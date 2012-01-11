@@ -1,10 +1,10 @@
-.. kuenishi.github.com documentation master file, created by
-   sphinx-quickstart on Tue Oct  4 22:21:48 2011.
+.. kuenishi (7) documentation master file, created by
+   sphinx-quickstart on Thu Jan 12 01:52:44 2012.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-KUENISHI(7)
-===========
+Welcome to kuenishi (7)'s documentation!
+========================================
 
 Contents:
 
@@ -13,6 +13,7 @@ Contents:
 
    cv
    persona
+
 
 Indices and tables
 ==================
