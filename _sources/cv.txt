@@ -2,61 +2,57 @@
 Curriculum Vitae
 ================
 
+Contact
+-------
+
+- UENISHI Kota
+- kuenishi@gmail.com
+- uenishi.kota@lab.ntt.co.jp - working in `NTT Information Sharing Platform Laboratory <http://www2.pflab.ecl.ntt.co.jp/>`_
+
 Interest
 --------
+
 Distributed Systems, Database Systems, High Availability, Functional Programming Languages, and Reliability/Performance Design for non-stop middleware servers
 
 Computer Skills
 ---------------
 
-C, C++, Erlang/OTP, Ruby, Python, OCaml.
-
-Server middleware programming in Linux (and other unix-like systems), reliability design.
+- C, C++, Erlang/OTP, Ruby, Python, OCaml.
+- Server middleware programming in Linux (and other unix-like systems), reliability design.
+- not fluent in Java
 
 
 Work Experience
 ---------------
 
-Engineer, at NTT Information Sharing Platform Laboratories, April 2007 - current
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Engineer, at NTT Information Sharing Platform Laboratories, April 2007 - current
+
+ - Development of scalable, highly available, data intensive software system using massive combination of inexpensive hardware. Developed 2-3 software written in C, C++.
+
+
 
 Education
 ---------
 
-Master of Science, University of Tokyo, 2007
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Concentration: (Large Vocabulary Continuous) Speech Recognition
-Keikichi Hirose Lab.
-Project:
-A language-modelling system with prosodic feature-helps. The system has multiple language models and switches them as context state changes by watching prosodic features. The language model will be trained with statistic methods using a huge corpus of spontaneous Japanese which consists of hundreds of Kwords, hundreds of hours and gigabytes of metadatas. Its experiment program was implementation of Variational Bayesian method for inferring combination of Gaussian pdf, written in C++.
+- Master of Science, University of Tokyo, 2007
 
-BS in Electronic Information Engineering, University of Tokyo, 2005
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Concentration: Genetic Algorithm, Humanoid Robot
-Hitoshi Iba Lab.
-Project:
-Trying an auto-evolution of neural networks with genetic algorithm (GA): controlling humanoid robot with recurrent neural network - I integrated robot controlling simulation system and neural network processing engine, with my own GA and neural network description generator (written in C++).
+ - (Large Vocabulary Continuous) Speech Recognition
+ - in Keikichi Hirose Lab.
+ - A language-modelling system with prosodic feature-helps. The system has multiple language models and switches them as context state changes by watching prosodic features. The language model will be trained with statistic methods using a huge corpus of spontaneous Japanese which consists of hundreds of Kwords, hundreds of hours and gigabytes of metadatas. Its experiment program was implementation of Variational Bayesian method for inferring combination of Gaussian pdf, written in C++.
 
+- BS in Electronic Information Engineering, University of Tokyo, 2005
 
-Other
------
+ - Genetic Algorithm, Humanoid Robot
+ - Hitoshi Iba Lab.
+ - Trying an auto-evolution of neural networks with genetic algorithm (GA): controlling humanoid robot with recurrent neural network - I integrated robot controlling simulation system and neural network processing engine, with my own GA and neural network description generator (written in C++).
 
-committer: `MessagePack <http://msgpack.org>`_ (2010-)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-MessagePack is a binary-based efficient object serialization library. It enables to exchange structured objects between many languages like JSON. But unlike JSON, it is very fast and small. Participating as a committer of Erlang-binding of both MessagePack and MessagePack-RPC.
+Publications
+------------
 
-Yatce: yet another TokyoCabinet-Erlang binding (2009)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Erlang's built-in key/value storage system (dets) is very slow and its performance is bad. While TokyoCabinet is a blazingly-fast key/value storage system written in state-of-art C, Yatce connects it with Erlang. It is built into some proprietary software and being sold (Yatce itself is dual-licensed as LGPL/MIT).
+- 小田　哲・中山心太・上西康太・木下真吾, "Jubatus: Distributed Framework for Real-time processing of BigData", `IN研2012 <http://www.ieice.org/cs/in/jpn/invited/2011.html>`_ , IEICE
+- "Jubatus 分散処理の仕組み", Jubatus workshop 2012. `slide <http://www.slideshare.net/JubatusOfficial/jubatus-workshop>`_
+- WebDB Forum「大規模分散リアルタイム機械学習を支える技術と今後の展望」岡野原 大輔, 海野 裕也, 上西 康太, 小田 哲, 2011.
 
-Mercurial Localization (2009)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Mercurial is a Python-based distributed version control software. My contribution was next to project leader, flying-foozy (Mr. Fujiwara) - Almost 200 messages.
-
-Japanese translation of CouchDB: the Definitive Guide (2009-2011)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-As the book's script is open by CC-3.0 license, I started translation project with same licence.
-
-.. Publications
+.. Other
 .. Qualifications
 .. Membership
