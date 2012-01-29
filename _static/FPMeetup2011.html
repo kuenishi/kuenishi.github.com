@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 3.0.1 (172019)"/><meta name="created" content="2011-09-16 01:21:36 +0900"/><meta name="updated" content="2011-09-17 14:18:09 +0900"/><title>函数プログラミングの集い - Erlang/OTP update slide</title></head><body style="word-wrap: break-word; -webkit-nbsp-mode: space; -webkit-line-break: after-white-space;">
+<div><span style="font-size: 48px;"><span style="font-size: 48px;"><b><br/></b></span></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><b><br/></b></div>
+<div><span style="font-size: 48px;"><b>  Erlang Update</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>                           2011/9/17</b></span></div>
+<div><span style="font-size: 48px;"><b>                           Functional Programming Meetup Tokyo</b></span></div>
+<div><span style="font-size: 48px;"><b>                           UENISHI Kota: @kuenishi</b></span></div>
+<div><span style="font-size: 48px;"><b><img src="http://www.erlang.org/doc/erlang-logo.png" height="135" width="156"/><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>オマエ、誰よ？</b></span></div>
+<div><span style="font-size: 48px;"><b>・上西康太</b></span></div>
+<div><span style="font-size: 48px;"><b>・@kuenishi</b></span></div>
+<div><b><span style="font-size: 48px;">・</span><a href="http://github.com/msgpack/msgpack-erlang" style="font-size: 48px;">MessagePack/Erlang</a></b></div>
+<div><span style="font-size: 48px;"><b>・分散的システム作っています</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Erlangはメジャーな言語です</b></span></div>
+<div><b><span style="font-size: 48px;">9/15時点で <u>23位</u>　</span><span style="font-size: 48px;"><a href="https://github.com/languages/Erlang">https://github.com/languages/Erlang</a></span></b></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Haskell #15</b></span></div>
+<div><span style="font-size: 48px;"><b>Scala #17</b></span></div>
+<div><span style="font-size: 48px;"><b>Clojure #20</b></span></div>
+<div><span style="font-size: 48px;"><b>Common Lisp #24</b></span></div>
+<div><span style="font-size: 48px;"><b>D #26</b></span></div>
+<div><span style="font-size: 48px;"><b>Go #31</b></span></div>
+<div><span style="font-size: 48px;"><b>OCaml #33</b></span></div>
+<div><span style="font-size: 48px;"><span style="font-size: 48px;"><b><br/></b></span></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<b>・100人に聴きました：</b>
+<div><span style="font-size: 48px;"><b>   Erlang/OTPはプログラミング言語ですか？</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><b><span style="font-size: 48px;"><br/></span></b>
+<div><span style="font-size: 48px;"><b>・調査結果　Yes 95人 No 5人</b></span></div>
+<div><span style="font-size: 48px;"><b>・Noと答えた方に</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>RailsなしではRubyが語れないように</b></span></div>
+<div><span style="font-size: 48px;"><b>CPANなしでPerlが語れないように</b></span></div>
+<div><span style="font-size: 48px;"><b>PyPIなしでPythonが語れないように</b></span></div>
+<div><span style="font-size: 48px;"><b>OCaml…</b></span></div>
+<div><span style="font-size: 48px;"><b>Haskell…</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 72px;"><b>そういうレベルではありません</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Erlang/OTPはプログラミング言語ではない、サーバープログラミングフレームワークである</b></span></div>
+<div><span style="font-size: 48px;"><b>Erlang/OTPはプログラミング言語ではない、サーバープログラミングフレームワークである</b></span></div>
+<div><span style="font-size: 48px;"><b>Erlang/OTPはプログラミング言語ではない、サーバープログラミングフレームワークである</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 72px;"><b>・基本編</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Erlang/OTPはプログラミング言語ではない</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>高可用サーバーを構築するための</b></span></div>
+<div><span style="font-size: 48px;"><b>プログラミングフレームワークである。</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><b><span style="font-size: 48px;">昔から高可用性が要求されたところ：</span><span style="font-size: 48px;">ネットワーク周り</span></b></div>
+<div><span style="font-size: 48px;"><b>ATM, RADIUS, DNS, SIP　…なんかいろいろ</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><u><b>他だと難しかったり面倒だったりするところ</b></u></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・軽量プロセス - ネイティブスレッドとリクエストを1:1対応させるのはちょっとアレ</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・soft-realtime - タイムアウト系の処理がとても簡単にかける</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・receive … after … end - 複数のイベントの待ち合わせも簡単すぎて生きるのが辛い</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・軽いGC - 止まってはいけないサーバー24時</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・リクエストを取りこぼさず、かつ止めずにコードをアップグレード - ネイティブコードなんて大変</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>　個人的には末尾再帰のとてもうまい利用例</b></span></div>
+<div><span style="font-size: 48px;"><b>　だからこそ動的型付け＆バイトコードVM</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・速度？そんなの関係ない - だいたいネットワークとディスクI/Oがいつも遅い</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・エラー処理？Errorモナドではない解がここに</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: center;"><span style="font-size: 72px;"><b>LET IT DIE</b></span></div>
+<div style="text-align: center;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><u><b>開発環境</b></u></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・まさかOTP使ってないとかないよね？！</b></span></div>
+<div><span style="font-size: 48px;"><b>・erlang-mode: M-x tempo-template-*</b></span></div>
+<div><span style="font-size: 48px;"><b>・distel</b></span></div>
+<div><span style="font-size: 48px;"><b>・rebar</b></span></div>
+<div><span style="font-size: 48px;"><b>・git</b></span></div>
+<div><span style="font-size: 48px;"><b>・eunit</b></span></div>
+<div><span style="font-size: 48px;"><b>・ct</b></span></div>
+<div><span style="font-size: 48px;"><b>・cover</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><u><b>よくdisられていた</b></u></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・動的型付けなんて怖くて使えない</b></span></div>
+<div><span style="font-size: 48px;"><b>・型推論してくれない</b></span></div>
+<div><span style="font-size: 48px;"><b>・せっかく関数型なのにテスト書くのだるい</b></span></div>
+<div><span style="font-size: 48px;"><b>・Prologっぽくてイヤ</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><b><span style="font-size: 48px;">最近の動向 - </span><span style="font-size: 48px;">Erlang Factory SF Bay Area 2011から</span></b></div>
+<div><span style="font-size: 48px;"><b><a href="http://erlang-factory.com/conference/SFBay2011/talks">http://erlang-factory.com/conference/SFBay2011/</a><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・発表を弾丸紹介</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>"Cool Tools for Modern Erlang Program Development" by Kostis Saganos</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>#1 Dialyzer</b></span></div>
+<div><span style="font-size: 48px;"><b>2007からErlang/OTP標準ライブラリに</b></span></div>
+<div><span style="font-size: 48px;"><b>型定義えらー、API violation, dead code, Opacity violations, Concurrency Errors</b></span></div>
+<div><span style="font-size: 48px;"><b>Experimental: stronger type inference, messagepassing error &amp; deadlock detection</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>#2 Typer</b></span></div>
+<div><span style="font-size: 48px;"><b>type annotationついてない関数をみつけて教えてくれる</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>#3 Tidier</b></span></div>
+<div><span style="font-size: 48px;"><b>refactoring tools</b></span></div>
+<div><span style="font-size: 48px;"><b>ソースを整形、短縮、性能改善してくれる</b></span></div>
+<div><span style="font-size: 48px;"><b>Obsoleteなのは新しくしてくれる</b></span></div>
+<div><span style="font-size: 48px;"><b>サンプルが半端ないわ</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>#4 PropEr</b></span></div>
+<div><span style="font-size: 48px;"><b>Property based testing tool inspired by QuickCheck</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>#5 CED</b></span></div>
+<div><span style="font-size: 48px;"><b>Concurrency Error Detector</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>"GPGPU Programming in Erlang" by kevsmith</b></span></div>
+<div><span style="font-size: 48px;"><b>pteracuda: integrate CUDA &amp; Erlang (experimental)</b></span></div>
+<div><span style="font-size: 48px;"><b>http://github.com/kevsmith/pteracuda</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>"QuickCheck" by John Hughes</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><b><span style="font-size: 48px;">常識だよね！　有名だよね！！</span><br/></b></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>John Hughes</b></span></div>
+<div><span style="font-size: 48px;"><b>Why functial programming matters　の人</b></span></div>
+<div><span style="font-size: 24px;"><b><a href="http://www.cse.chalmers.se/~rjmh/Papers/whyfp.html">http://www.cse.chalmers.se/~rjmh/Papers/whyfp.html</a><br/></b></span></div>
+<div><b><a href="http://www.sampou.org/haskell/article/whyfp.html" style="font-size: 24px;">http://www.sampou.org/haskell/article/whyfp.html</a><br/></b></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Haskellの人</b></span></div>
+<div><span style="font-size: 48px;"><b>QuickCheckをHaskellで作った人</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>インタビュー</b></span></div>
+<div><span style="font-size: 48px;"><b>「なんでErlangにしたの？」「客がいるからね」</b></span></div>
+<div><b><a href="http://www.infoq.com/interviews/Erlang-Haskell-John-Hughes" style="font-size: 24px;">http://www.infoq.com/interviews/Erlang-Haskell-John-Hughes</a><br/></b></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Cもテストできるようになったらしいよ…</b></span></div>
+<div><span style="font-size: 48px;"><b><a href="http://quviq.com/news091117.html">http://quviq.com/news091117.html</a><br/></b></span></div>
+<div><b><br/></b></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>"Erlang Deployments Demystified" by Joe Williams</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Hot code upgradeができる…けど、それでも割と大変</b></span></div>
+<div><span style="font-size: 24px;"><b><span style="font-family: 'Helvetica Neue';">• A simple Chef API for deploying Erlang releasesがある</span><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>大変なのは手作業だから。ちょっとやれば自動化できる</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・Push code</b></span></div>
+<div><span style="font-size: 48px;"><b>・CIでビルド→でぷろい</b></span></div>
+<div><span style="font-size: 48px;"><b>・コンフィグも自動で</b></span></div>
+<div><span style="font-size: 48px;"><b>・Hot code upgradeも！</b></span></div>
+<div><span style="font-size: 48px;"><b>　・Rebarで.appupファイルを生成</b></span></div>
+<div><span style="font-size: 48px;"><b>　・Rebarでupgrade用tarballを生成</b></span></div>
+<div><span style="font-size: 48px;"><b>　・tarballもツールが置き換えっ！</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>"How to make an optimized compiler in a few months" by Joe Armstrong</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>ZAPBAR : Erlang => LLVM Assembler</b></span></div>
+<div><span style="font-size: 48px;"><b>ECCとかいうのも　Erlangで作ったCコンパイラ？もうワケわからん</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>3690行</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>これができると・・・</b></span></div>
+<div><span style="font-size: 48px;"><b>"inline C" in Erlang, "inline X" in Erlang</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>"The Case for Erlang as a Testing Language" by Graham Crowe</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Erlangでハードウェアテスト</b></span></div>
+<div><span style="font-size: 48px;"><b>soft-realtimeでconcurrentだと、Grey-box testingができる</b></span></div>
+<div><span style="font-size: 48px;"><b>QuickCheck使うとビット単位で網羅したテストが組める</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>”A History of the Erlang VM” by Robert Virding</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>Telephony Algebra</b></span></div>
+<div><span style="font-size: 48px;"><b>Prolog Interpreter</b></span></div>
+<div><span style="font-size: 48px;"><b>Phoning Philosophers</b></span></div>
+<div><span style="font-size: 48px;"><b>歴史的には沢山のErlang実装 </b></span></div>
+<div><span style="font-size: 48px;"><b>・JAM, VEE(Virdings Erlang Engine), Strand88</b></span></div>
+<div><span style="font-size: 48px;"><b>・TEAM(Turbo), BEAM(Bogdan's)</b></span></div>
+<div><span style="font-size: 48px;"><b>・=> BEAM(Bjorn's) generational GC, SMP, NIFs, etc….</b></span></div>
+<div><span style="font-size: 48px;"><b>Erlang VMを使った言語実装</b></span></div>
+<div><span style="font-size: 48px;"><b>・Efene</b></span></div>
+<div><span style="font-size: 48px;"><b>・LFE (lisp flavoured Erlang)</b></span></div>
+<div><span style="font-size: 48px;"><b>・Reia（Rubyっぽい？LL風的な</b></span></div>
+<div><span style="font-size: 48px;"><b>・Erjang（ここにはないけど</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><font color="brown" style="color: rgb(0, 0, 0); text-decoration: none; font-size: 48px;">"<a href="http://erlang-factory.com/conference/SFBay2011/speakers/CliffMoon" style="color: rgb(0, 0, 0); text-decoration: none;">Building Polyglot Distributed Systems With JInterface</a>" by Cliff Moon</font></b></p>
+<div><span style="font-size: 48px;"><b>JInterfaceは超絶イマイチなのでScalangというのを作ってみた</b></span></div>
+<div><span style="font-size: 48px;"><a href="https://github.com/boundary"><b>https://github.com/boundary</b></a></span></div>
+<div><span style="font-size: 48px;"><b>− Netty Networking Stack</b></span></div>
+<div><span style="font-size: 48px;"><b>- Jetlang actors</b></span></div>
+<div><span style="font-size: 48px;"><b>- Native Scala type mappings</b></span></div>
+<div><span style="font-size: 48px;"><b>- Process monitors</b></span></div>
+<div><span style="font-size: 48px;"><b>- Real supervision</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="color: rgb(165, 42, 42); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><span style="font-size: 48px;"><b>"Building Solid Distributed Applications with Haskell and Riak" by Bryan O'Sullivan</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>はい、ご存知ですねRWHの著者</b></span></div>
+<div><span style="font-size: 48px;"><b>・Riakが一番簡単だった</b></span></div>
+<div><span style="font-size: 48px;"><b>　CassandraとかVoldemortよりも</b></span></div>
+<div><span style="font-size: 48px;"><b>・簡単なの大事</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>・ビジネスロジックは当然、Haskellだけど</b></span></div>
+<div><span style="font-size: 48px;"><b>　データの共有だけはふつうRDBMS</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div><span style="font-size: 48px;"><b>…だった。</b></span></div>
+<div><span style="font-size: 48px;"><b><br/></b></span></div>
+<div>
+<table border="1" width="80%" cellspacing="0" cellpadding="2" style="text-align: center;">
+<tbody>
+<tr>
+<td valign="top"><span style="font-size: 24px;"><b>時代</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>昔</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>今</b></span></td>
+</tr>
+<tr>
+<td valign="top"><span style="font-size: 24px;"><b>例えると…</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>スプリンクラー</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>火災報知機</b></span></td>
+</tr>
+<tr>
+<td valign="top"><span style="font-size: 24px;"><b>つまり</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>ちょう安全だけど、ちょっと火が出ただけでもうびしょ濡れ</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>火が出たらすぐ教えてくれるけど、火は自分で消す！</b></span></td>
+</tr>
+<tr>
+<td valign="top"><span style="font-size: 24px;"><b>残念なところ</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>パフォーマンスが大変…</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>プログラミングが大変</b></span></td>
+</tr>
+<tr>
+<td valign="top"><span style="font-size: 24px;"><b>答え</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>トランザクション</b></span></td>
+<td valign="top"><span style="font-size: 24px;"><b>Vector Clocks</b></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div>
+<table border="1" width="80%" cellspacing="0" cellpadding="2" style="text-align: center;"/>
+</div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><b><span style="font-size: 48px;">・Riakなら簡単！</span><br/></b></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・Haskell Riak Client Library - まあJSONで叩けばよいのだけど、RiakはProtocol Buffersインターフェースを持っているので性能がほしいときはそちら</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・Vector Clocksの衝突解決</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><font face="'Arial Black'"><b>class (Eq a, Show a) => Resolvable a where</b></font></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><font face="'Arial Black'"><b>  resolve :: a -> a -> a</b></font></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><font face="'Arial Black'"><b><br/></b></font></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><font face="'Arial Black'"><b>instance Resolvable (Set a) => where</b></font></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><font face="'Arial Black'"><b>  resolve = union</b></font></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・それでも分散KVS使うのはawkwardで、冗長化されてるのはBig Deal</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・MySQLほど速くもないし使いやすくもないよ、まあそりゃあ。</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・（Haskellの）QuickCheck+Riak+JSON+Protocol buffers+Snappyでいろいろと幸せ</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・ $ cabal install riak</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><a href="https://bitbucket.org/bos/erlang-factory-2011/overview">https://bitbucket.org/bos/erlang-factory-2011</a><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><font color="brown" style="color: rgb(0, 0, 0); text-decoration: none;">"<a href="http://www.erlang-factory.com/conference/SFBay2011/speakers/kenjirikitake" style="color: rgb(0, 0, 0); text-decoration: none;">Erlang/OTP and how the PRNGs work</a>"</font></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><span style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><font color="brown" style="color: rgb(0, 0, 0); text-decoration: none;"> by Kenji Rikitake</font></span><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><font color="brown" style="color: rgb(0, 0, 0); text-decoration: none;">Erlang/OTPの擬似乱数生成器の改善</font></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><font color="brown" style="color: rgb(0, 0, 0); text-decoration: none;">確かOTPに入ったはず</font></b></span></div>
+<p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Tahoma; min-height: 14.0px"><b><br/></b></p>
+<div style="text-align: left;"><b><span style="font-family: Tahoma; font-size: 40px;">SIMD-Oriented Mersenne Twister を実装して、既存のものより3倍速くなってしかも、より長周期（＝more secure）になったよ</span><span style="font-size: 48px;"><span style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><font color="brown" style="color: rgb(0, 0, 0); text-decoration: none;"><br/></font></span></span></b></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>Erlang Factoryでは、</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>　毎年このような濃い話がされている。</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>　Londonでもやってる</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>他にも面白そうなのが</b></span></div>
+<div><span style="font-size: 36px;"><b><br/></b></span></div>
+<div><b style="font-size: 36px;"><br/></b></div>
+<div><b><a href="http://www.erlang-factory.com/conference/SFBay2011/speakers/GeneSher" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="color: rgb(182, 63, 17); text-decoration: none; font-size: 24px;">From Telecom Networks to Neural Networks; Erlang, as the unintentional Neural Network Programming Language</font></a></b></div>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/SFBay2011/speakers/GeoffCant" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="color: rgb(182, 63, 17); text-decoration: none; font-size: 24px;">Escript changes the game</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/SFBay2011/speakers/BradAnderson" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Erlang and Video-On-Demand</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/SFBay2011/speakers/MickaelRemond" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Distributed Social Networking with ejabberd</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/SFBay2011/speakers/PaoloNegri" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Big Switch to Erlang in Online Gaming</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/SFBay2011/speakers/YuriiRashkovskii" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Beam.JS: Erlang meets JavaScript</font></a></b></p>
+<div><span style="font-size: 24px;"><b><br/></b></span>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/OriPekelman" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">A match made in Scalability Heaven. Mongo with Erlang.</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/PeroSubasic" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">AOL's Erlang Framework for Real-time Computational Advertising</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/JonasBoner" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Above the Clouds: Introducing Cloudy Akka</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/KrestenKrabThorup" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Bringing Riak to the Mobile Platform</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/JamesAimonetti" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Building VoIP Applications (whApps) in Whistle</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/PaoloNegri" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Designing online games for scale with Erlang</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/MatthewSackman" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Erlando: Imitation (of syntax) is the most sincere form of flattery</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/MalcolmDowse" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Erlang and First-Person Shooters in online games</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/DavidDawson" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Erlang runs TV votes on Facebook</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/EricMerritt" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Erlware Commons: Well Tested, Abstract types for Erlang</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/JonBrisbin" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Eventing Data with RabbitMQ and Riak</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/JohnHughes" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">How I found five lurking race conditions in mnesia with 200 lines of QuickCheck code</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/AlvaroVidela" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Messaging Patterns with RabbitMQ</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/adamlindberg" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Mocking Erlang Modules with Meck</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/BenjaminNortier" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Shapesmith - Accessible 3D modelling in the browser</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/MikeWilliams" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="color: rgb(182, 63, 17); text-decoration: none; font-size: 24px;">The true story of why we invented Erlang and a few things you don't want to tell your manager</font></a></b></p>
+<div>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/ScottLystigFritchie" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Usually Received, Maybe Late, or Sometimes Dropped: simulating failure in message passing protocols</font></a></b></p>
+<p style="color: rgb(28, 24, 18); font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><a href="http://www.erlang-factory.com/conference/London2011/speakers/JacobVorreuter" style="color: rgb(182, 63, 17); text-decoration: none;"><font color="brown" style="font-size: 24px;">Utilizing Redis in distributed Erlang systems</font></a></b></p>
+<div>
+<p style="font-family: Tahoma; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); font-size: 12px;"><font color="#A52A2A"><b><br/></b></font></p>
+<div><b><br/></b></div>
+<div><b><br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+<div><b><br/>
+<br/></b></div>
+<b><br/></b></div>
+</div>
+<div style="text-align: left;"/>
+<div style="text-align: left;"/>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><b><span style="font-size: 48px;"><em style="font-style: normal; color: rgb(0, 0, 0); font-family: arial, sans-serif; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">"Esc</em><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">: </span></span><span style="font-size: 48px;"><em style="font-style: normal; color: rgb(0, 0, 0); font-family: arial, sans-serif; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);">Towards an Elastic Stream Computing Platform for the Cloud"</em></span></b></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><em style="font-style: normal; color: rgb(0, 0, 0); font-family: arial, sans-serif; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255);"><b><br/></b></em></span></div>
+<div style="text-align: left;"><b><span style="font-size: 48px;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none;">Satzger, B.; Hummer, W.; Leitner, P.; and Dustdar, S. 2011. In 4th IEEE International Conference on Cloud Computing (CLOUD'11) </span></span><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; line-height: 16px; font-size: 48px;">via @kenji_rikitake</span></b></div>
+<div style="text-align: left;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none; font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none; font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none; font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><b><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none; font-size: 48px;">Erlang/OTPでElastic Stream Computing Platform作って</span><br/></b></div>
+<div style="text-align: left;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none; font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-style: normal; font-variant: normal; letter-spacing: normal; line-height: 16px; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); display: inline !important; float: none; font-size: 48px;"><b>HFTやりましたよ、とかいう</b></span></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b><br/></b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b>いろんな情報を分散処理するストリーミングを作った</b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b><br/></b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b>死活監視とかちょう簡単、プロセスが死んだ時の再起動</b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b><br/></b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b><br/></b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b>Soft-realtimeなのでレイテンシを押さえることも可能</b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b><br/></b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b>（HFTなのでレイテンシは死活問題</b></span></font></div>
+<div style="text-align: left;"><font color="#222222" face="arial, sans-serif"><span style="line-height: 16px; font-size: 48px;"><b><br/></b></span></font></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>Erlang/OTPのお仕事</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・欧州は多い</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・米国はまあ普通に多い</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・日本もまああるにはあるが…</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>Erlang/OTPの今後</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・R14B04も出るみたい</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・R15がどうやら 12/14 らしい。新機能は？</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>実行時エラーが出たら、スタックトレースに行番号が表示されるようになります（えっ</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>- 64bit Windows build</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>- parallel make</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>- gen_streamが入るかも？！ origin/pu</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><a href="https://github.com/erlang/otp/blob/pu/lib/stdlib/src/gen_stream.erl">https://github.com/erlang/otp/blob/pu/lib/stdlib/src/gen_stream.erl</a><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・まとめ</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>Erlang/OTPの常識と雰囲気をお伝えしました</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>最新の技術動向をお伝えしました</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>発表資料が適当で本当にすみません</b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b><br/></b></span></div>
+<div style="text-align: left;"><span style="font-size: 48px;"><b>・おまけ</b></span></div>
+<div style="text-align: left;"><span style="font-size: 36px;"><b>仕事では、Erlang/OTPをとーっても採用したい</b></span></div>
+<div style="text-align: left;"><span style="font-size: 36px;"><b>そう思って個人的に調べて、コミュニティにも参加してきた</b></span></div>
+<div style="text-align: left;"><span style="font-size: 36px;"><b>開発者が少ない　→開発者が潤沢にいないと業種的に死活問題</b></span></div>
+<div style="text-align: left;"><span style="font-size: 36px;"><b>開発者を増やせばこの問題も解決！</b></span></div>
+<div style="text-align: left;"><span style="font-size: 36px;"><b>　→これを機会にErlang/OTPをやってみませんか？？</b></span></div>
+<div style="text-align: left;"><span style="font-size: 36px;"><b>　→ MessagePack/Erlangはあなたを待っています</b></span></div>
+<div style="text-align: left;"><b><span style="font-size: 36px;">　　　</span><a href="https://github.com/msgpack/msgpack-erlang" style="font-size: 24px;">https://github.com/msgpack/msgpack-erlang</a></b></div>
+<div style="text-align: left;"><span style="font-size: 36px;"><br/></span></div>
+</div>
+</body></html>

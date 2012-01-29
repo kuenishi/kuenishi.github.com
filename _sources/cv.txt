@@ -52,6 +52,7 @@ Publications
 - 小田　哲・中山心太・上西康太・木下真吾, "Jubatus: Distributed Framework for Real-time processing of BigData", `IN研2012 <http://www.ieice.org/cs/in/jpn/invited/2011.html>`_ , IEICE
 - "Jubatus 分散処理の仕組み", Jubatus workshop 2012. `slide <http://www.slideshare.net/JubatusOfficial/jubatus-workshop>`_
 - WebDB Forum「大規模分散リアルタイム機械学習を支える技術と今後の展望」岡野原 大輔, 海野 裕也, 上西 康太, 小田 哲, 2011.
+- "Erlang Update," on "函数型プログラミングの集い" (Functional Programming Meetup Tokyo), Sep 2011 (`slides <_static/FPMeetup2011.html>`_ ) .
 
 .. Other
 .. Qualifications
