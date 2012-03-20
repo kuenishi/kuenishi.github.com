@@ -6,6 +6,9 @@
 kuenishi (7)
 ============
 
+.. figure:: _static/self_portrait.png
+   :align: right
+
 kuenishi is an ordinary man living in Tokyo, Japan, with his family, including a gutsy son.
 
 .. toctree::
