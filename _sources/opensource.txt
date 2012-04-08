@@ -5,7 +5,10 @@ Open Source Contrubutions
 
 - committer: `Jubatus <http://jubat.us>`_ (2011-)
 
- - Jubatus is a distributed online machine learning framework and library. Jubatus is a joint work of `Preferreed Infrastructure <http://preferred.jp>`_ and `NTT Information Sharing Platform Laboratory <http://www2.pflab.ecl.ntt.co.jp/>`_. I designed the architecture the 'mix' - softly synchronizing data for parallel machine learning and the server framework to make it applicable to various machine learning algorithms.
+ - Jubatus is a distributed online machine learning framework and library. Jubatus is a joint work of `Preferreed Infrastructure <http://preferred.jp>`_ and `NTT Information Sharing Platform Laboratory <http://www2.pflab.ecl.ntt.co.jp/>`_. I designed the architecture the "mix" - softly synchronizing data for parallel machine learning and the server framework to make it applicable to various machine learning algorithms.
+
+ - Modified Python generation of `msgpack-idl <http://hackage.haskell.org/package/msgpack-idl>`_ to use in Jubatus
+ - A small patch sent to `msgpack-rpc-python <http://pypi.python.org/pypi/msgpack-rpc-python/>`_ to use in Jubatus
 
 - committer: `MessagePack (Erlang) <http://msgpack.org>`_ (2010-)
 
