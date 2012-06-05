@@ -22,7 +22,6 @@ Computer Skills
 
 - C, C++, Erlang/OTP, Ruby, Python, OCaml.
 - Server middleware programming in Linux (and other unix-like systems), reliability design.
-- not fluent in Java
 
 
 Work Experience
