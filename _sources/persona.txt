@@ -4,7 +4,7 @@ Persona
 Mainly active in twitter, facebook and his blog.
 
 - `Twitter: @kuenishi <http://twitter.com/kuenishi>`_
-- `Japanese Blog (hatena diary) <http://d.hatena.ne.jp/kuenishi/>`_
+- `Japanese Blog (hatena diary) <http://kuenishi.hatenadiary.jp/>`_
 
 - `English Blog <http://kuenishi.blogspot.com>`_
 - `Hatena Social Bookmark <http://b.hatena.ne.jp/kuenishi>`_
