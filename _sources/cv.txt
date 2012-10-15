@@ -26,7 +26,7 @@ Computer Skills
 Work Experience
 ---------------
 
-- Engineer, September 2012 -
+- Engineer, at a company , September 2012 -
 
 - Engineer, at `NTT <http://www.ntt.co.jp>`_ , April 2007 - August 2012
 
