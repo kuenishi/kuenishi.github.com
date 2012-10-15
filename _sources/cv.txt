@@ -26,7 +26,9 @@ Computer Skills
 Work Experience
 ---------------
 
-- Engineer, at a company , September 2012 -
+- Senior Software Engineer, at `Basho Japan KK <http://basho.co.jp>`_ , September 2012
+
+ - Basho Japan KK is a 100% child company of `Basho Technologies, Inc. <http://basho.com>`_ , which is an inventor, distributer and primary developer of `Riak <http://github.com/basho/riak>`_ .
 
 - Engineer, at `NTT <http://www.ntt.co.jp>`_ , April 2007 - August 2012
 
