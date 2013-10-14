@@ -12,7 +12,7 @@ kuenishi (7)
 kuenishi is an ordinary man living in Tokyo, Japan, with his family, including a gutsy son.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    cv
    opensource
