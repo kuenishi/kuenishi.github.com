@@ -8,17 +8,18 @@ Curriculum Vitae
 Computer Skills
 ---------------
 
-- Distributed Systems, Database Systems, High Availability, Functional Programming Languages, and Reliability/Performance Design for non-stop middleware servers.
+- Distributed Systems, Database Systems, High Availability, Functional
+  Programming Languages, and Reliability/Performance Design for
+  non-stop middleware servers.
 - C, C++, Erlang/OTP
-- Server middleware programming in Linux (and other unix-like systems), reliability design.
-- git-flow style workflow
+- Server middleware programming in Linux (and other unix-like systems)
 
 Work Experience
 ---------------
 
 - Senior Software Engineer, at `Basho <http://basho.co.jp>`_ , September 2012 -
 
- - Riak CS development
+ - Riak CS development, team lead (2014-)
 
 - Engineer, at `NTT <http://www.ntt.co.jp>`_ , April 2007 - August 2012
 

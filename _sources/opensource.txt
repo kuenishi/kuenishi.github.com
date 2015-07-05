@@ -1,12 +1,17 @@
 Open Source Contrubutions
 =========================
 
-Here's `my wishlist <http://www.amazon.co.jp/registry/wishlist/1P6IW44XCM1H2>`_ . Your donation with product name will motivate me for sure.
+Here's `my wishlist <http://www.amazon.co.jp/registry/wishlist/1P6IW44XCM1H2>`_ . Your donation with product name will motivate me for sure. See my `Github <https://github.com/kuenishi>`_ or `Bitbucket <https://bitbucket.org/kuenishi>`_ account for all personal software.
+
+- `A small piece of my work <https://github.com/erlang/otp/commit/966e9e7ed0951db306c3c5dc4b1fd4c6eac25cf9>`_ is included in `Erlang/OTP 18.0 <http://www.erlang.org/download/otp_src_18.0.readme>`_ !
 
 - `meddatum <https://github.com/kuenishi/meddatum>`_ (2013-) : A tool to import/search/handle medical record formats with Riak Search 2.
-- fluent-logger-erlang, fluent-plugin-riak
+- `fluent-logger-erlang <https://github.com/fluent/fluent-logger-erlang>`_
 
 - `Riak <https://github.com/basho/riak>`_ , `Riak CS <https://github.com/basho/riak_cs>`_ (2012-)
+
+ - `fluent-plugin-riak <https://github.com/kuenishi/fluent-plugin-riak>`_
+ - `presto-riak <https://github.com/kuenishi/presto-riak>`_ : A `PrestoDB <https://prestodb.io>`_ connector of Riak.
 
 - `Jubatus <http://jubat.us>`_ (2011-)
 
