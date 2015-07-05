@@ -23,6 +23,10 @@ Mainly active in twitter, facebook and his blog.
 - `pictures in hatena <http://f.hatena.ne.jp/kuenishi>`_
 - picasa web album
 
+Publication (en)
+================
+
+- Satoshi Oda, Kota Uenishi, and Shingo Kinoshita, `"Jubatus: Scalable Distributed Processing Framework for Realtime Analysis of Big Data" <https://www.ntt-review.jp/archive/ntttechnical.php?contents=ntr201206ra2.html>`_ , NTT Technical Review, 2012.
 
 Publications (ja)
 =================
