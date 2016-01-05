@@ -8,9 +8,7 @@ Curriculum Vitae
 Computer Skills
 ---------------
 
-- Distributed Systems, Database Systems, High Availability, Functional
-  Programming Languages, and Reliability/Performance Design for
-  non-stop middleware servers.
+- Distributed Systems, Database Systems, High Availability
 - C, C++, Erlang/OTP
 - Server middleware programming in Linux (and other unix-like systems)
 
@@ -25,7 +23,7 @@ Work Experience
 
  - On April 2012 `Information Sharing Platform Laboratories <http://www2.pflab.ecl.ntt.co.jp>`_ divided into two laboratories - `Software Innovation Center <http://www.sic.ecl.ntt.co.jp>`_ and Secure Platform Laboratories.
  - 2011-2012 open source: Development of `Jubatus <http://jubat.us>`_ - joint work with Preferred Structure Inc., writing C++, Python and OCaml.
- - 2008-2012 proprietary: Development of distributed software system. 2-3 softwares written in C, C++.
+ - 2008-2012 proprietary: Development of distributed database system inclusing consensus system. 2-3 softwares written in C, C++.
 
 
 Education

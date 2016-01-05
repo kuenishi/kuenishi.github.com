@@ -10,18 +10,13 @@ Mainly active in twitter, facebook and his blog.
 - `Hatena Social Bookmark <http://b.hatena.ne.jp/kuenishi>`_
 - `LinkedIn <http://www.linkedin.com/in/kuenishi>`_
 - `slideshare <http://www.slideshare.net/kuenishi>`_
+- `SpeakerDeck <https://speakerdeck.com/kuenishi>`_
 
 - `Google+ <https://plus.google.com/117649496798509603328/>`_
 
 - `github <http://github.com/kuenishi>`_
 - bitbucket
-- assenbla
 - CiteULike
-- livejournal
-- me/.jp
-- me/.
-- `pictures in hatena <http://f.hatena.ne.jp/kuenishi>`_
-- picasa web album
 
 Publication (en)
 ================

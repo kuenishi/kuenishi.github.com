@@ -13,7 +13,7 @@ Here's `my wishlist <http://www.amazon.co.jp/registry/wishlist/1P6IW44XCM1H2>`_ 
  - `fluent-plugin-riak <https://github.com/kuenishi/fluent-plugin-riak>`_
  - `presto-riak <https://github.com/kuenishi/presto-riak>`_ : A `PrestoDB <https://prestodb.io>`_ connector of Riak.
 
-- `Jubatus <http://jubat.us>`_ (2011-)
+- `Jubatus <http://jubat.us>`_ (2009-2012)
 
  - Jubatus is a distributed online machine learning framework and library. Jubatus is a joint work of `Preferreed Infrastructure <http://preferred.jp>`_ and `NTT Information Sharing Platform Laboratory <http://www2.pflab.ecl.ntt.co.jp/>`_. I designed the architecture the "mix" - softly synchronizing data for parallel machine learning and the server framework to make it applicable to various machine learning algorithms.
 
