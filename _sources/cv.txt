@@ -4,6 +4,7 @@ Curriculum Vitae
 - UENISHI Kota : kuenishi^at^gmail.com
 - Native Japanese speaking, business level English speaking
 - Tokyo, Japan
+- GPG Key/Fingerprint: 8CD45203 / Key fingerprint = FF7E B3FF 4AEE ADEA 764D  2F33 BD95 145F 8CD4 5203
 
 Computer Skills
 ---------------
