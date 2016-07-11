@@ -10,13 +10,14 @@ Computer Skills
 ---------------
 
 - Distributed Systems, Database Systems, High Availability
-- C, C++, Erlang/OTP
+- C, C++, Erlang/OTP, Java
 - Server middleware programming in Linux (and other unix-like systems)
 
 Work Experience
 ---------------
 
-- Senior Software Engineer, at `Basho <http://basho.co.jp>`_ , September 2012 -
+- Software Engineer at `Nautilus Technologies KK <http://www.nautilus-technologies.com>`_ , April 2016 -
+- Senior Software Engineer at `Basho <http://basho.co.jp>`_ , September 2012 - March 2016
 
  - Riak CS development, team lead (2014-)
 
