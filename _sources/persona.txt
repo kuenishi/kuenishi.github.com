@@ -3,6 +3,7 @@ Persona
 
 Mainly active in twitter, facebook and his blog.
 
+- `Keybase.io: kuenish <https://keybase.io/kuenishi>`_
 - `Twitter: @kuenishi <http://twitter.com/kuenishi>`_
 - `Japanese Blog (hatena diary) <http://kuenishi.hatenadiary.jp/>`_
 
