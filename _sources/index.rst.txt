@@ -17,64 +17,7 @@ kuenishi is an ordinary man living in Tokyo, Japan, with his family, including a
    cv
    opensource
    persona
-
-
-My GPG Key::
-
-  -----BEGIN PGP PUBLIC KEY BLOCK-----
-  Version: GnuPG v2
-
-  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
-  baI0XVHdM4ws4y5utpydmw==
-  =pi11
-  -----END PGP PUBLIC KEY BLOCK-----
-
-
+   
 
 .. Indices and tables
 .. ==================
