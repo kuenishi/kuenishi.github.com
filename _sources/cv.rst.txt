@@ -9,14 +9,14 @@ Curriculum Vitae
 Computer Skills
 ---------------
 
-- Distributed Systems, Database Systems, High Availability
+- Distributed Systems, Database Systems, High Availability Design
 - C, C++, Erlang/OTP, Java
 - Server middleware programming in Linux (and other unix-like systems)
 
 Work Experience
 ---------------
 
-- Software Engineer at `Nautilus Technologies KK <http://www.nautilus-technologies.com>`_ , April 2016 -
+- Software Engineer at `Nautilus Technologies Inc, <http://www.nautilus-technologies.com>`_ , April 2016 -
 - Senior Software Engineer at `Basho <http://basho.co.jp>`_ , September 2012 - March 2016
 
  - Riak CS development, team lead (2014-)
@@ -24,7 +24,7 @@ Work Experience
 - Engineer, at `NTT <http://www.ntt.co.jp>`_ , April 2007 - August 2012
 
  - On April 2012 `Information Sharing Platform Laboratories <http://www2.pflab.ecl.ntt.co.jp>`_ divided into two laboratories - `Software Innovation Center <http://www.sic.ecl.ntt.co.jp>`_ and Secure Platform Laboratories.
- - 2011-2012 open source: Development of `Jubatus <http://jubat.us>`_ - joint work with Preferred Structure Inc., writing C++, Python and OCaml.
+ - 2011-2012 open source: Development of `Jubatus <http://jubat.us>`_ - joint work with Preferred Infrastructure Inc., writing C++, Python and OCaml.
  - 2008-2012 proprietary: Development of distributed database system inclusing consensus system. 2-3 softwares written in C, C++.
 
 

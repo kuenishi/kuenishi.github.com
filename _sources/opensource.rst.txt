@@ -3,6 +3,8 @@ Open Source Contributions
 
 Here's `my wishlist in Amazon <http://www.amazon.co.jp/registry/wishlist/1P6IW44XCM1H2>`_ and my bitcoin wallet is `1Nk9j9PwVVDL5sud6B3WcusjkJv2UirEtg` . Your donation with product name will motivate me for sure. See my `Github <https://github.com/kuenishi>`_ or `Bitbucket <https://bitbucket.org/kuenishi>`_ account for all personal software.
 
+- `Retz <https://github.com/retz/retz>`_ (2016 -) Job scheduler as Apache Mesos framework
+
 - `A small piece of my work <https://github.com/erlang/otp/commit/966e9e7ed0951db306c3c5dc4b1fd4c6eac25cf9>`_ is included in `Erlang/OTP 18.0 <http://www.erlang.org/download/otp_src_18.0.readme>`_ !
 
 - `meddatum <https://github.com/kuenishi/meddatum>`_ (2013-) : A tool to import/search/handle medical record formats with Riak Search 2.
