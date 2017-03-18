@@ -1,0 +1,72 @@
+==================================================================
+https://keybase.io/kuenishi
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://kuenishi.github.io
+  * I am kuenishi (https://keybase.io/kuenishi) on keybase.
+  * I have a public key with fingerprint FF7E B3FF 4AEE ADEA 764D  2F33 BD95 145F 8CD4 5203
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "0101a5c96f8d378e13bf84be933421b9a2b3ac51e2548e05c5c4556f87bbefa4bccf0a",
+            "fingerprint": "ff7eb3ff4aeeadea764d2f33bd95145f8cd45203",
+            "host": "keybase.io",
+            "key_id": "bd95145f8cd45203",
+            "kid": "0101a5c96f8d378e13bf84be933421b9a2b3ac51e2548e05c5c4556f87bbefa4bccf0a",
+            "uid": "6d435afb93aa4da4ec42ab52832df619",
+            "username": "kuenishi"
+        },
+        "service": {
+            "hostname": "kuenishi.github.io",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1489860562,
+    "expire_in": 157680000,
+    "prev": "651a366f003b689275eaef3e2ba64c9b32a4832c0ae026848cb443f142239e14",
+    "seqno": 21,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+
+owGtUmtMFFcYXRaoskCCFqlY2tRBrVWEee8MYHkEoZSQgEADWNnembmzOwV2l9lZ
+EOWNQCymVpFEDRuwPnikUihBESqhoUKquKHB2Gi7gaQJqbWlJRZLxdLO0PZP05+9
+f27ud8853zlfvg8CvXV6rxutwabjd/d7e91+yOly75R5jiCcTShHoo8ghXDtgkUC
+dCimQklAohEUQzFA8SwtMgJhZCBGcCJDcpAlCBLHOBbgHAF4CoM4RTIQpXiKJylK
+RRs5DoqA5HheRAESgYiS1QxluyxZFVVWFI2QI0SRBBACAQIjTQq4SBCcwFIYSYkM
+L5AUjhIq0WJzaAzVHAccMFKyqTX1YVqz9x/4/9m3c02OFkiCAiLHEgCQAiAhT+KA
+o3CGwAWRxlgN6ICyFRRDzasTWiWHRUIqIxC1WirxUBusluRfiEizpFic3F+p7LJN
+sfG2IvXfoih2R7TGV8rtGqEMcqa/pUycZBXUaaqMUig7JJsVicZUJK9ImjZGMixD
+oxSNRyDwkF2SoUnSEJSRZlD1aH1gqZbJRGGAoGkRRQmOZljcSEEARQLiHKBJnuUI
+HJBqQB4FEMVphmR4jiQJESNxnGAhRiJauhKrDYnGMdUoMKuiDslsBYpThkil4Zg+
+zEfnpdc956vXFk1n8Av6Z/vqHEG6lsFlcfVM5/D6hNOP/a+FOi73v0KcunCpNXel
+q9ZQ0a2wfWfHZpPnPE+3Xt8gbvMZ2n3V7d5zYP5rv6GpkWb5j8ZbKVTJ6jKbiFW1
+XM7e8m5uamN81ESTqx3pyMe3Z7l6QwN2Pc0qWvBdF9u543Fyssc9sc84Gbsh/ODg
+j+PmX5sDT93/0vVdwOJrO5dP9AX6740ynquf8N+Uff1l7OC8EtPe2dSVuQKFN4Yf
+HR3BSqM6vppe8W8dzjjTeT5mwNAc/wmd/2R0X+GL6w6FdN+qHZl735L085Yl98xU
+7QtXFo+2tefZUosLPq4bbZuNSa/8bfgLl6ffq/Rs/Z6RLry20fOgfWls8FqPLmT6
+Uuz+c/nOoIdZD263GnxfkqmFnEdjo79kpPYMmxMC9T+cXHZV7fg93WK2rA+vrrZX
+P8urmJdrssoad7fGx4ctuDI3tx0vKHg2uHjD2tKhv6fvevv5d3yKepa8yxN7qwLS
+khr9CM/NQrtXnHvvsV0Z7OctT8ZLDs9Edk82Gb91hw/M9W/qy3c1fJNjlHSEoeL1
+K9+fzIsLCe5Jyrl4v/dm8LjP3PJVpmfyTftY2t3PXm0/8elqcXKm86OtCfUlDX11
+p+MsbR/OhFz0bEybTAnLOXz+znRBjTOmeLbhAu6Zuje0OUTeGPqTM3tboFR2YAXd
+nl0TMLAz/b35xNy3ylL+BA==
+=PvYB
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/kuenishi
+
+==================================================================
