@@ -7,7 +7,7 @@ Here's `my wishlist in Amazon <http://www.amazon.co.jp/registry/wishlist/1P6IW44
 
 - `A small piece of my work <https://github.com/erlang/otp/commit/966e9e7ed0951db306c3c5dc4b1fd4c6eac25cf9>`_ is included in `Erlang/OTP 18.0 <http://www.erlang.org/download/otp_src_18.0.readme>`_ !
 
-- `meddatum <https://github.com/kuenishi/meddatum>`_ (2013-) : A tool to import/search/handle medical record formats with Riak Search 2.
+- `meddatum <https://github.com/kuenishi/meddatum>`_ (2013-2015) : A tool to import/search/handle medical record formats with Riak Search 2.
 - `fluent-logger-erlang <https://github.com/fluent/fluent-logger-erlang>`_
 
 - `Riak <https://github.com/basho/riak>`_ , `Riak CS <https://github.com/basho/riak_cs>`_ (2012-)
