@@ -16,6 +16,7 @@ Computer Skills
 Work Experience
 ---------------
 
+- Software Engineer at `Preferred Networks <https://www.preferred-networks.jp/ja/>`_, November 2017 -
 - Software Engineer at `Nautilus Technologies Inc, <http://www.nautilus-technologies.com>`_ , April 2016 - October 2017
 - Senior Software Engineer at `Basho <http://basho.co.jp>`_ , September 2012 - March 2016
 
