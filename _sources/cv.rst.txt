@@ -10,8 +10,8 @@ Computer Skills
 ---------------
 
 - Distributed Systems, Database Systems, High Availability Design
-- C, C++, Erlang/OTP, Java
-- Server middleware programming in Linux (and other unix-like systems)
+- C, C++, Erlang/OTP, Java, Python
+- Server middleware in Linux, Apache Mesos, Chainer
 
 Work Experience
 ---------------

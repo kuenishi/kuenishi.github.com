@@ -17,7 +17,20 @@ kuenishi is an ordinary man living in Tokyo, Japan, with his family, including a
    cv
    opensource
    persona
+
+
+Other memorandum
    
+.. toctree::
+   :maxdepth: 1
+
+   memo/arch
+   memo/zfs
+   memo/ergodox-ez
+   memo/cost-of-send-after3
+   memo/beam
+   memo/kudu
+   memo/riak-cs-spark
 
 .. Indices and tables
 .. ==================
