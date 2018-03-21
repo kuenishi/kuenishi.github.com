@@ -27,6 +27,7 @@ Other memorandum
    memo/arch
    memo/zfs
    memo/ergodox-ez
+   memo/blockchain
    memo/cost-of-send-after3
    memo/beam
    memo/kudu
