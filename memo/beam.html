@@ -1,0 +1,291 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>BEAM &#8212; kuenishi(7)</title>
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Kudu memo" href="kudu.html" />
+    <link rel="prev" title="the cost of erlang:send_after/3" href="cost-of-send-after3.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="kudu.html" title="Kudu memo"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cost-of-send-after3.html" title="the cost of erlang:send_after/3"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="beam">
+<h1>BEAM<a class="headerlink" href="#beam" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>from <a class="reference external" href="https://gist.github.com/kuenishi/3183043">https://gist.github.com/kuenishi/3183043</a></li>
+</ul>
+<div class="section" id="assemble">
+<h2>assemble<a class="headerlink" href="#assemble" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">$</span> <span class="pre">erlc</span> <span class="pre">-S</span> <span class="pre">test.erl</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="registers">
+<h2>registers<a class="headerlink" href="#registers" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>1024 <code class="docutils literal notranslate"><span class="pre">X</span></code> registers</li>
+<li><code class="docutils literal notranslate"><span class="pre">Y</span></code> register</li>
+</ul>
+<p>Registers X, Y are represented like this:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">5 bit tag:</th><td class="field-body">27 bit value</td>
+</tr>
+</tbody>
+</table>
+<p>The tags are 3=X, 4=Y, 5=r, 6=Literal</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">CP</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>“Continuation Pointer” - return address</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">PC</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>“Program Counter” - next instruction to be executed</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="important-instructions">
+<h2>important instructions<a class="headerlink" href="#important-instructions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>test</li>
+<li>move <code class="docutils literal notranslate"><span class="pre">{move,</span> <span class="pre">Src,</span> <span class="pre">Dest}</span></code></li>
+</ul>
+<p>64 is the opcode for “move”, 0x18000000 is the encoding of argument that means register <code class="docutils literal notranslate"><span class="pre">{x,</span> <span class="pre">0}</span></code></p>
+<ul class="simple">
+<li>gc_bif</li>
+<li>call <code class="docutils literal notranslate"><span class="pre">{call,</span> <span class="pre">Arity,</span> <span class="pre">{f,</span> <span class="pre">N}}</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>set <code class="docutils literal notranslate"><span class="pre">P=N,</span> <span class="pre">CP=Next</span></code></li>
+<li>jumps to label <code class="docutils literal notranslate"><span class="pre">N</span></code></li>
+<li>arguments are stored in X0 ~ Xn</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>return</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>does <code class="docutils literal notranslate"><span class="pre">PC=CP</span></code></li>
+<li>return value is stored in X0</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>receive</li>
+<li>allocate</li>
+<li>deallocate <code class="docutils literal notranslate"><span class="pre">{deallocate,</span> <span class="pre">N}</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>create and remove stack frames.</li>
+<li>there also exists <code class="docutils literal notranslate"><span class="pre">{allocate_zero,</span> <span class="pre">Ny,</span> <span class="pre">Ng}</span></code> - <code class="docutils literal notranslate"><span class="pre">Ny</span></code> Y registers</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="other-instructions">
+<h2>other instructions<a class="headerlink" href="#other-instructions" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>label <code class="docutils literal notranslate"><span class="pre">{label,</span> <span class="pre">N}</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>Nth label in the module</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>function <code class="docutils literal notranslate"><span class="pre">{function,</span> <span class="pre">Name,</span> <span class="pre">Arity,</span> <span class="pre">LabelID}</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>defines a function</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>bif <code class="docutils literal notranslate"><span class="pre">{bif,</span> <span class="pre">FuncAtom,</span> <span class="pre">{f,</span> <span class="pre">0},</span> <span class="pre">[],</span> <span class="pre">{x,</span> <span class="pre">0}}</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>calls, ?</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>gc_bif <code class="docutils literal notranslate"><span class="pre">{gc_bif,</span> <span class="pre">'*',</span> <span class="pre">{f,</span> <span class="pre">A},</span> <span class="pre">N1,</span> <span class="pre">[R1,</span> <span class="pre">R2,</span> <span class="pre">R3]}</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>jumps to a function named <code class="docutils literal notranslate"><span class="pre">'*'</span></code></li>
+<li>multiply R1 and R2, and set the result into R3. If any failure occurs jump to <code class="docutils literal notranslate"><span class="pre">A</span></code>. If GC is triggered include N1 X registers starting at X0 in the root set for GC.</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>send <code class="docutils literal notranslate"><span class="pre">send.</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>sends the data in <code class="docutils literal notranslate"><span class="pre">X0</span></code> ?</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>loop_rec <code class="docutils literal notranslate"><span class="pre">{loop_rec,</span> <span class="pre">{f,</span> <span class="pre">N},</span> <span class="pre">{x,</span> <span class="pre">0}}</span></code></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li>receive clause starts here, till <code class="docutils literal notranslate"><span class="pre">loop_rec_end</span></code></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li>wait_timeout <code class="docutils literal notranslate"><span class="pre">{wait_timeout,</span> <span class="pre">{f,</span> <span class="pre">N},</span> <span class="pre">{integer,</span> <span class="pre">T}}</span></code></li>
+<li>test <code class="docutils literal notranslate"><span class="pre">{test,</span> <span class="pre">is_eq_exact,</span> <span class="pre">{f,</span> <span class="pre">N},</span> <span class="pre">[{x,0},</span> <span class="pre">{atom,</span> <span class="pre">foo}]}</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">remove_message.</span></code></li>
+</ul>
+</div>
+<div class="section" id="misc">
+<h2>misc:<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="context-switch">
+<h2>Context Switch<a class="headerlink" href="#context-switch" title="Permalink to this headline">¶</a></h2>
+<p>No other timing than when a <code class="docutils literal notranslate"><span class="pre">call</span></code> or <code class="docutils literal notranslate"><span class="pre">receive</span></code> instruction is executed, check a reduction counter.</p>
+</div>
+<div class="section" id="how-to-disasemble">
+<h2>How to disasemble<a class="headerlink" href="#how-to-disasemble" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">`erl</span>
+<span class="pre">beam_lib:chunks(&quot;hw.beam&quot;,</span> <span class="pre">[abstract_code]),</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>instruction set? [genop.tab](<a class="reference external" href="https://github.com/erlang/otp/blob/master/lib/compiler/src/genop.tab">https://github.com/erlang/otp/blob/master/lib/compiler/src/genop.tab</a>&gt;)</li>
+<li>source code - [beam_emu.c](<a class="reference external" href="https://github.com/erlang/otp/blob/master/erts/emulator/beam/beam_emu.c#L1103">https://github.com/erlang/otp/blob/master/erts/emulator/beam/beam_emu.c#L1103</a>&gt;)</li>
+<li>[erlang vm opcodes: beam_opcodes.erl](<a class="reference external" href="https://github.com/mfoemmel/erlang-otp/blob/master/lib/compiler/src/beam_opcodes.erl">https://github.com/mfoemmel/erlang-otp/blob/master/lib/compiler/src/beam_opcodes.erl</a>&gt;)</li>
+<li>Joe Armsgrong, [Deconstructing the BEAM](<a class="reference external" href="http://erlang.org/pipermail/erlang-questions/2012-May/066524.html">http://erlang.org/pipermail/erlang-questions/2012-May/066524.html</a>&gt;) , 2012.</li>
+<li>[The Erlang BEAM Virtual Machine Specification](<a class="reference external" href="http://www.cs-lab.org/historical_beam_instruction_set.html">http://www.cs-lab.org/historical_beam_instruction_set.html</a>&gt;)</li>
+<li>[File format for Beam R5 and later](<a class="reference external" href="http://www.erlang.se/~bjorn/beam_file_format.html">http://www.erlang.se/~bjorn/beam_file_format.html</a>&gt;)</li>
+<li>[The Evolution of the Erlang VM](<a class="reference external" href="http://erlang.org/pipermail/erlang-questions/2012-May/066524.html">http://erlang.org/pipermail/erlang-questions/2012-May/066524.html</a>&gt;)</li>
+<li>[A Guide to the Erlang Source](<a class="reference external" href="http://www.trapexit.org/A_Guide_To_The_Erlang_Source">http://www.trapexit.org/A_Guide_To_The_Erlang_Source</a>&gt;)</li>
+<li>[Erlang source code guide](<a class="reference external" href="http://stackoverflow.com/questions/3755506/erlang-source-code-guide">http://stackoverflow.com/questions/3755506/erlang-source-code-guide</a>&gt;)</li>
+<li>[The Erlang BEAM Virtual Machine Specification](<a class="reference external" href="http://www.cs-lab.org/historical_beam_instruction_set.html">http://www.cs-lab.org/historical_beam_instruction_set.html</a>) 1997.</li>
+<li>[BEAM File Format (pdf)](<a class="reference external" href="http://synrc.com/publications/cat/Functional%20Languages/Erlang/BEAM.pdf">http://synrc.com/publications/cat/Functional%20Languages/Erlang/BEAM.pdf</a>)  2012.</li>
+<li>[Erlang on Xen: BEAM instruction set](<a class="reference external" href="http://erlangonxen.org/more/beam">http://erlangonxen.org/more/beam</a>)</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">BEAM</a><ul>
+<li><a class="reference internal" href="#assemble">assemble</a></li>
+<li><a class="reference internal" href="#registers">registers</a></li>
+<li><a class="reference internal" href="#important-instructions">important instructions</a></li>
+<li><a class="reference internal" href="#other-instructions">other instructions</a></li>
+<li><a class="reference internal" href="#misc">misc:</a></li>
+<li><a class="reference internal" href="#context-switch">Context Switch</a></li>
+<li><a class="reference internal" href="#how-to-disasemble">How to disasemble</a></li>
+<li><a class="reference internal" href="#reference">Reference</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="cost-of-send-after3.html"
+                        title="previous chapter">the cost of erlang:send_after/3</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="kudu.html"
+                        title="next chapter">Kudu memo</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/memo/beam.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="kudu.html" title="Kudu memo"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cost-of-send-after3.html" title="the cost of erlang:send_after/3"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012, UENISHI Kota.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>the cost of erlang:send_after/3 &#8212; kuenishi(7)</title>
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="BEAM" href="beam.html" />
+    <link rel="prev" title="ErgoDox EZ" href="ergodox-ez.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="beam.html" title="BEAM"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ergodox-ez.html" title="ErgoDox EZ"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-cost-of-erlang-send-after-3">
+<h1>the cost of erlang:send_after/3<a class="headerlink" href="#the-cost-of-erlang-send-after-3" title="Permalink to this headline">¶</a></h1>
+<p>When you want to do something “after N seconds” in Erlang, the best way to do it is said to be <code class="docutils literal notranslate"><span class="pre">erlang:send_after/3</span></code> . But how many memory does it take? How many computation cost does it take?</p>
+<p># Entry point</p>
+<p><code class="docutils literal notranslate"><span class="pre">erlang:send_after/3</span></code> can be found as bif at [bif.tab](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/bif.tab#L203">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/bif.tab#L203</a>) . The entry point is at [erl_bif_timer.c](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_bif_timer.c#L493">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_bif_timer.c#L493</a>) . This function just calls <code class="docutils literal notranslate"><span class="pre">setup_bif_timer()</span></code>, which is [in the same file](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_bif_timer.c#L390">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_bif_timer.c#L390</a>). This allocates <code class="docutils literal notranslate"><span class="pre">ErtsBifTimer</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">btm</span> <span class="o">=</span> <span class="p">(</span><span class="n">ErtsBifTimer</span> <span class="o">*</span><span class="p">)</span> <span class="n">erts_alloc</span><span class="p">(</span><span class="n">ERTS_ALC_T_LL_BIF_TIMER</span><span class="p">,</span>
+                                 <span class="n">sizeof</span><span class="p">(</span><span class="n">ErtsBifTimer</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>which is defined in [the same file](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_bif_timer.c#L41">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_bif_timer.c#L41</a>) . This does not include such a big struct other than <code class="docutils literal notranslate"><span class="pre">ErlTimer</span> <span class="pre">tm;</span></code> ( [defined in erl_time.h](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_time.h#L33">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_time.h#L33</a>) ). Given the struct size is 256B, then registering 10^6 timers costs about 256MB (re-calculate it, please!) . Needs calculation, but and, it is put into timer wheel.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tab_insert</span><span class="p">(</span><span class="n">btm</span><span class="p">);</span>
+<span class="n">ASSERT</span><span class="p">(</span><span class="n">btm</span> <span class="o">==</span> <span class="n">tab_find</span><span class="p">(</span><span class="n">ref</span><span class="p">));</span>
+<span class="n">btm</span><span class="o">-&gt;</span><span class="n">tm</span><span class="o">.</span><span class="n">active</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">/*</span> <span class="n">MUST</span> <span class="n">be</span> <span class="n">initalized</span> <span class="o">*/</span>
+<span class="n">erts_set_timer</span><span class="p">(</span><span class="o">&amp;</span><span class="n">btm</span><span class="o">-&gt;</span><span class="n">tm</span><span class="p">,</span>
+              <span class="p">(</span><span class="n">ErlTimeoutProc</span><span class="p">)</span> <span class="n">bif_timer_timeout</span><span class="p">,</span>
+              <span class="p">(</span><span class="n">ErlCancelProc</span><span class="p">)</span> <span class="n">bif_timer_cleanup</span><span class="p">,</span>
+              <span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">btm</span><span class="p">,</span>
+              <span class="n">timeout</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">bif_timer_timeout</span></code> is a callback of timeout, and <code class="docutils literal notranslate"><span class="pre">btm-&gt;tm</span></code> is <code class="docutils literal notranslate"><span class="pre">ErlTimer</span></code> struct.</p>
+<p># Before/After setting timer</p>
+<p>[erts_set_timer in time.c](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/time.c#L397">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/time.c#L397</a>) is very interesting. Just before setting timer, it moves clock forward by calling <code class="docutils literal notranslate"><span class="pre">erts_deliver_time()</span></code> .</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>void
+erts_set_timer(ErlTimer* p, ErlTimeoutProc timeout, ErlCancelProc cancel,
+            void* arg, Uint t)
+{
+
+  erts_deliver_time();
+  erts_smp_mtx_lock(&amp;tiw_lock);
+  if (p-&gt;active) { /* XXX assert ? */
+      erts_smp_mtx_unlock(&amp;tiw_lock);
+      return;
+  }
+  p-&gt;timeout = timeout;
+  p-&gt;cancel = cancel;
+  p-&gt;arg = arg;
+  p-&gt;active = 1;
+  insert_timer(p, t);
+  erts_smp_mtx_unlock(&amp;tiw_lock);
+#if defined(ERTS_SMP)
+  if (t &lt;= (Uint) ERTS_SHORT_TIME_T_MAX)
+      erts_sys_schedule_interrupt_timed(1, (erts_short_time_t) t);
+#endif
+}
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">insert_timer(p,</span> <span class="pre">t);</span></code> actually timer is registered, but right after it the erts scheduler is interrupted by [writing “!”](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/sys/common/erl_poll.c#L472">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/sys/common/erl_poll.c#L472</a>) <code class="docutils literal notranslate"><span class="pre">write(2)</span></code> with into scheduler interruption pipe.</p>
+<p># Setting timer actually</p>
+<p><code class="docutils literal notranslate"><span class="pre">insert_timer</span></code> is in [time.c](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/time.c#L347">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/time.c#L347</a>) . <code class="docutils literal notranslate"><span class="pre">tiw</span></code> might be read as “timer wheel” ? maybe. It’s actually timer wheel, which has 65536 slots (actually <code class="docutils literal notranslate"><span class="pre">TIW_SLOTS</span></code> ) . Each slot is for single millisecond and keeps all timers that should be invoked in the single milliseconds. Each slot is just a linked list via pointer and generic prev/next pointer linking.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/*</span> <span class="n">calculate</span> <span class="n">slot</span> <span class="o">*/</span>
+ <span class="n">tm</span> <span class="o">=</span> <span class="p">(</span><span class="n">ticks</span> <span class="o">+</span> <span class="n">tiw_pos</span><span class="p">)</span> <span class="o">%</span> <span class="n">TIW_SIZE</span><span class="p">;</span>
+ <span class="n">p</span><span class="o">-&gt;</span><span class="n">slot</span> <span class="o">=</span> <span class="p">(</span><span class="n">Uint</span><span class="p">)</span> <span class="n">tm</span><span class="p">;</span>
+ <span class="n">p</span><span class="o">-&gt;</span><span class="n">count</span> <span class="o">=</span> <span class="p">(</span><span class="n">Uint</span><span class="p">)</span> <span class="p">(</span><span class="n">ticks</span> <span class="o">/</span> <span class="n">TIW_SIZE</span><span class="p">);</span>
+
+ <span class="o">/*</span> <span class="n">insert</span> <span class="n">at</span> <span class="n">head</span> <span class="n">of</span> <span class="nb">list</span> <span class="n">at</span> <span class="n">slot</span> <span class="o">*/</span>
+ <span class="n">p</span><span class="o">-&gt;</span><span class="nb">next</span> <span class="o">=</span> <span class="n">tiw</span><span class="p">[</span><span class="n">tm</span><span class="p">];</span>
+ <span class="n">p</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">NULL</span><span class="p">;</span>
+ <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="nb">next</span> <span class="o">!=</span> <span class="n">NULL</span><span class="p">)</span>
+     <span class="n">p</span><span class="o">-&gt;</span><span class="nb">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+ <span class="n">tiw</span><span class="p">[</span><span class="n">tm</span><span class="p">]</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
+</pre></div>
+</div>
+<p># Invoking the timer</p>
+<p><code class="docutils literal notranslate"><span class="pre">erts_bump_timer</span></code> is the function where these timers are triggered. This function is called by several scheduling logic incling <code class="docutils literal notranslate"><span class="pre">schedule()</span></code> like [here](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_process.c#L3012">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_process.c#L3012</a>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dt</span> <span class="o">=</span> <span class="n">erts_do_time_read_and_reset</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">dt</span><span class="p">)</span> <span class="n">erts_bump_timer</span><span class="p">(</span><span class="n">dt</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">erts_bump_timer_internal</span></code> is the core part of popping out timed out timers from the timer wheel slot [timer.c](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/time.c#L227">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/time.c#L227</a>). Popping out all timer entries to <code class="docutils literal notranslate"><span class="pre">timeout_head</span></code> and calls all callbacks.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>/* Call timedout timers callbacks */
+while (timeout_head) {
+    p = timeout_head;
+    timeout_head = p-&gt;next;
+    /* Here comes hairy use of the timer fields!
+     * They are reset without having the lock.
+     * It is assumed that no code but this will
+     * accesses any field until the -&gt;timeout
+     * callback is called.
+     */
+    p-&gt;next = NULL;
+    p-&gt;prev = NULL;
+    p-&gt;slot = 0;
+    (*p-&gt;timeout)(p-&gt;arg);
+}
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">erlang:send_after/3</span></code> the callback is [bif_timer_timeout](<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_bif_timer.c#L302">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/beam/erl_bif_timer.c#L302</a>) . This function calls <code class="docutils literal notranslate"><span class="pre">erts_queue_message</span></code>, which finally stacks the message into target process’s msg_q.</p>
+<p># Conclusion</p>
+<p>The memory consumption is in order of ~100Bytes per timer. The computation cost is in order of traversing the linked list, whose length is in the same order with Timers stored in each milliseconds.</p>
+<p>Suppose 10K timers continuously stored on memory then the length of each queue is 10K / 65536 by average. This is because each timer slot can be accessed by offset.</p>
+<p>## Note</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">*</span></code> nix [gettimeofday(2) is used for clock.] (<a class="reference external" href="https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/sys/unix/erl_unix_sys.h#L162">https://github.com/erlang/otp/blob/OTP-17.0/erts/emulator/sys/unix/erl_unix_sys.h#L162</a>) This clock cannot be trusted so much because it leaps back but Erlang remembers the former answer of it and if the time diff is negative, the wrong time is ignored and nothing changes.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ergodox-ez.html"
+                        title="previous chapter">ErgoDox EZ</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="beam.html"
+                        title="next chapter">BEAM</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/memo/cost-of-send-after3.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="beam.html" title="BEAM"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ergodox-ez.html" title="ErgoDox EZ"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012, UENISHI Kota.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+  </body>
+</html>

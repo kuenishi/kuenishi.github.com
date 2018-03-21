@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ZFS Memo &#8212; kuenishi(7)</title>
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ErgoDox EZ" href="ergodox-ez.html" />
+    <link rel="prev" title="Arch Linux Installation" href="arch.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ergodox-ez.html" title="ErgoDox EZ"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="arch.html" title="Arch Linux Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="zfs-memo">
+<h1>ZFS Memo<a class="headerlink" href="#zfs-memo" title="Permalink to this headline">¶</a></h1>
+<p>2017/11/3 - 11/5 FreeBSD Update from 10.3 -&gt; 11.1 のためにバックアップ。</p>
+<p>プール <code class="docutils literal notranslate"><span class="pre">data</span></code> があって、パーティション <code class="docutils literal notranslate"><span class="pre">data</span></code> と <code class="docutils literal notranslate"><span class="pre">data/user</span></code> が
+いまのところある。 <code class="docutils literal notranslate"><span class="pre">data</span></code> にはTimeMachineデータが入っているだけなの
+で特に退避とかはしない。 <code class="docutils literal notranslate"><span class="pre">data/user</span></code> だけバックアップする。スナップ
+ショットの作成は:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># zfs snapshot data/user@10to11</span>
+</pre></div>
+</div>
+<p>スナップショットを別ドライブ上にあるプール <code class="docutils literal notranslate"><span class="pre">attic</span></code> に流し込む:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># zfs send data/user@10to11 | zfs recv attic</span>
+</pre></div>
+</div>
+<p>このとき <code class="docutils literal notranslate"><span class="pre">attic</span></code> 上（特に <code class="docutils literal notranslate"><span class="pre">/attic/user</span></code> というディレクトリ）にデー
+タを置かないこと。置くなら、 <code class="docutils literal notranslate"><span class="pre">-F</span></code> オプションで上書きする必要がある。
+スナップショットの転送が終わったら:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># zfs list -t snapshot</span>
+</pre></div>
+</div>
+<p>で存在とサイズの一致を確認。ファイルで保存したい場合は:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># zfs send data/user@10to11 | gzip &gt; data-user-10to11.gz</span>
+</pre></div>
+</div>
+<p>などとする。転送元のスナップショットを削除するには:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># zfs destroy data/user@10to11</span>
+</pre></div>
+</div>
+<p>ちなみに、<code class="docutils literal notranslate"><span class="pre">data</span></code> というプールがあって <code class="docutils literal notranslate"><span class="pre">data/user</span></code> を
+作りたい場合は:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># zfs create data/user</span>
+</pre></div>
+</div>
+<p>肝心のアップデートは:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># freebsd-update fetch</span>
+<span class="c1"># freebsd-update install</span>
+<span class="c1"># : &gt; /bin/sbin/bspatch</span>
+<span class="c1"># freebsd-update upgrade -r 11.0-RELEASE</span>
+<span class="c1"># freebsd-update install</span>
+<span class="o">&lt;</span><span class="n">reboot</span><span class="o">&gt;</span>
+<span class="c1"># freebsd-update install</span>
+<span class="c1"># pkg update</span>
+<span class="c1"># pkg upgrade</span>
+<span class="c1"># freebsd-update install</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://www.freebsd.org/releases/11.0R/announce.html">See</a> for more
+details, which has upgrade precedure a bit.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="arch.html"
+                        title="previous chapter">Arch Linux Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ergodox-ez.html"
+                        title="next chapter">ErgoDox EZ</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/memo/zfs.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ergodox-ez.html" title="ErgoDox EZ"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="arch.html" title="Arch Linux Installation"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012, UENISHI Kota.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+  </body>
+</html>

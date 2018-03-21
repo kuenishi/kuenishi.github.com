@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Run Spark on Riak CS &#8212; kuenishi(7)</title>
+    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Kudu memo" href="kudu.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="kudu.html" title="Kudu memo"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="run-spark-on-riak-cs">
+<h1>Run Spark on Riak CS<a class="headerlink" href="#run-spark-on-riak-cs" title="Permalink to this headline">¶</a></h1>
+<p>[Spark](<a class="reference external" href="http://spark.apache.org/">http://spark.apache.org/</a>) is fast distributed processing framework, by keeping intermediate data or input data on memory, as known as RDD. Spark not only runs on top of HDFS but also on top of S3 - then it should work on top of [Riak CS](<a class="reference external" href="http://docs.basho.com/riakcs/latest/">http://docs.basho.com/riakcs/latest/</a>) . This document shows result of connectivity test.</p>
+<p>## Test Spark with Local Filesystem</p>
+<p>So easy as ABC. Get whatever Spark release from [download page](<a class="reference external" href="http://spark.apache.org/downloads.html">http://spark.apache.org/downloads.html</a>) .</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; tar xzf spark-1.0.0-bin-hadoop2.tgz
+&gt; cd spark-1.0.0-bin-hadoop2/
+
+&gt; bin/spark-shell
+Spark assembly has been built with Hive, including Datanucleus jars on classpath
+14/07/01 23:32:59 INFO SecurityManager: Using Spark&#39;s default log4j profile: org/apache/spark/log4j-defaults.properties
+14/07/01 23:32:59 INFO SecurityManager: Changing view acls to: kuenishi
+14/07/01 23:32:59 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(kuenishi)
+14/07/01 23:32:59 INFO HttpServer: Starting HTTP Server
+Welcome to
+     ____              __
+    / __/__  ___ _____/ /__
+   _\ \/ _ \/ _ `/ __/  &#39;_/
+  /___/ .__/\_,_/_/ /_/\_\   version 1.0.0
+     /_/
+
+Using Scala version 2.10.4 (Java HotSpot(TM) 64-Bit Server VM, Java 1.7.0_25)
+Type in expressions to have them evaluated.
+Type :help for more information.
+(snip)
+14/07/01 23:33:19 INFO Executor: Using REPL class URI: http://172.17.42.1:49255
+14/07/01 23:33:19 INFO SparkILoop: Created spark context..
+Spark context available as sc.
+
+scala&gt;
+</pre></div>
+</div>
+<p>That’s easy. And run some test query as in [quickstart](<a class="reference external" href="http://spark.apache.org/docs/latest/quick-start.html">http://spark.apache.org/docs/latest/quick-start.html</a>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">val</span> <span class="n">textFile</span><span class="o">=</span><span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s2">&quot;README.md&quot;</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">01</span> <span class="mi">23</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">00</span> <span class="n">INFO</span> <span class="n">MemoryStore</span><span class="p">:</span> <span class="n">ensureFreeSpace</span><span class="p">(</span><span class="mi">138803</span><span class="p">)</span> <span class="n">called</span> <span class="k">with</span> <span class="n">curMem</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxMem</span><span class="o">=</span><span class="mi">308713881</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">01</span> <span class="mi">23</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">00</span> <span class="n">INFO</span> <span class="n">MemoryStore</span><span class="p">:</span> <span class="n">Block</span> <span class="n">broadcast_0</span> <span class="n">stored</span> <span class="k">as</span> <span class="n">values</span> <span class="n">to</span> <span class="n">memory</span> <span class="p">(</span><span class="n">estimated</span> <span class="n">size</span> <span class="mf">135.5</span> <span class="n">KB</span><span class="p">,</span> <span class="n">free</span> <span class="mf">294.3</span> <span class="n">MB</span><span class="p">)</span>
+<span class="n">textFile</span><span class="p">:</span> <span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">RDD</span><span class="p">[</span><span class="n">String</span><span class="p">]</span> <span class="o">=</span> <span class="n">MappedRDD</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">at</span> <span class="n">textFile</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">12</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="n">textFile</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">01</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">55</span> <span class="n">INFO</span> <span class="n">FileInputFormat</span><span class="p">:</span> <span class="n">Total</span> <span class="nb">input</span> <span class="n">paths</span> <span class="n">to</span> <span class="n">process</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">01</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">55</span> <span class="n">INFO</span> <span class="n">SparkContext</span><span class="p">:</span> <span class="n">Starting</span> <span class="n">job</span><span class="p">:</span> <span class="n">count</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">15</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">01</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">55</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Got</span> <span class="n">job</span> <span class="mi">0</span> <span class="p">(</span><span class="n">count</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">15</span><span class="p">)</span> <span class="k">with</span> <span class="mi">2</span> <span class="n">output</span> <span class="n">partitions</span> <span class="p">(</span><span class="n">allowLocal</span><span class="o">=</span><span class="n">false</span><span class="p">)</span>
+<span class="p">(</span><span class="n">snip</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">01</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">56</span> <span class="n">INFO</span> <span class="n">TaskSchedulerImpl</span><span class="p">:</span> <span class="n">Removed</span> <span class="n">TaskSet</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">whose</span> <span class="n">tasks</span> <span class="n">have</span> <span class="nb">all</span> <span class="n">completed</span><span class="p">,</span> <span class="kn">from</span> <span class="nn">pool</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">01</span> <span class="mi">23</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">56</span> <span class="n">INFO</span> <span class="n">SparkContext</span><span class="p">:</span> <span class="n">Job</span> <span class="n">finished</span><span class="p">:</span> <span class="n">count</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="n">took</span> <span class="mf">0.316897949</span> <span class="n">s</span>
+<span class="n">res0</span><span class="p">:</span> <span class="n">Long</span> <span class="o">=</span> <span class="mi">127</span>
+
+<span class="n">scala</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>That’s also easy, right? In the next chapter let’s try run the same query against the file in Riak CS.</p>
+<p>## Setup Riak CS</p>
+<p>Riak CS version is 1.5.0-beta1. The package is not officially
+released. But you can build by yourself, by starting from
+[github repository](<a class="reference external" href="https://github.com/basho/riak_cs">https://github.com/basho/riak_cs</a>).</p>
+<p>## Let Spark find Riak CS</p>
+<p>Suppose <a class="reference external" href="http://localhost:8080">http://localhost:8080</a> is Riak CS and its name is
+s3.amazonaws.com as usual. Spark also uses <cite>jets3t</cite> as S3 connector,
+thus putting <cite>jets3t.properties</cite> into <cite>$SPARK_HOME/conf</cite> and setting
+environment variables will be sufficient.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; cp $SPARK_HOME
+&gt; cp your/jets3t.properties conf
+&gt; cat conf/jets3t.properties
+s3service.https-only=false
+#s3service.s3-endpoint=localhost
+#s3service.s3-endpoint-http-port=8080
+#s3service.s3-endpoint-https-port=8080
+#s3service.disable-dns-buckets=true
+
+httpclient.proxy-autodetect=false
+httpclient.proxy-host=localhost
+httpclient.proxy-port=8080
+httpclient.retry-max=11
+&gt; export AWS_ACCESS_KEY_ID=KI_-C956C0F0GNFMKMW4
+&gt; export AWS_SECRET_ACCESS_KEY=c7Xb0rzhErBFH8JrHcHTMSfNnqAuxdRToI94zA==
+&gt; s3cmd put README.md s3://test/
+../hadoop/spark-1.0.0-bin-hadoop2/README.md -&gt; s3://test/README.md  [1 of 1]
+ 4221 of 4221   100% in    0s    27.04 kB/s  done
+&gt; bin/spark-shell
+</pre></div>
+</div>
+<p>## Just do it</p>
+<p>And then try exactly the same example as above, and make sure the
+result is same.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scala</span><span class="o">&gt;</span> <span class="n">val</span> <span class="n">data</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">textFile</span><span class="p">(</span><span class="s2">&quot;s3n://test/README.md&quot;</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">14</span> <span class="n">INFO</span> <span class="n">MemoryStore</span><span class="p">:</span> <span class="n">ensureFreeSpace</span><span class="p">(</span><span class="mi">139483</span><span class="p">)</span> <span class="n">called</span> <span class="k">with</span> <span class="n">curMem</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxMem</span><span class="o">=</span><span class="mi">308713881</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">14</span> <span class="n">INFO</span> <span class="n">MemoryStore</span><span class="p">:</span> <span class="n">Block</span> <span class="n">broadcast_0</span> <span class="n">stored</span> <span class="k">as</span> <span class="n">values</span> <span class="n">to</span> <span class="n">memory</span> <span class="p">(</span><span class="n">estimated</span> <span class="n">size</span> <span class="mf">136.2</span> <span class="n">KB</span><span class="p">,</span> <span class="n">free</span> <span class="mf">294.3</span> <span class="n">MB</span><span class="p">)</span>
+<span class="n">data</span><span class="p">:</span> <span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">spark</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">RDD</span><span class="p">[</span><span class="n">String</span><span class="p">]</span> <span class="o">=</span> <span class="n">MappedRDD</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">at</span> <span class="n">textFile</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">12</span>
+
+<span class="n">scala</span><span class="o">&gt;</span> <span class="n">data</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">RestUtils</span><span class="p">:</span> <span class="n">Using</span> <span class="n">Proxy</span><span class="p">:</span> <span class="n">localhost</span><span class="p">:</span><span class="mi">8080</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">FileInputFormat</span><span class="p">:</span> <span class="n">Total</span> <span class="nb">input</span> <span class="n">paths</span> <span class="n">to</span> <span class="n">process</span> <span class="p">:</span> <span class="mi">1</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">SparkContext</span><span class="p">:</span> <span class="n">Starting</span> <span class="n">job</span><span class="p">:</span> <span class="n">count</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">15</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Got</span> <span class="n">job</span> <span class="mi">0</span> <span class="p">(</span><span class="n">count</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">15</span><span class="p">)</span> <span class="k">with</span> <span class="mi">2</span> <span class="n">output</span> <span class="n">partitions</span> <span class="p">(</span><span class="n">allowLocal</span><span class="o">=</span><span class="n">false</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Final</span> <span class="n">stage</span><span class="p">:</span> <span class="n">Stage</span> <span class="mi">0</span><span class="p">(</span><span class="n">count</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">15</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Parents</span> <span class="n">of</span> <span class="n">final</span> <span class="n">stage</span><span class="p">:</span> <span class="n">List</span><span class="p">()</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Missing</span> <span class="n">parents</span><span class="p">:</span> <span class="n">List</span><span class="p">()</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Submitting</span> <span class="n">Stage</span> <span class="mi">0</span> <span class="p">(</span><span class="n">MappedRDD</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">at</span> <span class="n">textFile</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">12</span><span class="p">),</span> <span class="n">which</span> <span class="n">has</span> <span class="n">no</span> <span class="n">missing</span> <span class="n">parents</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Submitting</span> <span class="mi">2</span> <span class="n">missing</span> <span class="n">tasks</span> <span class="kn">from</span> <span class="nn">Stage</span> <span class="mi">0</span> <span class="p">(</span><span class="n">MappedRDD</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">at</span> <span class="n">textFile</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">12</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">TaskSchedulerImpl</span><span class="p">:</span> <span class="n">Adding</span> <span class="n">task</span> <span class="nb">set</span> <span class="mf">0.0</span> <span class="k">with</span> <span class="mi">2</span> <span class="n">tasks</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">TaskSetManager</span><span class="p">:</span> <span class="n">Starting</span> <span class="n">task</span> <span class="mf">0.0</span><span class="p">:</span><span class="mi">0</span> <span class="k">as</span> <span class="n">TID</span> <span class="mi">0</span> <span class="n">on</span> <span class="n">executor</span> <span class="n">localhost</span><span class="p">:</span> <span class="n">localhost</span> <span class="p">(</span><span class="n">PROCESS_LOCAL</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">TaskSetManager</span><span class="p">:</span> <span class="n">Serialized</span> <span class="n">task</span> <span class="mf">0.0</span><span class="p">:</span><span class="mi">0</span> <span class="k">as</span> <span class="mi">1696</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">2</span> <span class="n">ms</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">TaskSetManager</span><span class="p">:</span> <span class="n">Starting</span> <span class="n">task</span> <span class="mf">0.0</span><span class="p">:</span><span class="mi">1</span> <span class="k">as</span> <span class="n">TID</span> <span class="mi">1</span> <span class="n">on</span> <span class="n">executor</span> <span class="n">localhost</span><span class="p">:</span> <span class="n">localhost</span> <span class="p">(</span><span class="n">PROCESS_LOCAL</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">TaskSetManager</span><span class="p">:</span> <span class="n">Serialized</span> <span class="n">task</span> <span class="mf">0.0</span><span class="p">:</span><span class="mi">1</span> <span class="k">as</span> <span class="mi">1696</span> <span class="nb">bytes</span> <span class="ow">in</span> <span class="mi">12</span> <span class="n">ms</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">Executor</span><span class="p">:</span> <span class="n">Running</span> <span class="n">task</span> <span class="n">ID</span> <span class="mi">1</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">Executor</span><span class="p">:</span> <span class="n">Running</span> <span class="n">task</span> <span class="n">ID</span> <span class="mi">0</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">BlockManager</span><span class="p">:</span> <span class="n">Found</span> <span class="n">block</span> <span class="n">broadcast_0</span> <span class="n">locally</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">BlockManager</span><span class="p">:</span> <span class="n">Found</span> <span class="n">block</span> <span class="n">broadcast_0</span> <span class="n">locally</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">HadoopRDD</span><span class="p">:</span> <span class="n">Input</span> <span class="n">split</span><span class="p">:</span> <span class="n">s3n</span><span class="p">:</span><span class="o">//</span><span class="n">test</span><span class="o">/</span><span class="n">README</span><span class="o">.</span><span class="n">md</span><span class="p">:</span><span class="mi">0</span><span class="o">+</span><span class="mi">2110</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">HadoopRDD</span><span class="p">:</span> <span class="n">Input</span> <span class="n">split</span><span class="p">:</span> <span class="n">s3n</span><span class="p">:</span><span class="o">//</span><span class="n">test</span><span class="o">/</span><span class="n">README</span><span class="o">.</span><span class="n">md</span><span class="p">:</span><span class="mi">2110</span><span class="o">+</span><span class="mi">2111</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">deprecation</span><span class="p">:</span> <span class="n">mapred</span><span class="o">.</span><span class="n">tip</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Instead</span><span class="p">,</span> <span class="n">use</span> <span class="n">mapreduce</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">id</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">deprecation</span><span class="p">:</span> <span class="n">mapred</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Instead</span><span class="p">,</span> <span class="n">use</span> <span class="n">mapreduce</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">attempt</span><span class="o">.</span><span class="n">id</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">deprecation</span><span class="p">:</span> <span class="n">mapred</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="ow">is</span><span class="o">.</span><span class="n">map</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Instead</span><span class="p">,</span> <span class="n">use</span> <span class="n">mapreduce</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">ismap</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">deprecation</span><span class="p">:</span> <span class="n">mapred</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">partition</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Instead</span><span class="p">,</span> <span class="n">use</span> <span class="n">mapreduce</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">partition</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">deprecation</span><span class="p">:</span> <span class="n">mapred</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Instead</span><span class="p">,</span> <span class="n">use</span> <span class="n">mapreduce</span><span class="o">.</span><span class="n">job</span><span class="o">.</span><span class="n">id</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">deprecation</span><span class="p">:</span> <span class="n">mapred</span><span class="o">.</span><span class="n">tip</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Instead</span><span class="p">,</span> <span class="n">use</span> <span class="n">mapreduce</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">id</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">NativeS3FileSystem</span><span class="p">:</span> <span class="n">Opening</span> <span class="s1">&#39;s3n://test/README.md&#39;</span> <span class="k">for</span> <span class="n">reading</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">NativeS3FileSystem</span><span class="p">:</span> <span class="n">Opening</span> <span class="s1">&#39;s3n://test/README.md&#39;</span> <span class="k">for</span> <span class="n">reading</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">NativeS3FileSystem</span><span class="p">:</span> <span class="n">Opening</span> <span class="n">key</span> <span class="s1">&#39;README.md&#39;</span> <span class="k">for</span> <span class="n">reading</span> <span class="n">at</span> <span class="n">position</span> <span class="s1">&#39;2110&#39;</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">17</span> <span class="n">INFO</span> <span class="n">NativeS3FileSystem</span><span class="p">:</span> <span class="n">Opening</span> <span class="n">key</span> <span class="s1">&#39;README.md&#39;</span> <span class="k">for</span> <span class="n">reading</span> <span class="n">at</span> <span class="n">position</span> <span class="s1">&#39;0&#39;</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">Executor</span><span class="p">:</span> <span class="n">Serialized</span> <span class="n">size</span> <span class="n">of</span> <span class="n">result</span> <span class="k">for</span> <span class="mi">1</span> <span class="ow">is</span> <span class="mi">597</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">Executor</span><span class="p">:</span> <span class="n">Serialized</span> <span class="n">size</span> <span class="n">of</span> <span class="n">result</span> <span class="k">for</span> <span class="mi">0</span> <span class="ow">is</span> <span class="mi">597</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">Executor</span><span class="p">:</span> <span class="n">Sending</span> <span class="n">result</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">directly</span> <span class="n">to</span> <span class="n">driver</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">Executor</span><span class="p">:</span> <span class="n">Sending</span> <span class="n">result</span> <span class="k">for</span> <span class="mi">0</span> <span class="n">directly</span> <span class="n">to</span> <span class="n">driver</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">Executor</span><span class="p">:</span> <span class="n">Finished</span> <span class="n">task</span> <span class="n">ID</span> <span class="mi">0</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">Executor</span><span class="p">:</span> <span class="n">Finished</span> <span class="n">task</span> <span class="n">ID</span> <span class="mi">1</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">TaskSetManager</span><span class="p">:</span> <span class="n">Finished</span> <span class="n">TID</span> <span class="mi">0</span> <span class="ow">in</span> <span class="mi">237</span> <span class="n">ms</span> <span class="n">on</span> <span class="n">localhost</span> <span class="p">(</span><span class="n">progress</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Completed</span> <span class="n">ResultTask</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Completed</span> <span class="n">ResultTask</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">DAGScheduler</span><span class="p">:</span> <span class="n">Stage</span> <span class="mi">0</span> <span class="p">(</span><span class="n">count</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">15</span><span class="p">)</span> <span class="n">finished</span> <span class="ow">in</span> <span class="mf">0.329</span> <span class="n">s</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">TaskSetManager</span><span class="p">:</span> <span class="n">Finished</span> <span class="n">TID</span> <span class="mi">1</span> <span class="ow">in</span> <span class="mi">247</span> <span class="n">ms</span> <span class="n">on</span> <span class="n">localhost</span> <span class="p">(</span><span class="n">progress</span><span class="p">:</span> <span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">TaskSchedulerImpl</span><span class="p">:</span> <span class="n">Removed</span> <span class="n">TaskSet</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">whose</span> <span class="n">tasks</span> <span class="n">have</span> <span class="nb">all</span> <span class="n">completed</span><span class="p">,</span> <span class="kn">from</span> <span class="nn">pool</span>
+<span class="mi">14</span><span class="o">/</span><span class="mi">07</span><span class="o">/</span><span class="mi">02</span> <span class="mi">01</span><span class="p">:</span><span class="mi">38</span><span class="p">:</span><span class="mi">18</span> <span class="n">INFO</span> <span class="n">SparkContext</span><span class="p">:</span> <span class="n">Job</span> <span class="n">finished</span><span class="p">:</span> <span class="n">count</span> <span class="n">at</span> <span class="o">&lt;</span><span class="n">console</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">15</span><span class="p">,</span> <span class="n">took</span> <span class="mf">0.444235349</span> <span class="n">s</span>
+<span class="n">res0</span><span class="p">:</span> <span class="n">Long</span> <span class="o">=</span> <span class="mi">127</span>
+
+<span class="n">scala</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Here it works.</p>
+<ul class="simple">
+<li>Spark on S3 (Japanese) <a class="reference external" href="http://itsneatlife.blogspot.jp/2014/01/sparks3.html">http://itsneatlife.blogspot.jp/2014/01/sparks3.html</a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="kudu.html"
+                        title="previous chapter">Kudu memo</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/memo/riak-cs-spark.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="kudu.html" title="Kudu memo"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012, UENISHI Kota.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+    </div>
+  </body>
+</html>
