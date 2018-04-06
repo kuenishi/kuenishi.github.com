@@ -1,5 +1,6 @@
+###############################
 the cost of erlang:send_after/3
-===============================
+###############################
 
 
 When you want to do something "after N seconds" in Erlang, the best way to do it is said to be ``erlang:send_after/3`` . But how many memory does it take? How many computation cost does it take?

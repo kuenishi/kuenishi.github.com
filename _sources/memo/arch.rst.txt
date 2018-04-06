@@ -1,5 +1,6 @@
+#####################################
 Arch Linux Installation & Maintenance
-=====================================
+#####################################
 
 2017/10/19 - 2017/10/20
 
@@ -70,6 +71,10 @@ https://www.archlinux.org/download/ からPGP署名ファイルとISOイメー�
    1071104+0 レコード入力
    1071104+0 レコード出力
    548405248 bytes (548 MB, 523 MiB) copied, 201.131 s, 2.7 MB/s
+
+
+Installation
+------------
 
 ThinkPad届く。
 
@@ -325,7 +330,7 @@ CtrlとCaps Lockを入れ替えるのは、とりあえず::
 DPIはAppearance （外観）から変更。とりあえず字大きめの160で。
 
 Weird display vibrarion
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Sometimes a screen vibrates suddenly with a dmesg line including ``[drm:intel_cpu_fifo_underrun_irq_handler [i915]] *ERROR* CPU pipe A FIFO underrun``  ... which may be solved with installing ``xf86-video-intel``  .
 
@@ -634,7 +639,7 @@ Arch Linux Installation to machine #2
 To my desktop machine, with NVIDIA GeForce 760, and several hetero HDDs.
 
 OS Install
-----------
+^^^^^^^^^^
 
 Same os above, using many tools to setup Arch Installation, except for:
 
@@ -645,7 +650,8 @@ Same os above, using many tools to setup Arch Installation, except for:
 - NVIDIA driver
 
 Btrfs setup
------------
+^^^^^^^^^^^
+
 
 See `Using Btrfs with Multiple Devices <https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices>`_::
 
@@ -653,7 +659,7 @@ See `Using Btrfs with Multiple Devices <https://btrfs.wiki.kernel.org/index.php/
   # mount /dev/sde /mnt
 
 Static IP address
------------------
+^^^^^^^^^^^^^^^^^^
 
 `Use netctl <https://wiki.archlinux.jp/index.php/Netctl#.E6.9C.89.E7.B7.9A>`_::
 
@@ -677,7 +683,7 @@ Don't do any fucking typoes here. Troutbleshoot with ``# journalctl -xe``, like 
 
 
 Nvidia driver
--------------
+^^^^^^^^^^^^^^
 
 Nouvearu is kind of general and just works - but was too slow for me
 at runtime. With `official guide
@@ -686,7 +692,7 @@ at runtime. With `official guide
   $ lspci -k | grep -A 2 -E "(VGA|3D)"
 
 Install yaourt
---------------
+^^^^^^^^^^^^^^^
 
 https://wiki.archlinux.jp/index.php/Yaourt
 
@@ -696,7 +702,7 @@ General Trouble Shooting
 ------------------------
 
 Pacman のアップデートで GnuPG エラーが出る
-+++++++++++++++++++++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 パッケージアップデート時に ``gnupg: signature from "Gaetan Bisson
 <bisson@archlinux.org>" is invalid`` 的なエラーがでて失敗したら、以下
@@ -709,7 +715,7 @@ Pacman のアップデートで GnuPG エラーが出る
 
 
 Fix kernel or other files 2018/4/6
-++++++++++++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``yaourt -Syu`` が妙に時間がかかったのでマシンを途中で止めてしまったと
 ころ、起動時（LUKSのパスワード入力）時にキーボードが効かなくなり、パス

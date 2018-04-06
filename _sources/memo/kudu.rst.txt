@@ -1,5 +1,6 @@
+#########
 Kudu memo
-=========
+#########
 
 * Externally consistent transactions in the sense where all transactions are linearizable
 
