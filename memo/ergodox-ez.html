@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Memo on Block Chain Study Group meeting #2" href="blockchain.html" />
     <link rel="prev" title="ZFS Memo" href="zfs.html" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
@@ -30,6 +31,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="blockchain.html" title="Memo on Block Chain Study Group meeting #2"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="zfs.html" title="ZFS Memo"
              accesskey="P">previous</a> |</li>
@@ -60,9 +64,18 @@ $ ls ergodox_ez_default.hex
 ergodox_ez_default.hex
 </pre></div>
 </div>
+<p>I configured my keymap as <a class="reference external" href="https://github.com/kuenishi/qmk_firmware/blob/kinesislike/keyboards/ergodox_ez/keymaps/kinesislike/keymap.c">Kinesis-like keymap</a> . To build it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone git@github.com:kuenishi/qmk_firmware
+$ cd qmk_firmware
+$ git checkout kinesislike
+$ make ergodox_ez:kinesislike
+$ ls ergodox_ez_kinesislike.hex
+ergodox_ez_kinesislike.hex
+</pre></div>
+</div>
 <p>Burn it! See <a class="reference external" href="https://github.com/qmk/qmk_firmware/tree/master/keyboards/ergodox_ez">doc</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(arch)$ yaourt -S teensy-loader-cli
-$ teensy_loader_cli -mmcu=atmega32u4 -w ergodox_ez_.hex
+$ teensy_loader_cli -mmcu=atmega32u4 -w ergodox_ez_kinesislike.hex
 </pre></div>
 </div>
 <p>And press reset button. For macOS, <a class="reference external" href="https://www.pjrc.com/teensy/loader.html">downlaod the application</a></p>
@@ -80,6 +93,9 @@ $ teensy_loader_cli -mmcu=atmega32u4 -w ergodox_ez_.hex
   <h4>Previous topic</h4>
   <p class="topless"><a href="zfs.html"
                         title="previous chapter">ZFS Memo</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="blockchain.html"
+                        title="next chapter">Memo on Block Chain Study Group meeting #2</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -110,13 +126,16 @@ $ teensy_loader_cli -mmcu=atmega32u4 -w ergodox_ez_.hex
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="blockchain.html" title="Memo on Block Chain Study Group meeting #2"
+             >next</a> |</li>
+        <li class="right" >
           <a href="zfs.html" title="ZFS Memo"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2012, UENISHI Kota.
+        &#169; Copyright 2012-2018, UENISHI Kota.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
     </div>
   </body>

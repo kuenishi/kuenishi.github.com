@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Arch Linux Installation &#8212; kuenishi(7)</title>
+    <title>Arch Linux Installation &amp; Maintenance &#8212; kuenishi(7)</title>
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" src="../_static/documentation_options.js"></script>
@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ZFS Memo" href="zfs.html" />
     <link rel="prev" title="Persona" href="../persona.html" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
@@ -31,6 +32,9 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="zfs.html" title="ZFS Memo"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="../persona.html" title="Persona"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
@@ -42,10 +46,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="arch-linux-installation">
-<h1>Arch Linux Installation<a class="headerlink" href="#arch-linux-installation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="arch-linux-installation-maintenance">
+<h1>Arch Linux Installation &amp; Maintenance<a class="headerlink" href="#arch-linux-installation-maintenance" title="Permalink to this headline">¶</a></h1>
 <p>2017/10/19 - 2017/10/20</p>
-<p>2018/3/15 カーネルパッチの部分を削除</p>
+<p>2018/9/9 Mac mini mid 2011 のインストールを追加
+2018/3/15 カーネルパッチの部分を削除
+2018/4/6 Trouble Shooting追加</p>
 <div class="section" id="iso-image-download">
 <h2>ISO Image Download<a class="headerlink" href="#iso-image-download" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.archlinux.org/download/">https://www.archlinux.org/download/</a> からPGP署名ファイルとISOイメージをダウンロード:</p>
@@ -109,6 +115,9 @@ $ sudo dd if=archlinux-2017.10.01-x86_64.iso of=/dev/sdf status=progress &amp;&a
 548405248 bytes (548 MB, 523 MiB) copied, 201.131 s, 2.7 MB/s
 </pre></div>
 </div>
+</div>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>ThinkPad届く。</p>
 <p>Secure Bootをオフに必ずしておく。
 Bootパスはまあこの際後でもいっか。</p>
@@ -232,7 +241,6 @@ Verify passphrase:
 </div>
 <p>この時点で <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> を作ったり、基本的なファイルを先においておく。:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span>
-<span class="c1"># arch-chroot /mnt</span>
 <span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime</span>
 <span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf</span>
 <span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># locale-gen</span>
@@ -527,9 +535,10 @@ $ git show tagname
 <ul class="simple">
 <li><a class="reference external" href="https://www.gnupg.org/gph/en/manual/x334.html">https://www.gnupg.org/gph/en/manual/x334.html</a></li>
 <li><a class="reference external" href="https://github.com/kuenishi/baccounts">baccounts</a> -&gt; GnuPG 2.0ま
-でのフォーマットしか対応してないので悩ましい。Archに入っている最新の
-GnuPGが作るKeyringファイルだと動かない… crypto/openpgp に新しい機
-能入ってたりしないかな（TODO）</li>
+でのフォーマットしか対応してないが、新しい GnuPG だと旧フォーマット
+で出力できる。自前で GnuPG 1.x を入れてると pacman-keyring とかと干
+渉してシステムアップデートできなくなるトラブルがあったので、自前では
+入れずに公式でやること。</li>
 </ul>
 </div>
 <div class="section" id="clamav">
@@ -607,24 +616,12 @@ auth      required  pam_env.so
 input sudo password and the YubiKey is waiting for your touch.</p>
 <p>See also:  <a class="reference external" href="https://developers.yubico.com/yubico-pam/Manuals/ykpamcfg.1.html">ykpamcfg(1)</a></p>
 </div>
-<div class="section" id="trouble-shooting">
-<h2>Trouble Shooting<a class="headerlink" href="#trouble-shooting" title="Permalink to this headline">¶</a></h2>
-<p>パッケージアップデート時に <code class="docutils literal notranslate"><span class="pre">gnupg:</span> <span class="pre">signature</span> <span class="pre">from</span> <span class="pre">&quot;Gaetan</span> <span class="pre">Bisson</span>
-<span class="pre">&lt;bisson&#64;archlinux.org&gt;&quot;</span> <span class="pre">is</span> <span class="pre">invalid</span></code> 的なエラーがでて失敗したら、以下
-の手順でキーを更新する:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo rm /var/lib/pacman/sync/*
-$ sudo pacman-key --init
-$ sudo pacman-key --populate archlinux
-$ sudo pacman-key --refresh-keys
-</pre></div>
-</div>
-</div>
 <div class="section" id="todo">
 <h2>TODO<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>いつの間にかF1~F12 のキーのうちいくつかが使えるようになっていた。不思議</li>
 <li>YubiKeyを入れるとキーボードのCaps Lockが戻ってしまう</li>
-<li>pacman/AURのフロントエンドを何か選ぶ -&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/AUR_helpers">https://wiki.archlinux.org/index.php/AUR_helpers</a></li>
+<li>pacman/AURのフロントエンドを何か選ぶ -&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/AUR_helpers">https://wiki.archlinux.org/index.php/AUR_helpers</a> -&gt; とりあえず <code class="docutils literal notranslate"><span class="pre">yaourt</span></code> で困っていない。</li>
 <li><a class="reference external" href="https://wiki.archlinux.jp/index.php/Yubikey#OpenPGP_.E3.82.B9.E3.83.9E.E3.83.BC.E3.83.88.E3.82.AB.E3.83.BC.E3.83.89.E3.83.A2.E3.83.BC.E3.83.89.E3.82.92.E6.9C.89.E5.8A.B9.E5.8C.96">OpenPGP のスマートカード有効化</a></li>
 </ul>
 </div>
@@ -638,13 +635,12 @@ $ sudo pacman-key --refresh-keys
 <li><a class="reference external" href="https://qiita.com/miy4/items/796c51813417cc90c77f">Thinkpad X1 Carbon (Gen 4)にArch Linuxをインストールする</a> &lt;- なぜ systemd hook をつけてないのに systemd-boot でブートローダーが作れるんだ？</li>
 </ul>
 </div>
-</div>
-<div class="section" id="arch-linux-installation-2">
-<h1>Arch Linux Installation #2<a class="headerlink" href="#arch-linux-installation-2" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="arch-linux-installation-to-machine-2">
+<h2>Arch Linux Installation to machine #2<a class="headerlink" href="#arch-linux-installation-to-machine-2" title="Permalink to this headline">¶</a></h2>
 <p>2018/2/4</p>
 <p>To my desktop machine, with NVIDIA GeForce 760, and several hetero HDDs.</p>
 <div class="section" id="os-install">
-<h2>OS Install<a class="headerlink" href="#os-install" title="Permalink to this headline">¶</a></h2>
+<h3>OS Install<a class="headerlink" href="#os-install" title="Permalink to this headline">¶</a></h3>
 <p>Same os above, using many tools to setup Arch Installation, except for:</p>
 <ul class="simple">
 <li>No HDD encryption</li>
@@ -655,7 +651,7 @@ $ sudo pacman-key --refresh-keys
 </ul>
 </div>
 <div class="section" id="btrfs-setup">
-<h2>Btrfs setup<a class="headerlink" href="#btrfs-setup" title="Permalink to this headline">¶</a></h2>
+<h3>Btrfs setup<a class="headerlink" href="#btrfs-setup" title="Permalink to this headline">¶</a></h3>
 <p>See <a class="reference external" href="https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices">Using Btrfs with Multiple Devices</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkfs.btrfs -d single /dev/sdb /dev/sdc /dev/sdd /dev/sde</span>
 <span class="c1"># mount /dev/sde /mnt</span>
@@ -663,7 +659,7 @@ $ sudo pacman-key --refresh-keys
 </div>
 </div>
 <div class="section" id="static-ip-address">
-<h2>Static IP address<a class="headerlink" href="#static-ip-address" title="Permalink to this headline">¶</a></h2>
+<h3>Static IP address<a class="headerlink" href="#static-ip-address" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Netctl#.E6.9C.89.E7.B7.9A">Use netctl</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip a</span>
 <span class="o">...</span> <span class="p">(</span><span class="n">see</span> <span class="n">device</span> <span class="n">name</span><span class="p">)</span> <span class="o">...</span>
@@ -685,7 +681,7 @@ $ sudo pacman-key --refresh-keys
 <p>Don’t do any fucking typoes here. Troutbleshoot with <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">journalctl</span> <span class="pre">-xe</span></code>, like <a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?id=161263">this</a> .</p>
 </div>
 <div class="section" id="nvidia-driver">
-<h2>Nvidia driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this headline">¶</a></h2>
+<h3>Nvidia driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this headline">¶</a></h3>
 <p>Nouvearu is kind of general and just works - but was too slow for me
 at runtime. With <a class="reference external" href="https://wiki.archlinux.org/index.php/NVIDIA">official guide</a> you can find your device version:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lspci -k | grep -A 2 -E &quot;(VGA|3D)&quot;
@@ -693,8 +689,99 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 </div>
 </div>
 <div class="section" id="install-yaourt">
-<h2>Install yaourt<a class="headerlink" href="#install-yaourt" title="Permalink to this headline">¶</a></h2>
+<h3>Install yaourt<a class="headerlink" href="#install-yaourt" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Yaourt">https://wiki.archlinux.jp/index.php/Yaourt</a></p>
+</div>
+</div>
+<div class="section" id="general-trouble-shooting">
+<h2>General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Permalink to this headline">¶</a></h2>
+<p>ロケールが変になったらいつでも作り直すことができる。
+<code class="docutils literal notranslate"><span class="pre">/etc/locale.gen</span></code> を編集して、必要なロケールのコメントアウトをとりの
+ぞく。そのあと再度:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo locale-gen
+</pre></div>
+</div>
+<p>と実行することでロケールが作成される。</p>
+<ul class="simple">
+<li><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB">https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB</a></li>
+</ul>
+<p>2018/9の時点で <a class="reference external" href="https://apple-history.com/mac_mini_mid_11">mid 2011</a>
+のモデルが最後のアップデート。もうMacOSは動かないくらいのスペックなの
+で、 Arch Linux を入れた。 <a class="reference external" href="https://support.apple.com/ja-jp/HT202796">ブート USB を指して、 Options キーを押しな
+がら起動するとブートセレクタに入れる</a> 。 WiFi はBCM43xxなので、
+ブート用のISOには入っていないので、有線ネットワークのアクセスがインストールのためには必要。</p>
+<p>インストール後は有線がセットアップされていないので:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S dhcpcd
+$ sudo systemctl start dhcpcd
+$ sudo systemctl enable dhcpcd
+</pre></div>
+</div>
+<p>WiFiを使うために</p>
+<ul class="simple">
+<li><a class="reference external" href="https://aur.archlinux.org/packages/yay/">yay</a> をインストール</li>
+<li><a class="reference external" href="https://wiki.archlinux.org/index.php/broadcom_wireless#b43">b43</a> をインストール</li>
+<li><code class="docutils literal notranslate"><span class="pre">broadcom-wl</span></code> もインストールして再起動。 dmesg で BCM4331 が見えていることを確認</li>
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">cp</span> <span class="pre">/etc/netctl/examples/wireless-wpa</span> <span class="pre">/etc/netctl/&lt;profile-name&gt;</span></code> をやって内容を編集</li>
+<li>デバイス名は <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">link</span></code> で一覧して結果を確認。それらの内容を <code class="docutils literal notranslate"><span class="pre">/etc/netctl/&lt;profile-name&gt;</span></code> に書き込む</li>
+<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">netctl;</span> <span class="pre">sudo</span> <span class="pre">netctl</span> <span class="pre">start</span> <span class="pre">&lt;profile-name&gt;</span></code></li>
+<li><a class="reference external" href="https://wiki.archlinux.jp/index.php/Netctl">netctl</a></li>
+<li>多分これでいける</li>
+</ul>
+<p>xorg入れたけどなぜかGUIがでてこない</p>
+<div class="section" id="pacman-gnupg">
+<h3>Pacman のアップデートで GnuPG エラーが出る<a class="headerlink" href="#pacman-gnupg" title="Permalink to this headline">¶</a></h3>
+<p>パッケージアップデート時に <code class="docutils literal notranslate"><span class="pre">gnupg:</span> <span class="pre">signature</span> <span class="pre">from</span> <span class="pre">&quot;Gaetan</span> <span class="pre">Bisson</span>
+<span class="pre">&lt;bisson&#64;archlinux.org&gt;&quot;</span> <span class="pre">is</span> <span class="pre">invalid</span></code> 的なエラーがでて失敗したら、以下
+の手順でキーを更新する:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo rm /var/lib/pacman/sync/*
+$ sudo pacman-key --init
+$ sudo pacman-key --populate archlinux
+$ sudo pacman-key --refresh-keys
+</pre></div>
+</div>
+</div>
+<div class="section" id="fix-kernel-or-other-files-2018-4-6">
+<h3>Fix kernel or other files 2018/4/6<a class="headerlink" href="#fix-kernel-or-other-files-2018-4-6" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">yaourt</span> <span class="pre">-Syu</span></code> が妙に時間がかかったのでマシンを途中で止めてしまったと
+ころ、起動時（LUKSのパスワード入力）時にキーボードが効かなくなり、パス
+ワードを入力できなくなった。このためその後のブートシーケンスを継続でき
+ない。</p>
+<p>まずは起動して <code class="docutils literal notranslate"><span class="pre">yaourt</span> <span class="pre">-Syu</span></code> の続きを完了することを目指す。ブートディ
+スクを使って、まずブートディスクのカーネルで起動しておく。それでchroot
+環境をつくる。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># cryptsetup open /dev/nvme0n1p2 crypt-root</span>
+<span class="n">Enter</span> <span class="n">passphrase</span> <span class="k">for</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nvme0n1p2</span><span class="p">:</span>
+<span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># mount /dev/mapper/crypt-root /mnt</span>
+<span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># mount /dev/nvme0n1p1 /mnt/boot</span>
+<span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># timedatectl set-ntp true</span>
+<span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># timedatectl status</span>
+<span class="o">...</span>
+<span class="c1"># arch-chroot /mnt</span>
+<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># yaourt -Syu</span>
+</pre></div>
+</div>
+<p>とやると、 <code class="docutils literal notranslate"><span class="pre">pacman</span> <span class="pre">-Syu</span></code> やってるんじゃないの？といわれる。定番のロッ
+クファイルが残っているやつなのでロックファイルを消す。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># rm /var/lib/pacman/db.lck</span>
+<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># yaourt -Syu</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>今度は普通に最後まで動く。というわけでchroot環境を出てから再起動
+<code class="docutils literal notranslate"><span class="pre">shutdown</span> <span class="pre">-r</span> <span class="pre">now</span></code> してみてもやっぱりパスワードを入力できない（キーボー
+ドが使えていない）。はっそういえば…と思いなおして、また同じ手順を繰り
+返して chroot 環境に入って、:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># mkinitcpio -p linux</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<p>として、 initrd を作り直して再起動したところ無事にキーボードが使えるよ
+うになった。おそらくは vmlinuz (カーネルのファイル) を作っただけで
+initrd を再作成していなかったため何かがズレて起動だけはするけどキーボー
+ドが使えなくなっていたのだろうと思われる。教訓: カーネルのアップデート
+途中に電源長押しで再起動なんかしてはいけないし、 <em>金曜夕方の退勤間際に
+間違ってもOSのアップデートなんかしてはいけない</em> 。</p>
+</div>
 </div>
 </div>
 
@@ -706,8 +793,9 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Arch Linux Installation</a><ul>
+<li><a class="reference internal" href="#">Arch Linux Installation &amp; Maintenance</a><ul>
 <li><a class="reference internal" href="#iso-image-download">ISO Image Download</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#gui">GUI</a><ul>
 <li><a class="reference internal" href="#weird-display-vibrarion">Weird display vibrarion</a></li>
 </ul>
@@ -723,12 +811,9 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 <li><a class="reference internal" href="#id6">マルチ（外部）ディスプレイ</a></li>
 <li><a class="reference internal" href="#windows-on-virtualbox">Windows on VirtualBox</a></li>
 <li><a class="reference internal" href="#yubikey-authentication">YubiKey authentication</a></li>
-<li><a class="reference internal" href="#trouble-shooting">Trouble Shooting</a></li>
 <li><a class="reference internal" href="#todo">TODO</a></li>
 <li><a class="reference internal" href="#reference">Reference</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#arch-linux-installation-2">Arch Linux Installation #2</a><ul>
+<li><a class="reference internal" href="#arch-linux-installation-to-machine-2">Arch Linux Installation to machine #2</a><ul>
 <li><a class="reference internal" href="#os-install">OS Install</a></li>
 <li><a class="reference internal" href="#btrfs-setup">Btrfs setup</a></li>
 <li><a class="reference internal" href="#static-ip-address">Static IP address</a></li>
@@ -736,11 +821,21 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 <li><a class="reference internal" href="#install-yaourt">Install yaourt</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#general-trouble-shooting">General Trouble Shooting</a><ul>
+<li><a class="reference internal" href="#pacman-gnupg">Pacman のアップデートで GnuPG エラーが出る</a></li>
+<li><a class="reference internal" href="#fix-kernel-or-other-files-2018-4-6">Fix kernel or other files 2018/4/6</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="../persona.html"
                         title="previous chapter">Persona</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="zfs.html"
+                        title="next chapter">ZFS Memo</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -771,13 +866,16 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="zfs.html" title="ZFS Memo"
+             >next</a> |</li>
+        <li class="right" >
           <a href="../persona.html" title="Persona"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2012, UENISHI Kota.
+        &#169; Copyright 2012-2018, UENISHI Kota.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
     </div>
   </body>
