@@ -9,7 +9,7 @@
     <title>Arch Linux Installation &amp; Maintenance &#8212; kuenishi(7)</title>
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
@@ -690,11 +690,14 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 </div>
 <div class="section" id="install-yaourt">
 <h3>Install yaourt<a class="headerlink" href="#install-yaourt" title="Permalink to this headline">¶</a></h3>
-<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Yaourt">https://wiki.archlinux.jp/index.php/Yaourt</a></p>
+<p>Obsolete… yaourt is not maintained any more.</p>
 </div>
 </div>
 <div class="section" id="general-trouble-shooting">
 <h2>General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Permalink to this headline">¶</a></h2>
+<p>ok</p>
+<div class="section" id="locale">
+<h3>Locale再生成<a class="headerlink" href="#locale" title="Permalink to this headline">¶</a></h3>
 <p>ロケールが変になったらいつでも作り直すことができる。
 <code class="docutils literal notranslate"><span class="pre">/etc/locale.gen</span></code> を編集して、必要なロケールのコメントアウトをとりの
 ぞく。そのあと再度:</p>
@@ -705,6 +708,9 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 <ul class="simple">
 <li><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB">https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB</a></li>
 </ul>
+</div>
+<div class="section" id="mac-mini-mid-2011">
+<h3>Mac Mini mid 2011 にインストール<a class="headerlink" href="#mac-mini-mid-2011" title="Permalink to this headline">¶</a></h3>
 <p>2018/9の時点で <a class="reference external" href="https://apple-history.com/mac_mini_mid_11">mid 2011</a>
 のモデルが最後のアップデート。もうMacOSは動かないくらいのスペックなの
 で、 Arch Linux を入れた。 <a class="reference external" href="https://support.apple.com/ja-jp/HT202796">ブート USB を指して、 Options キーを押しな
@@ -728,6 +734,7 @@ $ sudo systemctl enable dhcpcd
 <li>多分これでいける</li>
 </ul>
 <p>xorg入れたけどなぜかGUIがでてこない</p>
+</div>
 <div class="section" id="pacman-gnupg">
 <h3>Pacman のアップデートで GnuPG エラーが出る<a class="headerlink" href="#pacman-gnupg" title="Permalink to this headline">¶</a></h3>
 <p>パッケージアップデート時に <code class="docutils literal notranslate"><span class="pre">gnupg:</span> <span class="pre">signature</span> <span class="pre">from</span> <span class="pre">&quot;Gaetan</span> <span class="pre">Bisson</span>
@@ -822,6 +829,8 @@ initrd を再作成していなかったため何かがズレて起動だけは�
 </ul>
 </li>
 <li><a class="reference internal" href="#general-trouble-shooting">General Trouble Shooting</a><ul>
+<li><a class="reference internal" href="#locale">Locale再生成</a></li>
+<li><a class="reference internal" href="#mac-mini-mid-2011">Mac Mini mid 2011 にインストール</a></li>
 <li><a class="reference internal" href="#pacman-gnupg">Pacman のアップデートで GnuPG エラーが出る</a></li>
 <li><a class="reference internal" href="#fix-kernel-or-other-files-2018-4-6">Fix kernel or other files 2018/4/6</a></li>
 </ul>
@@ -876,7 +885,7 @@ initrd を再作成していなかったため何かがズレて起動だけは�
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2018, UENISHI Kota.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.2.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
     </div>
   </body>
 </html>
