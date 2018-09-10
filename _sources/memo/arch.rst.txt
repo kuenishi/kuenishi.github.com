@@ -695,15 +695,17 @@ at runtime. With `official guide
 Install yaourt
 ^^^^^^^^^^^^^^^
 
-https://wiki.archlinux.jp/index.php/Yaourt
+Obsolete... yaourt is not maintained any more.
 
 
 
 General Trouble Shooting
-------------------------
+----------------------------
+
+ok
 
 Locale再生成
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^
 
 ロケールが変になったらいつでも作り直すことができる。
 ``/etc/locale.gen`` を編集して、必要なロケールのコメントアウトをとりの
@@ -717,7 +719,7 @@ Locale再生成
 
 
 Mac Mini mid 2011 にインストール
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 2018/9の時点で `mid 2011 <https://apple-history.com/mac_mini_mid_11>`_
 のモデルが最後のアップデート。もうMacOSは動かないくらいのスペックなの
