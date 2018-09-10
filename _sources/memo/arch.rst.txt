@@ -4,6 +4,7 @@ Arch Linux Installation & Maintenance
 
 2017/10/19 - 2017/10/20
 
+2018/9/9 Mac mini mid 2011 のインストールを追加
 2018/3/15 カーネルパッチの部分を削除
 2018/4/6 Trouble Shooting追加
 
@@ -655,7 +656,7 @@ Btrfs setup
 
 See `Using Btrfs with Multiple Devices <https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices>`_::
 
-  # mkfs.btrfs -d single /dev/sdb /dev/sdc /dev/sdd /dev/sde 
+  # mkfs.btrfs -d single /dev/sdb /dev/sdc /dev/sdd /dev/sde
   # mount /dev/sde /mnt
 
 Static IP address
@@ -700,6 +701,53 @@ https://wiki.archlinux.jp/index.php/Yaourt
 
 General Trouble Shooting
 ------------------------
+
+Locale再生成
+~~~~~~~~~~~~~~~
+
+ロケールが変になったらいつでも作り直すことができる。
+``/etc/locale.gen`` を編集して、必要なロケールのコメントアウトをとりの
+ぞく。そのあと再度::
+
+  $ sudo locale-gen
+
+と実行することでロケールが作成される。
+
+- https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB
+
+
+Mac Mini mid 2011 にインストール
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2018/9の時点で `mid 2011 <https://apple-history.com/mac_mini_mid_11>`_
+のモデルが最後のアップデート。もうMacOSは動かないくらいのスペックなの
+で、 Arch Linux を入れた。 `ブート USB を指して、 Options キーを押しな
+がら起動するとブートセレクタに入れる
+<https://support.apple.com/ja-jp/HT202796>`_ 。 WiFi はBCM43xxなので、
+ブート用のISOには入っていないので、有線ネットワークのアクセスがインストールのためには必要。
+
+
+インストール後は有線がセットアップされていないので::
+
+  $ sudo pacman -S dhcpcd
+  $ sudo systemctl start dhcpcd
+  $ sudo systemctl enable dhcpcd
+
+
+WiFiを使うために
+
+- `yay <https://aur.archlinux.org/packages/yay/>`_ をインストール
+- `b43 <https://wiki.archlinux.org/index.php/broadcom_wireless#b43>`_ をインストール
+- ``broadcom-wl`` もインストールして再起動。 dmesg で BCM4331 が見えていることを確認
+- ``sudo cp /etc/netctl/examples/wireless-wpa /etc/netctl/<profile-name>`` をやって内容を編集
+- デバイス名は ``ip link`` で一覧して結果を確認。それらの内容を ``/etc/netctl/<profile-name>`` に書き込む
+- ``sudo systemctl start netctl; sudo netctl start <profile-name>``
+- `netctl <https://wiki.archlinux.jp/index.php/Netctl>`_
+- 多分これでいける
+
+
+xorg入れたけどなぜかGUIがでてこない
+
 
 Pacman のアップデートで GnuPG エラーが出る
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
