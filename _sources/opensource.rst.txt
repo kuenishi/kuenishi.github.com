@@ -18,6 +18,9 @@ with product name will motivate me for sure. See my `Github
 - `Retz <https://github.com/retz/retz>`_ (2016 - 2018) Job scheduler as
   Apache Mesos framework
 
+- `baccounts <https://github.com/kuenishi/baccounts>`_ (2016) - a tiny
+  CUI password and account manager built with PGP encryption
+
 - `A small piece of my work
   <https://github.com/erlang/otp/commit/966e9e7ed0951db306c3c5dc4b1fd4c6eac25cf9>`_
   is included in `Erlang/OTP 18.0
