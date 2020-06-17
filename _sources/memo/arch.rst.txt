@@ -7,6 +7,7 @@ Arch Linux Installation & Maintenance
 2018/9/9 Mac mini mid 2011 のインストールを追加
 2018/3/15 カーネルパッチの部分を削除
 2018/4/6 Trouble Shooting追加
+2020/6/17 btrfs まわりを追加
 
 ISO Image Download
 ------------------
@@ -659,6 +660,99 @@ See `Using Btrfs with Multiple Devices <https://btrfs.wiki.kernel.org/index.php/
   # mkfs.btrfs -d single /dev/sdb /dev/sdc /dev/sdd /dev/sde
   # mount /dev/sde /mnt
 
+単体の例::
+
+  # mkfs.btrfs -d single /dev/sdf
+  btrfs-progs v5.6.1
+  See http://btrfs.wiki.kernel.org for more information.
+
+  Detected a SSD, turning off metadata duplication.  Mkfs with -m dup if you want to force metadata duplication.
+  Label:              (null)
+  UUID:               e092a2dc-b65d-45e4-8dee-46529c1949a0
+  Node size:          16384
+  Sector size:        4096
+  Filesystem size:    931.51GiB
+  Block group profiles:
+    Data:             single            8.00MiB
+    Metadata:         single            8.00MiB
+    System:           single            4.00MiB
+  SSD detected:       yes
+  Incompat features:  extref, skinny-metadata
+  Checksum:           crc32c
+  Number of devices:  1
+  Devices:
+     ID        SIZE  PATH
+      1   931.51GiB  /dev/sdf
+
+マウントしてサブボリュームを作る::
+
+  # mount /dev/sdf /mnt
+  # btrfs sub create /mnt/kuenishi
+  # chown kuenishi:kuenishi /mnt/kuenishi
+
+いろいろファイルをコピーする::
+
+  $ cd
+  $ mv -v * /mnt/kuenishi/
+  $ cp -v -r .* /mnt/kuenishi/
+
+
+サブボリュームを ``/etc/fstab`` に書く::
+
+  UUID=e092a2dc-b65d-45e4-8dee-46529c1949a0       /home           btrfs           rw,relatime,space_cache,subvolid=5,subvol=/     0 0
+
+
+これで再起動するとホームディレクトリが btrfs のパーティションになっているはずだ。::
+
+  $ sudo btrfs filesystem show /home
+  Label: none  uuid: e092a2dc-b65d-45e4-8dee-46529c1949a0
+          Total devices 1 FS bytes used 32.64GiB
+          devid    1 size 931.51GiB used 36.01GiB path /dev/sdf
+
+以前作った大きめの btrfs ボリュームが ``/data`` にあるものとする。予め
+スナップショット用のサブボリュームを作っておく。::
+
+  # btrfs sub create /home/ss
+  # btrfs sub create /data/home-backup
+
+
+
+今度はバックアップを実行する。シェルにしてしまった。::
+
+  #!/bin/sh
+
+  set -eux
+
+  TS=`date '+%Y%m%d-%H%M%S'`
+  btrfs sub snap /home/kuenishi /home/ss/kuenishi-${TS}
+  btrfs property set -ts /home/ss/kuenishi-${TS} ro true
+  btrfs send /home/ss/kuenishi-${TS} | btrfs receive /data/home-backup
+  btrfs sub delete /home/ss/kuenishi-${TS}
+
+
+これであとは適当にcronにでもしておけばよい。あとは Docker を使っている
+場合、レイヤーを btrfs に保存する方法は簡単で、 ``btrfs sub create
+/data/docker`` とやってサブボリュームを作っておく。それから、
+``/etc/fstab`` に::
+
+
+  UUID=5fdf336d-09b3-4b98-8e52-d78b72ceedcf       /data           btrfs           rw,relatime,space_cache,subvolid=5,subvol=/     0 0
+  UUID=5fdf336d-09b3-4b98-8e52-d78b72ceedcf       /var/lib/docker         btrfs           rw,relatime,space_cache,subvol=docker   0 0
+
+とかいておくと、 ``/data`` にも使われているボリュームを名前を変えて
+``/var/lib/docker`` に置き換えて使ってくれる。Dockerの方でも、btrfs で
+あることを検知して勝手にoverlayしてくれるようになる。::
+
+  $ df -h /data /var/lib/docker
+  Filesystem      Size  Used Avail Use% Mounted on
+  /dev/sdb        1.8T  461G  784G  37% /data
+  /dev/sdb        1.8T  461G  784G  37% /var/lib/docker
+
+マシンを再起動する前に一度 ``rm -rf /var/lib/docker/*`` を実行して綺麗
+にしておいた方がよいだろう。ちなみにしばらく使ったあとに ``btrfs sub
+list /data`` すると大量のレイヤーが表示されて、Dockerが使われているこ
+とがよくわかる。
+
 Static IP address
 ^^^^^^^^^^^^^^^^^^
 
@@ -701,8 +795,6 @@ Obsolete... yaourt is not maintained any more.
 
 General Trouble Shooting
 ----------------------------
-
-ok
 
 Locale再生成
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -807,3 +899,10 @@ initrd を再作成していなかったため何かがズレて起動だけは�
 ドが使えなくなっていたのだろうと思われる。教訓: カーネルのアップデート
 途中に電源長押しで再起動なんかしてはいけないし、 *金曜夕方の退勤間際に
 間違ってもOSのアップデートなんかしてはいけない* 。
+
+
+急にWiFiがつながらなくなったら
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+パソコンのハードスイッチからオフになっている可能性がある。推し間違いなど。
+``rfkill`` で状態を確認できるので、それ経由でオンにするとつながる。
