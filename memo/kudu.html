@@ -1,18 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kudu memo &#8212; kuenishi(7)</title>
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Run Spark on Riak CS" href="riak-cs-spark.html" />
@@ -37,7 +37,8 @@
         <li class="right" >
           <a href="beam.html" title="BEAM"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Kudu memo</a></li> 
       </ul>
     </div>  
 
@@ -49,12 +50,12 @@
   <div class="section" id="kudu-memo">
 <h1>Kudu memo<a class="headerlink" href="#kudu-memo" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
-<li>Externally consistent transactions in the sense where all transactions are linearizable</li>
+<li><p>Externally consistent transactions in the sense where all transactions are linearizable</p></li>
 </ul>
 <p>## Hybrid Time</p>
 <ul class="simple">
-<li>Assumption 1. Physical clock error from reference clock is bounded</li>
-<li>Assumption 2. Physical clock timestamps are monotonically increasing</li>
+<li><p>Assumption 1. Physical clock error from reference clock is bounded</p></li>
+<li><p>Assumption 2. Physical clock timestamps are monotonically increasing</p></li>
 </ul>
 <p>Physical Clock API:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="p">:</span><span class="n">server_id</span><span class="p">()</span>
@@ -99,24 +100,24 @@ upper bound of physical clock time skew, from reference time
 </pre></div>
 </div>
 <ul class="simple">
-<li>Theorem 1. The HybridTime clock happened-before relation forms a total order of events</li>
-<li>Q. This is <strong>not trivial</strong>, you cannot order e and f when <code class="docutils literal notranslate"><span class="pre">PC_i(e)</span> <span class="pre">-</span>
-<span class="pre">PC_j(f)</span> <span class="pre">&lt;</span> <span class="pre">E_i(e)</span> <span class="pre">&lt;</span> <span class="pre">E_j(f)</span></code> …</li>
-<li>Theorem 2. For any causal chain f the physical component of HTC
+<li><p>Theorem 1. The HybridTime clock happened-before relation forms a total order of events</p></li>
+<li><p>Q. This is <strong>not trivial</strong>, you cannot order e and f when <code class="docutils literal notranslate"><span class="pre">PC_i(e)</span> <span class="pre">-</span>
+<span class="pre">PC_j(f)</span> <span class="pre">&lt;</span> <span class="pre">E_i(e)</span> <span class="pre">&lt;</span> <span class="pre">E_j(f)</span></code> …</p></li>
+<li><p>Theorem 2. For any causal chain f the physical component of HTC
 timestamp approximates the “real” time the event occurred, with a
-bounded error <code class="docutils literal notranslate"><span class="pre">[-E_j(e),</span> <span class="pre">E_i(f)]</span></code></li>
+bounded error <code class="docutils literal notranslate"><span class="pre">[-E_j(e),</span> <span class="pre">E_i(f)]</span></code></p></li>
 </ul>
 <p>## Types of Transactions</p>
 <ul class="simple">
-<li>Read-write transactions</li>
-<li>Snapshot transactions</li>
-<li>Time-travel read</li>
+<li><p>Read-write transactions</p></li>
+<li><p>Snapshot transactions</p></li>
+<li><p>Time-travel read</p></li>
 </ul>
 <p>Write transactions that span multiple RG (Replica group)s needs one RG
 leader that plays transaction manager.</p>
 <ol class="arabic simple">
-<li><em>Prepare</em>: TM sends all related RGs making them aquiring locks, responding each HTCs</li>
-<li>TM chooses highest HTC and sends them as <em>Apply</em> to RG leaders</li>
+<li><p><em>Prepare</em>: TM sends all related RGs making them aquiring locks, responding each HTCs</p></li>
+<li><p>TM chooses highest HTC and sends them as <em>Apply</em> to RG leaders</p></li>
 </ol>
 <p>My questions: bounded error of time at f does not account the
 feasibility of Read-write or Write-write transactions. Details are not
@@ -125,78 +126,78 @@ select-update on <code class="docutils literal notranslate"><span class="pre">R(
 handled?</p>
 <p>## Spanner</p>
 <ul class="simple">
-<li>Lock-free distributed read transactions</li>
-<li>External Consistency - commit order respects global wall-time order (aka linearizability)</li>
-<li>TrueTime</li>
-<li>Transactions that writes use 2PL, 2PC</li>
-<li>Timestamp order == commit order</li>
-<li><strong>Commit wait</strong> : Pick timestamp s = TT.now().latest where TT.now().earliest &gt; s by average ε</li>
+<li><p>Lock-free distributed read transactions</p></li>
+<li><p>External Consistency - commit order respects global wall-time order (aka linearizability)</p></li>
+<li><p>TrueTime</p></li>
+<li><p>Transactions that writes use 2PL, 2PC</p></li>
+<li><p>Timestamp order == commit order</p></li>
+<li><p><strong>Commit wait</strong> : Pick timestamp s = TT.now().latest where TT.now().earliest &gt; s by average ε</p></li>
 </ul>
-<table border="1" class="docutils">
+<table class="docutils align-default">
 <colgroup>
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
-<col width="25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
 </colgroup>
-<tbody valign="top">
-<tr class="row-odd"><td>Operation</td>
-<td>Timestamp
-Discussion</td>
-<td>Concurrency Control</td>
-<td>Replica Required</td>
+<tbody>
+<tr class="row-odd"><td><p>Operation</p></td>
+<td><p>Timestamp
+Discussion</p></td>
+<td><p>Concurrency Control</p></td>
+<td><p>Replica Required</p></td>
 </tr>
-<tr class="row-even"><td>Read-Write
-Transactions</td>
-<td>4.1.2</td>
-<td>pessimistic</td>
-<td>Leader</td>
+<tr class="row-even"><td><p>Read-Write
+Transactions</p></td>
+<td><p>4.1.2</p></td>
+<td><p>pessimistic</p></td>
+<td><p>Leader</p></td>
 </tr>
-<tr class="row-odd"><td>Read-Only
-Transactions</td>
-<td>4.1.4</td>
-<td>lock-free</td>
-<td>leader for
+<tr class="row-odd"><td><p>Read-Only
+Transactions</p></td>
+<td><p>4.1.4</p></td>
+<td><p>lock-free</p></td>
+<td><p>leader for
 timesatmp; any for
-read</td>
+read</p></td>
 </tr>
-<tr class="row-even"><td>Snapshot Read,
+<tr class="row-even"><td><p>Snapshot Read,
 client-provided
-timestamp</td>
-<td>—</td>
-<td>lock-free</td>
-<td>any</td>
+timestamp</p></td>
+<td><p>—</p></td>
+<td><p>lock-free</p></td>
+<td><p>any</p></td>
 </tr>
-<tr class="row-odd"><td>Snapshot Read,
+<tr class="row-odd"><td><p>Snapshot Read,
 client-provided
-bound</td>
-<td>4.1.3</td>
-<td>lock-free</td>
-<td>any</td>
+bound</p></td>
+<td><p>4.1.3</p></td>
+<td><p>lock-free</p></td>
+<td><p>any</p></td>
 </tr>
 </tbody>
 </table>
 <p>Table: types of reads and writes in Spanner, how they compare</p>
 <p>### Invariants</p>
 <ul class="simple">
-<li>For single directory, all leaders’ lease period is disjoint</li>
-<li>All timestamps that any leader issues are unique</li>
+<li><p>For single directory, all leaders’ lease period is disjoint</p></li>
+<li><p>All timestamps that any leader issues are unique</p></li>
 </ul>
 <p>### Read-only transactions</p>
 <ul class="simple">
-<li>Assign a read timestamp at group leader</li>
+<li><p>Assign a read timestamp at group leader</p></li>
 </ul>
 <p>### Read-write transactions</p>
 <ul class="simple">
-<li>2PC between group (main group leader becomes the transaction manager)</li>
-<li>Wound-wait: later transactions wait for earlier transaction - (earlier transactions don’t wait for them, just abort)</li>
-<li>All commits and writes are logged via Paxos</li>
-<li>The group leader does commit-wait (ensure the commit timestamp exceeds the ε)</li>
+<li><p>2PC between group (main group leader becomes the transaction manager)</p></li>
+<li><p>Wound-wait: later transactions wait for earlier transaction - (earlier transactions don’t wait for them, just abort)</p></li>
+<li><p>All commits and writes are logged via Paxos</p></li>
+<li><p>The group leader does commit-wait (ensure the commit timestamp exceeds the ε)</p></li>
 </ul>
 <p>## Calvin</p>
 <ul class="simple">
-<li>“Deterministic Distributed Transactions” scheduler on top of distributed storage</li>
-<li>half million TPS at TPC-C benchmark</li>
+<li><p>“Deterministic Distributed Transactions” scheduler on top of distributed storage</p></li>
+<li><p>half million TPS at TPC-C benchmark</p></li>
 </ul>
 <p>Sequencer
 * 10ms epoch, all requests are tied up as a batch at the end of epoch
@@ -218,7 +219,7 @@ bound</td>
 * A stalled transaction write may block unrelated following transacations
 * If it’s predicted, put an artificial delay before and perform ‘warm-up’ at disk-&gt;memory</p>
 <ul class="simple">
-<li>“No need to pay the overhead of physical REDO logging” eh? instead replaying history of transactional input…</li>
+<li><p>“No need to pay the overhead of physical REDO logging” eh? instead replaying history of transactional input…</p></li>
 </ul>
 <p>Experiment
 * Contention index?
@@ -229,15 +230,16 @@ bound</td>
 * Also, how to avoid deadlocks is not clear; clocks goes sometimes wrong and sequencer gives lock to later transaction</p>
 <p>## Resouces</p>
 <ul class="simple">
-<li>[Repo](<a class="reference external" href="https://github.com/cloudera/kudu">https://github.com/cloudera/kudu</a>)</li>
-<li>[Hybrid Time paper](<a class="reference external" href="http://pdsl.ece.utexas.edu/david/hybrid-time-tech-report-01.pdf">http://pdsl.ece.utexas.edu/david/hybrid-time-tech-report-01.pdf</a>)</li>
-<li>[Transaction Semantics](<a class="reference external" href="https://github.com/cloudera/kudu/blob/master/docs/transaction_semantics.adoc">https://github.com/cloudera/kudu/blob/master/docs/transaction_semantics.adoc</a>)</li>
-<li>[Calvin: Calvin: Fast Distributed Transactions for Partitioned Database Systems](<a class="reference external" href="http://cs-www.cs.yale.edu/homes/dna/papers/calvin-sigmod12.pdf">http://cs-www.cs.yale.edu/homes/dna/papers/calvin-sigmod12.pdf</a>)</li>
-<li>[Spanner paper](<a class="reference external" href="http://research.google.com/archive/spanner.html">http://research.google.com/archive/spanner.html</a>)</li>
+<li><p>[Repo](<a class="reference external" href="https://github.com/cloudera/kudu">https://github.com/cloudera/kudu</a>)</p></li>
+<li><p>[Hybrid Time paper](<a class="reference external" href="http://pdsl.ece.utexas.edu/david/hybrid-time-tech-report-01.pdf">http://pdsl.ece.utexas.edu/david/hybrid-time-tech-report-01.pdf</a>)</p></li>
+<li><p>[Transaction Semantics](<a class="reference external" href="https://github.com/cloudera/kudu/blob/master/docs/transaction_semantics.adoc">https://github.com/cloudera/kudu/blob/master/docs/transaction_semantics.adoc</a>)</p></li>
+<li><p>[Calvin: Calvin: Fast Distributed Transactions for Partitioned Database Systems](<a class="reference external" href="http://cs-www.cs.yale.edu/homes/dna/papers/calvin-sigmod12.pdf">http://cs-www.cs.yale.edu/homes/dna/papers/calvin-sigmod12.pdf</a>)</p></li>
+<li><p>[Spanner paper](<a class="reference external" href="http://research.google.com/archive/spanner.html">http://research.google.com/archive/spanner.html</a>)</p></li>
 </ul>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -257,17 +259,15 @@ bound</td>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -284,12 +284,13 @@ bound</td>
         <li class="right" >
           <a href="beam.html" title="BEAM"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Kudu memo</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2018, UENISHI Kota.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
     </div>
   </body>
 </html>

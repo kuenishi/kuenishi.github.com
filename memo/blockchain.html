@@ -1,18 +1,18 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memo on Block Chain Study Group meeting #2 &#8212; kuenishi(7)</title>
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="the cost of erlang:send_after/3" href="cost-of-send-after3.html" />
@@ -37,7 +37,8 @@
         <li class="right" >
           <a href="ergodox-ez.html" title="ErgoDox EZ"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Memo on Block Chain Study Group meeting #2</a></li> 
       </ul>
     </div>  
 
@@ -50,16 +51,16 @@
 <h1>Memo on Block Chain Study Group meeting #2<a class="headerlink" href="#memo-on-block-chain-study-group-meeting-2" title="Permalink to this headline">¶</a></h1>
 <p>(ブロックチェーン勉強会２)</p>
 <ul class="simple">
-<li>[Thursday, May 26](<a class="reference external" href="https://www.facebook.com/events/607357016084911/">https://www.facebook.com/events/607357016084911/</a>)</li>
-<li>AltCoin といわれるものから、その合意プロトコル的なものについていくつか紹介</li>
-<li>TL;DR いっぱいありすぎてわかんねえ！</li>
+<li><p>[Thursday, May 26](<a class="reference external" href="https://www.facebook.com/events/607357016084911/">https://www.facebook.com/events/607357016084911/</a>)</p></li>
+<li><p>AltCoin といわれるものから、その合意プロトコル的なものについていくつか紹介</p></li>
+<li><p>TL;DR いっぱいありすぎてわかんねえ！</p></li>
 </ul>
 <p>## ブロックチェーンとは</p>
 <p>ある事実なり履歴を改竄できない形で複製して保持する技術の総称</p>
 <ul class="simple">
-<li>高可用性、耐故障性</li>
-<li>（ものによっては）匿名性</li>
-<li>？？？ 性能</li>
+<li><p>高可用性、耐故障性</p></li>
+<li><p>（ものによっては）匿名性</p></li>
+<li><p>？？？ 性能</p></li>
 </ul>
 <p>過去の履歴もMerkle Treeでまとめることによってデータの改竄を検出しやすくしている</p>
 <p>Block generation:</p>
@@ -106,10 +107,10 @@ $ echo $?
 <p>TL;DR 分散システムでいうところの合意ではない</p>
 <p><code class="docutils literal notranslate"><span class="pre">Block(n)</span></code> が合意されるか</p>
 <ul class="simple">
-<li>Termination (Liveness) … あとからいつでも覆される</li>
-<li>Validity … 全てのプロセスがvを提案したら全員がvに決定する</li>
-<li>Integrity … 全てのプロセスは１つだけブロックを選ぶ</li>
-<li>Agreement … 全てのプロセスは同じvを選ぶ(????)</li>
+<li><p>Termination (Liveness) … あとからいつでも覆される</p></li>
+<li><p>Validity … 全てのプロセスがvを提案したら全員がvに決定する</p></li>
+<li><p>Integrity … 全てのプロセスは１つだけブロックを選ぶ</p></li>
+<li><p>Agreement … 全てのプロセスは同じvを選ぶ(????)</p></li>
 </ul>
 <p>反例 … あるチェーンAが伸びてから、あとからより長いBを渡されたケース:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="n">A</span>
@@ -140,9 +141,9 @@ $ echo $?
 </div>
 <p>メジャーな攻撃方法</p>
 <ul class="simple">
-<li>51% attack - 計算能力の51% をとって常にRewardを独占</li>
-<li>Sybil attack - 悪意のあるノードを大量に追加して善意のあるクライアントをネットワークからきりはなす</li>
-<li>Network partition attack</li>
+<li><p>51% attack - 計算能力の51% をとって常にRewardを独占</p></li>
+<li><p>Sybil attack - 悪意のあるノードを大量に追加して善意のあるクライアントをネットワークからきりはなす</p></li>
+<li><p>Network partition attack</p></li>
 </ul>
 </div>
 <div class="section" id="proof-of-work">
@@ -150,24 +151,24 @@ $ echo $?
 <p>BitCoinと同様、Nonceの計算を競う早い者勝ちのプロトコル。より早くNonce
 を見つけるためには、より多くのコンピュータがあった方がよい。</p>
 <ul class="simple">
-<li>Pros: フェア</li>
-<li>Cons: エコじゃない, network attack で分岐する, 計算力の集中化が進んでいる, higher latency</li>
+<li><p>Pros: フェア</p></li>
+<li><p>Cons: エコじゃない, network attack で分岐する, 計算力の集中化が進んでいる, higher latency</p></li>
 </ul>
 </div>
 <div class="section" id="proof-of-stake">
 <h2>Proof of Stake<a class="headerlink" href="#proof-of-stake" title="Permalink to this headline">¶</a></h2>
 <p>投票によりより多くのコインを集めたBlockが正しいものになる。</p>
 <ul class="simple">
-<li>Pros: PoWよりはエコ, attacker は過半数に近いコインを集める必要がある, lower latency</li>
-<li>Cons: Richer get richer, “The Monopoly problem”</li>
+<li><p>Pros: PoWよりはエコ, attacker は過半数に近いコインを集める必要がある, lower latency</p></li>
+<li><p>Cons: Richer get richer, “The Monopoly problem”</p></li>
 </ul>
 <p>Monopoly =&gt; Double spending, denying service</p>
 <ul class="simple">
-<li>Nothing at Stake: 全てのForkに投票する（PoWと違って投票はチープだか
-ら）</li>
-<li>Stake Grinding: まずいくらかStakeを確保して、過去の歴史を遡って自分
+<li><p>Nothing at Stake: 全てのForkに投票する（PoWと違って投票はチープだか
+ら）</p></li>
+<li><p>Stake Grinding: まずいくらかStakeを確保して、過去の歴史を遡って自分
 が過半数をとれるブロックを探す。見つかったら、そこから歴史を今まで改
-竄する。</li>
+竄する。</p></li>
 </ul>
 <p>Stake Grinding:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Both benevolent and malevolent monopoly are potentially profitable,</span>
@@ -182,20 +183,20 @@ $ echo $?
 いない、らしい etc, etc</p>
 <p>バリエーションがいくつかある</p>
 <ul class="simple">
-<li>Randomized block selection (Nxt, BlackCoin)</li>
-<li>Coin age based selection (PPCoin)</li>
-<li>Velocity based selection (PoSV, Reddcoin)</li>
-<li>Voting based selection</li>
+<li><p>Randomized block selection (Nxt, BlackCoin)</p></li>
+<li><p>Coin age based selection (PPCoin)</p></li>
+<li><p>Velocity based selection (PoSV, Reddcoin)</p></li>
+<li><p>Voting based selection</p></li>
 </ul>
 </div>
 <div class="section" id="id1">
 <h2>他<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>[Proof of Activity Proposal](<a class="reference external" href="https://bitcointalk.org/index.php?topic=102355.0">https://bitcointalk.org/index.php?topic=102355.0</a>)</li>
-<li>[Proof of burn](<a class="reference external" href="https://en.bitcoin.it/wiki/Proof_of_burn">https://en.bitcoin.it/wiki/Proof_of_burn</a>) - Coinを “burn” する=利用不可能なWalletに送金するとProofになる</li>
-<li>[Proof of Stake Velocity](<a class="reference external" href="https://www.reddit.com/r/reddCoin/comments/249dnl/major_announcement_reddcoin_to_implement_new/">https://www.reddit.com/r/reddCoin/comments/249dnl/major_announcement_reddcoin_to_implement_new/</a>), [paper](<a class="reference external" href="https://www.reddcoin.com/papers/PoSV.pdf">https://www.reddcoin.com/papers/PoSV.pdf</a>)</li>
-<li>[Queued Delegated Proof-of-Stake](<a class="reference external" href="https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake">https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake</a>)</li>
-<li>[Tendermint - The completely decntralized consensus engine](<a class="reference external" href="https://news.ycombinator.com/item?id=9138923">https://news.ycombinator.com/item?id=9138923</a>) - PoS</li>
+<li><p>[Proof of Activity Proposal](<a class="reference external" href="https://bitcointalk.org/index.php?topic=102355.0">https://bitcointalk.org/index.php?topic=102355.0</a>)</p></li>
+<li><p>[Proof of burn](<a class="reference external" href="https://en.bitcoin.it/wiki/Proof_of_burn">https://en.bitcoin.it/wiki/Proof_of_burn</a>) - Coinを “burn” する=利用不可能なWalletに送金するとProofになる</p></li>
+<li><p>[Proof of Stake Velocity](<a class="reference external" href="https://www.reddit.com/r/reddCoin/comments/249dnl/major_announcement_reddcoin_to_implement_new/">https://www.reddit.com/r/reddCoin/comments/249dnl/major_announcement_reddcoin_to_implement_new/</a>), [paper](<a class="reference external" href="https://www.reddcoin.com/papers/PoSV.pdf">https://www.reddcoin.com/papers/PoSV.pdf</a>)</p></li>
+<li><p>[Queued Delegated Proof-of-Stake](<a class="reference external" href="https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake">https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake</a>)</p></li>
+<li><p>[Tendermint - The completely decntralized consensus engine](<a class="reference external" href="https://news.ycombinator.com/item?id=9138923">https://news.ycombinator.com/item?id=9138923</a>) - PoS</p></li>
 </ul>
 </div>
 <div class="section" id="ghost-protocol">
@@ -212,8 +213,8 @@ $ echo $?
 <p><strong>B の子ブロックのうち、サブツリーに一番沢山ブロックを持っている子ブロックを正当なツリーとして認める</strong> 戦略</p>
 <p>他にも、論文中では</p>
 <ul class="simple">
-<li>Bitcoin/GHOSTのスループットの理論値を計算 (Bitcoinでは &lt;1.0tps だったのに特定条件下で200を超えるように</li>
-<li>レイテンシの理論値の評価 etc, etc, …</li>
+<li><p>Bitcoin/GHOSTのスループットの理論値を計算 (Bitcoinでは &lt;1.0tps だったのに特定条件下で200を超えるように</p></li>
+<li><p>レイテンシの理論値の評価 etc, etc, …</p></li>
 </ul>
 <p>ところが… =&gt; Casper</p>
 </div>
@@ -222,73 +223,75 @@ $ echo $?
 <div class="section" id="ripple-proof-of-work-trust">
 <h3>Ripple: proof of work, TRUST?<a class="headerlink" href="#ripple-proof-of-work-trust" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Heuristics, to assume some limitations on network latency</li>
-<li>The Ripple protocol can achieve consensus in the face of (n-1)/5 failures +several other desirable features</li>
-<li><ol class="first upperalpha" start="17">
-<li>is this for a fixed node set? &lt;= given there’s “n”</li>
+<li><p>Heuristics, to assume some limitations on network latency</p></li>
+<li><p>The Ripple protocol can achieve consensus in the face of (n-1)/5 failures +several other desirable features</p></li>
+<li><ol class="upperalpha simple" start="17">
+<li><p>is this for a fixed node set? &lt;= given there’s “n”</p></li>
 </ol>
 </li>
-<li>[Ripple Consensus Algorithm](<a class="reference external" href="https://ripple.com/files/ripple_consensus_whitepaper.pdf">https://ripple.com/files/ripple_consensus_whitepaper.pdf</a>)</li>
+<li><p>[Ripple Consensus Algorithm](<a class="reference external" href="https://ripple.com/files/ripple_consensus_whitepaper.pdf">https://ripple.com/files/ripple_consensus_whitepaper.pdf</a>)</p></li>
 </ul>
 <p>UNL (Unique Node List) を各クライアントでもって、それの 4/5 の合意がとれればOK（えー</p>
 <p>### Etherium: PoW (rather a Smart Contracts platform)</p>
 <p>Public な open ledger で、 Smart Contracts といわれる、チューリング完
 全なプログラミング言語 (Solidity) とその処理系（EVM）がノード上に実装されている。</p>
 <ul class="simple">
-<li>“Uncle” 主流にならなかったブランチだけどRewardがもらえる→より多くの
-Minerが現れるのでブロックが進みやすい（レイテンシを短くできる）</li>
-<li>[More uncle statistics](<a class="reference external" href="https://blog.ethereum.org/2015/09/25/more-uncle-statistics/">https://blog.ethereum.org/2015/09/25/more-uncle-statistics/</a>)</li>
-<li>[Heavily centralized](<a class="reference external" href="https://etherchain.org/statistics/miners">https://etherchain.org/statistics/miners</a>)</li>
-<li>[Uncle Mining flaw](<a class="reference external" href="https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/">https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/</a>):
+<li><p>“Uncle” 主流にならなかったブランチだけどRewardがもらえる→より多くの
+Minerが現れるのでブロックが進みやすい（レイテンシを短くできる）</p></li>
+<li><p>[More uncle statistics](<a class="reference external" href="https://blog.ethereum.org/2015/09/25/more-uncle-statistics/">https://blog.ethereum.org/2015/09/25/more-uncle-statistics/</a>)</p></li>
+<li><p>[Heavily centralized](<a class="reference external" href="https://etherchain.org/statistics/miners">https://etherchain.org/statistics/miners</a>)</p></li>
+<li><p>[Uncle Mining flaw](<a class="reference external" href="https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/">https://bitslog.wordpress.com/2016/04/28/uncle-mining-an-ethereum-consensus-protocol-flaw/</a>):
 特定条件下では Uncle だけを掘った方が儲かるケースがあり、全員がそれ
-をやると収束しないという指摘</li>
+をやると収束しないという指摘</p></li>
 </ul>
 <p>脆弱性もあり、Uncle Miningなどの設計が難しいので将来的に PoS に移行する =&gt; Casper</p>
 <ul class="simple">
-<li>[Introducing Casper “the Friendly Ghost”](<a class="reference external" href="https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/">https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/</a>): Security debositをベースにしたPoS<ul>
-<li>おかしなことしたvalidatorはそのDepositoを失う</li>
-<li><em>their authentication chain ends in the list of currently-bonded validators.</em></li>
+<li><p>[Introducing Casper “the Friendly Ghost”](<a class="reference external" href="https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/">https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/</a>): Security debositをベースにしたPoS</p>
+<ul>
+<li><p>おかしなことしたvalidatorはそのDepositoを失う</p></li>
+<li><p><em>their authentication chain ends in the list of currently-bonded validators.</em></p></li>
 </ul>
 </li>
-<li>[ETHEREUM: A SECURE DECENTRALISED GENERALISED TRANSACTION LEDGER](<a class="reference external" href="http://gavwood.com/paper.pdf">http://gavwood.com/paper.pdf</a>)</li>
-<li>[Ethereum入門](<a class="reference external" href="http://book.ethereum-jp.net/">http://book.ethereum-jp.net/</a>)</li>
+<li><p>[ETHEREUM: A SECURE DECENTRALISED GENERALISED TRANSACTION LEDGER](<a class="reference external" href="http://gavwood.com/paper.pdf">http://gavwood.com/paper.pdf</a>)</p></li>
+<li><p>[Ethereum入門](<a class="reference external" href="http://book.ethereum-jp.net/">http://book.ethereum-jp.net/</a>)</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">Casper</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">security-deposit</span> <span class="pre">based</span> <span class="pre">economic</span> <span class="pre">consensus</span> <span class="pre">protocol.</span></code></p>
 <ul class="simple">
-<li>Security-deposit based security and authentication ‘bonded validators’</li>
-<li>Gambling on Consensus: <em>‘if on the other hand they do not quickly agree, they re-earn less of their deposit’</em></li>
-<li>By-height Consensus: <em>‘Casper forfeits their security deposit.’</em></li>
-<li>Transaction Finality: ???</li>
-<li>Recovery from netsplits: ???</li>
-<li>[ETHEREUM: A SECURE DECENTRALISED GENERALISED TRANSACTION LEDGER](<a class="reference external" href="http://gavwood.com/paper.pdf">http://gavwood.com/paper.pdf</a>)</li>
-<li>[Ethereum入門](<a class="reference external" href="http://book.ethereum-jp.net/">http://book.ethereum-jp.net/</a>)</li>
+<li><p>Security-deposit based security and authentication ‘bonded validators’</p></li>
+<li><p>Gambling on Consensus: <em>‘if on the other hand they do not quickly agree, they re-earn less of their deposit’</em></p></li>
+<li><p>By-height Consensus: <em>‘Casper forfeits their security deposit.’</em></p></li>
+<li><p>Transaction Finality: ???</p></li>
+<li><p>Recovery from netsplits: ???</p></li>
+<li><p>[ETHEREUM: A SECURE DECENTRALISED GENERALISED TRANSACTION LEDGER](<a class="reference external" href="http://gavwood.com/paper.pdf">http://gavwood.com/paper.pdf</a>)</p></li>
+<li><p>[Ethereum入門](<a class="reference external" href="http://book.ethereum-jp.net/">http://book.ethereum-jp.net/</a>)</p></li>
 </ul>
 </div>
 </div>
 <div class="section" id="stellar-stellar-consensus-protocol-trust">
 <h2>Stellar: Stellar consensus protocol (TRUST)<a class="headerlink" href="#stellar-stellar-consensus-protocol-trust" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Federated Byzantine Agreementというプロトコルを開発し、 PoW, PoS の問題を全て解決したと主張</li>
-<li>Byzantine General Problem を限定的な状況について効率的に解いたとのこと</li>
-<li>Quorum set とかいう不思議な概念で、このset毎に合意をとる（模様）→なぜか全体で上手くいく</li>
+<li><p>Federated Byzantine Agreementというプロトコルを開発し、 PoW, PoS の問題を全て解決したと主張</p></li>
+<li><p>Byzantine General Problem を限定的な状況について効率的に解いたとのこと</p></li>
+<li><p>Quorum set とかいう不思議な概念で、このset毎に合意をとる（模様）→なぜか全体で上手くいく</p></li>
 </ul>
 <ul class="simple">
-<li>ステラコンセンサスプロトコル
+<li><p>ステラコンセンサスプロトコル
 [EN](<a class="reference external" href="https://www.stellar.org/blog/stellar-consensus-protocol-proof-code/">https://www.stellar.org/blog/stellar-consensus-protocol-proof-code/</a>)
-[JA](<a class="reference external" href="http://stellar1.blog.fc2.com/blog-entry-48.html">http://stellar1.blog.fc2.com/blog-entry-48.html</a>)</li>
+[JA](<a class="reference external" href="http://stellar1.blog.fc2.com/blog-entry-48.html">http://stellar1.blog.fc2.com/blog-entry-48.html</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="bitshares-dpos-delegated-pos">
 <h2>BitShares: DPOS (Delegated PoS)<a class="headerlink" href="#bitshares-dpos-delegated-pos" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>[Delegated Proof-of-Stake](<a class="reference external" href="https://bitshares.org/technology/delegated-proof-of-stake-consensus/">https://bitshares.org/technology/delegated-proof-of-stake-consensus/</a>):<ul>
-<li>Block Production by Elected Witnesses, which produce blocks and get</li>
-<li>paid; netsplitもするよ</li>
-<li>Each account is allowed one vote per share per witness, a process
+<li><p>[Delegated Proof-of-Stake](<a class="reference external" href="https://bitshares.org/technology/delegated-proof-of-stake-consensus/">https://bitshares.org/technology/delegated-proof-of-stake-consensus/</a>):</p>
+<ul>
+<li><p>Block Production by Elected Witnesses, which produce blocks and get</p></li>
+<li><p>paid; netsplitもするよ</p></li>
+<li><p>Each account is allowed one vote per share per witness, a process
 known as approval voting. The top N witnesses by total approval
 are selected. The number (N) of witnesses is defined such that at
 least 50% of voting stakeholders believe there is sufficient
-decentralization.</li>
+decentralization.</p></li>
 </ul>
 </li>
 </ul>
@@ -299,39 +302,39 @@ decentralization.</li>
 <div class="section" id="qointum-qdpos">
 <h2>Qointum; QDPoS<a class="headerlink" href="#qointum-qdpos" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>[Queued Delegated Proof-of-Stake](<a class="reference external" href="https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake">https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake</a>)</li>
+<li><p>[Queued Delegated Proof-of-Stake](<a class="reference external" href="https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake">https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake</a>)</p></li>
 </ul>
 <p>QueueにDelegate (これからサインするブロック候補）を積んで、それを
 <em>blockchain entropy</em> を使ってランダムに振り分けていく→より広範囲に分散
 できてスケールできる</p>
 <p>Consensusは [Maximally Vetted Delegate Chain](<a class="reference external" href="https://wiki.qointum.com/design/dev/#maximally-vetted-delegate-chain">https://wiki.qointum.com/design/dev/#maximally-vetted-delegate-chain</a>) の長さで決まる</p>
 <ul class="simple">
-<li>Nxt: Proof of Stake, w/ leased forging</li>
-<li>NEM: Ripple Consensus</li>
-<li>[BlackCoin’s Proof-of-Stake Protocol v2](<a class="reference external" href="http://blackcoin.co/blackcoin-pos-protocol-v2-whitepaper.pdf">http://blackcoin.co/blackcoin-pos-protocol-v2-whitepaper.pdf</a>)</li>
+<li><p>Nxt: Proof of Stake, w/ leased forging</p></li>
+<li><p>NEM: Ripple Consensus</p></li>
+<li><p>[BlackCoin’s Proof-of-Stake Protocol v2](<a class="reference external" href="http://blackcoin.co/blackcoin-pos-protocol-v2-whitepaper.pdf">http://blackcoin.co/blackcoin-pos-protocol-v2-whitepaper.pdf</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>[Proof of Stake versus Proof of Work white paper](<a class="reference external" href="http://bitfury.com/content/5-white-papers-research/pos-vs-pow-1.0.2.pdf">http://bitfury.com/content/5-white-papers-research/pos-vs-pow-1.0.2.pdf</a>)</li>
-<li>[Infographic: The Blockchain Ecosystem in 2016](<a class="reference external" href="https://ibsintelligence.com/ibs-journal/ibs-news/infographic-the-blockchain-ecosystem-in-2016/">https://ibsintelligence.com/ibs-journal/ibs-news/infographic-the-blockchain-ecosystem-in-2016/</a>)</li>
-<li>[Non-PoW consensus protocols (Ethereum, Bitshares, Stellar/Ripple, etc)](<a class="reference external" href="https://bitcointalk.org/index.php?topic=1032927.0">https://bitcointalk.org/index.php?topic=1032927.0</a>)</li>
-<li>[JA translation of Ethereum White Paper](<a class="reference external" href="https://github.com/ethereum/wiki/wiki/%5BJapanese%5D-White-Paper">https://github.com/ethereum/wiki/wiki/%5BJapanese%5D-White-Paper</a>)</li>
-<li>[Larry Ren, Proof of Stake Velocity: Building the Social Currency of the Digital Age](<a class="reference external" href="https://www.reddcoin.com/papers/PoSV.pdf">https://www.reddcoin.com/papers/PoSV.pdf</a>)</li>
-<li>[Introducing Casper “the friendly GHOST”](<a class="reference external" href="https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/">https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/</a>)</li>
-<li>[Casper the Friendly Ghost](<a class="reference external" href="https://docs.google.com/presentation/d/1bV_vXJBko-DmhAgnOFYg8ZNbAvCZCZrlf0KBFPqwVIw/edit">https://docs.google.com/presentation/d/1bV_vXJBko-DmhAgnOFYg8ZNbAvCZCZrlf0KBFPqwVIw/edit</a>)</li>
-<li>[GnuPGのコマンド](<a class="reference external" href="http://www.nina.jp/server/windows/gpg/commands.html">http://www.nina.jp/server/windows/gpg/commands.html</a>)</li>
-<li>[ビットコイン2.0](<a class="reference external" href="http://jpbitcoin.com/bitcoin2s">http://jpbitcoin.com/bitcoin2s</a>)</li>
-<li>[電子署名の仕組み](<a class="reference external" href="http://esac.jipdec.or.jp/intro/shikumi.html">http://esac.jipdec.or.jp/intro/shikumi.html</a>)</li>
-<li>[電子署名の基礎知識](<a class="reference external" href="http://www.c-a-c.jp/about/knowledge.html">http://www.c-a-c.jp/about/knowledge.html</a>)</li>
-<li>[OpenSSLコマンドによる公開鍵暗号、電子署名の方法](<a class="reference external" href="http://qiita.com/kunichiko/items/3c0b1a2915e9dacbd4c1">http://qiita.com/kunichiko/items/3c0b1a2915e9dacbd4c1</a>)</li>
-<li>[電子署名のファイルフォーマット](<a class="reference external" href="http://qiita.com/kunichiko/items/2e0a2bd35c8e9492ceb5">http://qiita.com/kunichiko/items/2e0a2bd35c8e9492ceb5</a>)</li>
-<li>[図説RSA署名の巻](<a class="reference external" href="http://blog.livedoor.jp/k_urushima/archives/979220.html">http://blog.livedoor.jp/k_urushima/archives/979220.html</a>)</li>
+<li><p>[Proof of Stake versus Proof of Work white paper](<a class="reference external" href="http://bitfury.com/content/5-white-papers-research/pos-vs-pow-1.0.2.pdf">http://bitfury.com/content/5-white-papers-research/pos-vs-pow-1.0.2.pdf</a>)</p></li>
+<li><p>[Infographic: The Blockchain Ecosystem in 2016](<a class="reference external" href="https://ibsintelligence.com/ibs-journal/ibs-news/infographic-the-blockchain-ecosystem-in-2016/">https://ibsintelligence.com/ibs-journal/ibs-news/infographic-the-blockchain-ecosystem-in-2016/</a>)</p></li>
+<li><p>[Non-PoW consensus protocols (Ethereum, Bitshares, Stellar/Ripple, etc)](<a class="reference external" href="https://bitcointalk.org/index.php?topic=1032927.0">https://bitcointalk.org/index.php?topic=1032927.0</a>)</p></li>
+<li><p>[JA translation of Ethereum White Paper](<a class="reference external" href="https://github.com/ethereum/wiki/wiki/%5BJapanese%5D-White-Paper">https://github.com/ethereum/wiki/wiki/%5BJapanese%5D-White-Paper</a>)</p></li>
+<li><p>[Larry Ren, Proof of Stake Velocity: Building the Social Currency of the Digital Age](<a class="reference external" href="https://www.reddcoin.com/papers/PoSV.pdf">https://www.reddcoin.com/papers/PoSV.pdf</a>)</p></li>
+<li><p>[Introducing Casper “the friendly GHOST”](<a class="reference external" href="https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/">https://blog.ethereum.org/2015/08/01/introducing-casper-friendly-ghost/</a>)</p></li>
+<li><p>[Casper the Friendly Ghost](<a class="reference external" href="https://docs.google.com/presentation/d/1bV_vXJBko-DmhAgnOFYg8ZNbAvCZCZrlf0KBFPqwVIw/edit">https://docs.google.com/presentation/d/1bV_vXJBko-DmhAgnOFYg8ZNbAvCZCZrlf0KBFPqwVIw/edit</a>)</p></li>
+<li><p>[GnuPGのコマンド](<a class="reference external" href="http://www.nina.jp/server/windows/gpg/commands.html">http://www.nina.jp/server/windows/gpg/commands.html</a>)</p></li>
+<li><p>[ビットコイン2.0](<a class="reference external" href="http://jpbitcoin.com/bitcoin2s">http://jpbitcoin.com/bitcoin2s</a>)</p></li>
+<li><p>[電子署名の仕組み](<a class="reference external" href="http://esac.jipdec.or.jp/intro/shikumi.html">http://esac.jipdec.or.jp/intro/shikumi.html</a>)</p></li>
+<li><p>[電子署名の基礎知識](<a class="reference external" href="http://www.c-a-c.jp/about/knowledge.html">http://www.c-a-c.jp/about/knowledge.html</a>)</p></li>
+<li><p>[OpenSSLコマンドによる公開鍵暗号、電子署名の方法](<a class="reference external" href="http://qiita.com/kunichiko/items/3c0b1a2915e9dacbd4c1">http://qiita.com/kunichiko/items/3c0b1a2915e9dacbd4c1</a>)</p></li>
+<li><p>[電子署名のファイルフォーマット](<a class="reference external" href="http://qiita.com/kunichiko/items/2e0a2bd35c8e9492ceb5">http://qiita.com/kunichiko/items/2e0a2bd35c8e9492ceb5</a>)</p></li>
+<li><p>[図説RSA署名の巻](<a class="reference external" href="http://blog.livedoor.jp/k_urushima/archives/979220.html">http://blog.livedoor.jp/k_urushima/archives/979220.html</a>)</p></li>
 </ul>
 <p># Omake</p>
 <ul class="simple">
-<li>[ビットコイン関連詐欺を４つに分類する](<a class="reference external" href="http://coinandpeace.hatenablog.com/entry/4_types_of__bitcoin_scam">http://coinandpeace.hatenablog.com/entry/4_types_of__bitcoin_scam</a>)</li>
+<li><p>[ビットコイン関連詐欺を４つに分類する](<a class="reference external" href="http://coinandpeace.hatenablog.com/entry/4_types_of__bitcoin_scam">http://coinandpeace.hatenablog.com/entry/4_types_of__bitcoin_scam</a>)</p></li>
 </ul>
 <p>手作りの温かみのあるブロックチェーン (ブランチ選択なし）:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gpg -u kuenishi@gmail.com --clearsign hello.py.2
@@ -352,10 +355,10 @@ gpg: Good signature from &quot;Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;&qu
 <div class="section" id="misc">
 <h2>Misc<a class="headerlink" href="#misc" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>[Landscape](<a class="reference external" href="http://startupmanagement.org/wp-content/uploads/2015/12/Blockchain-in-Financial-Services-Landscape.jpg">http://startupmanagement.org/wp-content/uploads/2015/12/Blockchain-in-Financial-Services-Landscape.jpg</a>)</li>
-<li>[Distributed Ledger Technology: beyond block chain](<a class="reference external" href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16-1-distributed-ledger-technology.pdf">https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16-1-distributed-ledger-technology.pdf</a>)</li>
-<li>[Blockchain Ecosystem Database](<a class="reference external" href="https://www.blockstars.io/ecosystem/">https://www.blockstars.io/ecosystem/</a>)</li>
-<li>[Blockchain Consensus Protocols](<a class="reference external" href="http://www.slideshare.net/lablogga/blockchain-consensus-protocols">http://www.slideshare.net/lablogga/blockchain-consensus-protocols</a>)</li>
+<li><p>[Landscape](<a class="reference external" href="http://startupmanagement.org/wp-content/uploads/2015/12/Blockchain-in-Financial-Services-Landscape.jpg">http://startupmanagement.org/wp-content/uploads/2015/12/Blockchain-in-Financial-Services-Landscape.jpg</a>)</p></li>
+<li><p>[Distributed Ledger Technology: beyond block chain](<a class="reference external" href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16-1-distributed-ledger-technology.pdf">https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16-1-distributed-ledger-technology.pdf</a>)</p></li>
+<li><p>[Blockchain Ecosystem Database](<a class="reference external" href="https://www.blockstars.io/ecosystem/">https://www.blockstars.io/ecosystem/</a>)</p></li>
+<li><p>[Blockchain Consensus Protocols](<a class="reference external" href="http://www.slideshare.net/lablogga/blockchain-consensus-protocols">http://www.slideshare.net/lablogga/blockchain-consensus-protocols</a>)</p></li>
 </ul>
 <p>[BitShares / ビットシェアズ](<a class="reference external" href="http://jpbitcoin.com/bitcoin2/bitshares">http://jpbitcoin.com/bitcoin2/bitshares</a>)</p>
 <p>&gt; Bitsharesの基軸通貨はBTSと呼ばれます。このBTSの発行上限は約37億BTSであり、スタート時にはそのうち約25億が配布されました。残りの約12億は、取引の承認者に支払われる報酬金などの用途のため、準備金プール(Reserve Pool)と呼ばれる、誰もコントロールできない資産としてブロックチェーン上に保管されています。Bitsharesにおける取引手数料の20%はこの準備金プールへと送られます。
@@ -363,37 +366,38 @@ Bitsharesにおける取引承認のシステムは、DPOS(Delegated Proof of St
 選ばれたwitnessは、一定時間ごとにシャッフルされて承認の順番が割り当てられ、順に取引・ブロックを承認していきます。承認をしなかったwitnessは順番が飛ばされ次のwitnessが承認を行います。承認を行うごとに、witnessはBTS保有者の投票により定められた一定の報酬(現在は1ブロック1.5BTS)がもらえます。この報酬は先の準備金プールから支払われます。
 かつては、101人がwitnessに選出されていましたが、さらに少ない人数でもセキュリティ的には十分であることや、多すぎるとwitnessに支払う総報酬が多くなりコストがかさむ問題や投票者がwitness一人一人を評価することが困難になる問題などがあるため、現在では20人前後となっています。</p>
 <ul class="simple">
-<li>[Graphene](<a class="reference external" href="https://bitshares.org/doxygen/index.html">https://bitshares.org/doxygen/index.html</a>)</li>
+<li><p>[Graphene](<a class="reference external" href="https://bitshares.org/doxygen/index.html">https://bitshares.org/doxygen/index.html</a>)</p></li>
 </ul>
 </div>
 <div class="section" id="others">
 <h2>Others<a class="headerlink" href="#others" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>[20 MINS INTRO TO CONSENSUS](<a class="reference external" href="https://devcon.ethereum.org/slides/consensus_williams.pdf">https://devcon.ethereum.org/slides/consensus_williams.pdf</a>)</li>
-<li>A Prunable Blockchain Consensus Protocol Based on Non-Interactive
+<li><p>[20 MINS INTRO TO CONSENSUS](<a class="reference external" href="https://devcon.ethereum.org/slides/consensus_williams.pdf">https://devcon.ethereum.org/slides/consensus_williams.pdf</a>)</p></li>
+<li><p>A Prunable Blockchain Consensus Protocol Based on Non-Interactive
 Proofs of Past States Retrievability, Alexander Chepurnoy, Mario
 Larangeira, Alexander Ojiganov
-[Arxiv](<a class="reference external" href="http://arxiv.org/abs/1603.07926">http://arxiv.org/abs/1603.07926</a>)</li>
-<li>SCP: A Computationally-Scalable Byzantine Consensus Protocol For
-Blockchains [PDF](<a class="reference external" href="http://eprint.iacr.org/2015/1168.pdf">http://eprint.iacr.org/2015/1168.pdf</a>)</li>
-<li>The Stellar Consensus Protocol: A Federated Model for Internet-level
+[Arxiv](<a class="reference external" href="http://arxiv.org/abs/1603.07926">http://arxiv.org/abs/1603.07926</a>)</p></li>
+<li><p>SCP: A Computationally-Scalable Byzantine Consensus Protocol For
+Blockchains [PDF](<a class="reference external" href="http://eprint.iacr.org/2015/1168.pdf">http://eprint.iacr.org/2015/1168.pdf</a>)</p></li>
+<li><p>The Stellar Consensus Protocol: A Federated Model for Internet-level
 Consensus, DAVID MAZIERES , Stellar Development Foundation
-[PDF](<a class="reference external" href="https://www.stellar.org/papers/stellar-consensus-protocol.pdf">https://www.stellar.org/papers/stellar-consensus-protocol.pdf</a>)</li>
-<li>Byzantine Fault Tolerance Algorithmes, Practical Byzantine Fault
-Tolerance, 1999 Castro, Liskov</li>
-<li>Random Oracles in Constantinople: Practical Asynchronous Byzantine
-Agreement using Cryptography, 2000 Cachin, Kursawe, Shoup</li>
+[PDF](<a class="reference external" href="https://www.stellar.org/papers/stellar-consensus-protocol.pdf">https://www.stellar.org/papers/stellar-consensus-protocol.pdf</a>)</p></li>
+<li><p>Byzantine Fault Tolerance Algorithmes, Practical Byzantine Fault
+Tolerance, 1999 Castro, Liskov</p></li>
+<li><p>Random Oracles in Constantinople: Practical Asynchronous Byzantine
+Agreement using Cryptography, 2000 Cachin, Kursawe, Shoup</p></li>
 </ul>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Memo on Block Chain Study Group meeting #2</a><ul>
 <li><a class="reference internal" href="#bitcoin">BitCoinにおける合意（といわれているやつ）</a></li>
@@ -430,17 +434,15 @@ Agreement using Cryptography, 2000 Cachin, Kursawe, Shoup</li>
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -457,12 +459,13 @@ Agreement using Cryptography, 2000 Cachin, Kursawe, Shoup</li>
         <li class="right" >
           <a href="ergodox-ez.html" title="ErgoDox EZ"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Memo on Block Chain Study Group meeting #2</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2018, UENISHI Kota.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
     </div>
   </body>
 </html>

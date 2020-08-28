@@ -1,22 +1,22 @@
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arch Linux Installation &amp; Maintenance &#8212; kuenishi(7)</title>
     <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="ZFS Memo" href="zfs.html" />
-    <link rel="prev" title="Persona" href="../persona.html" />
+    <link rel="prev" title="Open Source Contributions" href="../opensource.html" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -35,9 +35,10 @@
           <a href="zfs.html" title="ZFS Memo"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="../persona.html" title="Persona"
+          <a href="../opensource.html" title="Open Source Contributions"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Arch Linux Installation &amp; Maintenance</a></li> 
       </ul>
     </div>  
 
@@ -51,7 +52,8 @@
 <p>2017/10/19 - 2017/10/20</p>
 <p>2018/9/9 Mac mini mid 2011 のインストールを追加
 2018/3/15 カーネルパッチの部分を削除
-2018/4/6 Trouble Shooting追加</p>
+2018/4/6 Trouble Shooting追加
+2020/6/17 btrfs まわりを追加</p>
 <div class="section" id="iso-image-download">
 <h2>ISO Image Download<a class="headerlink" href="#iso-image-download" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.archlinux.org/download/">https://www.archlinux.org/download/</a> からPGP署名ファイルとISOイメージをダウンロード:</p>
@@ -230,25 +232,26 @@ Verify passphrase:
 </pre></div>
 </div>
 <p>ミラーを日本だけのものにしとく。grepだと ‘–’ という余計なものが入るの
-で、消しておくこと。で、最後にベースシステムを <code class="docutils literal notranslate"><span class="pre">pacstrap</span></code> でインストー
-ルする:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grep Japan -A 1 /etc/pacman.d/mirrorlist &gt; mirrorlist</span>
-<span class="p">(</span><span class="n">remove</span>  <span class="o">--</span> <span class="n">here</span><span class="p">)</span>
-<span class="c1"># vi mirrorlist</span>
-<span class="c1"># mv mirrorlist /etc/pacman.d/</span>
-<span class="c1"># pacstrap /mnt base base-devel</span>
-</pre></div>
-</div>
-<p>この時点で <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> を作ったり、基本的なファイルを先においておく。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># locale-gen</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># echo KEYMAP=us &gt; /etc/vconsole.conf</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># echo utaha &gt; /etc/hostname</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># pacman -S emacs-nox</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># emacs /etc/hosts</span>
-<span class="p">(</span><span class="nb">set</span> <span class="n">hostname</span><span class="o">.</span><span class="n">localdomain</span><span class="p">)</span>
+で、消しておくこと。ベースシステムを <code class="docutils literal notranslate"><span class="pre">pacstrap</span></code> でインストールしてか
+ら、この時点で <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> を作っておく。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> # grep Japan -A 1 /etc/pacman.d/mirrorlist &gt; mirrorlist
+ (remove  -- here)
+ # vi mirrorlist
+ # mv mirrorlist /etc/pacman.d/
+ # pacstrap /mnt base base-devel linux linux-firmware
+ # genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+
+``chroot`` して、OS環境の作成を開始する。まず、基本的なファイルを先においておく。::
+
+ root@archiso ~ # arch-chroot /mnt
+ [root@archiso /]# ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+ [root@archiso /]# echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf
+ [root@archiso /]# locale-gen
+ [root@archiso /]# echo KEYMAP=us &gt; /etc/vconsole.conf
+ [root@archiso /]# echo utaha &gt; /etc/hostname
+ [root@archiso /]# pacman -S emacs-nox
+ [root@archiso /]# emacs /etc/hosts
+ (set hostname.localdomain)
 </pre></div>
 </div>
 <p>ひととおり設定できたら、initramfsを作る。 <code class="docutils literal notranslate"><span class="pre">/etc/mkinitcpio.conf</span></code> を
@@ -302,7 +305,7 @@ sd-lvm.</a>
 </div>
 <p>しかしこれでは後々マウスが動かないので、あとでこのカーネルをAURでアップデートすることになる。</p>
 <ul class="simple">
-<li><a class="reference external" href="https://wiki.archlinux.jp/index.php/Systemd-boot">https://wiki.archlinux.jp/index.php/Systemd-boot</a></li>
+<li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Systemd-boot">https://wiki.archlinux.jp/index.php/Systemd-boot</a></p></li>
 </ul>
 </div>
 <div class="section" id="gui">
@@ -365,7 +368,7 @@ $ ./swapctrlcaps.sh
 <h3>Weird display vibrarion<a class="headerlink" href="#weird-display-vibrarion" title="Permalink to this headline">¶</a></h3>
 <p>Sometimes a screen vibrates suddenly with a dmesg line including <code class="docutils literal notranslate"><span class="pre">[drm:intel_cpu_fifo_underrun_irq_handler</span> <span class="pre">[i915]]</span> <span class="pre">*ERROR*</span> <span class="pre">CPU</span> <span class="pre">pipe</span> <span class="pre">A</span> <span class="pre">FIFO</span> <span class="pre">underrun</span></code>  … which may be solved with installing <code class="docutils literal notranslate"><span class="pre">xf86-video-intel</span></code>  .</p>
 <ul class="simple">
-<li><a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?id=198157">Linux console goes crazy (“cpu pipe a fifo underrun”) when Xorg quits.</a></li>
+<li><p><a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?id=198157">Linux console goes crazy (“cpu pipe a fifo underrun”) when Xorg quits.</a></p></li>
 </ul>
 </div>
 </div>
@@ -533,12 +536,12 @@ $ git show tagname
 </pre></div>
 </div>
 <ul class="simple">
-<li><a class="reference external" href="https://www.gnupg.org/gph/en/manual/x334.html">https://www.gnupg.org/gph/en/manual/x334.html</a></li>
-<li><a class="reference external" href="https://github.com/kuenishi/baccounts">baccounts</a> -&gt; GnuPG 2.0ま
+<li><p><a class="reference external" href="https://www.gnupg.org/gph/en/manual/x334.html">https://www.gnupg.org/gph/en/manual/x334.html</a></p></li>
+<li><p><a class="reference external" href="https://github.com/kuenishi/baccounts">baccounts</a> -&gt; GnuPG 2.0ま
 でのフォーマットしか対応してないが、新しい GnuPG だと旧フォーマット
 で出力できる。自前で GnuPG 1.x を入れてると pacman-keyring とかと干
 渉してシステムアップデートできなくなるトラブルがあったので、自前では
-入れずに公式でやること。</li>
+入れずに公式でやること。</p></li>
 </ul>
 </div>
 <div class="section" id="clamav">
@@ -619,20 +622,20 @@ input sudo password and the YubiKey is waiting for your touch.</p>
 <div class="section" id="todo">
 <h2>TODO<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>いつの間にかF1~F12 のキーのうちいくつかが使えるようになっていた。不思議</li>
-<li>YubiKeyを入れるとキーボードのCaps Lockが戻ってしまう</li>
-<li>pacman/AURのフロントエンドを何か選ぶ -&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/AUR_helpers">https://wiki.archlinux.org/index.php/AUR_helpers</a> -&gt; とりあえず <code class="docutils literal notranslate"><span class="pre">yaourt</span></code> で困っていない。</li>
-<li><a class="reference external" href="https://wiki.archlinux.jp/index.php/Yubikey#OpenPGP_.E3.82.B9.E3.83.9E.E3.83.BC.E3.83.88.E3.82.AB.E3.83.BC.E3.83.89.E3.83.A2.E3.83.BC.E3.83.89.E3.82.92.E6.9C.89.E5.8A.B9.E5.8C.96">OpenPGP のスマートカード有効化</a></li>
+<li><p>いつの間にかF1~F12 のキーのうちいくつかが使えるようになっていた。不思議</p></li>
+<li><p>YubiKeyを入れるとキーボードのCaps Lockが戻ってしまう</p></li>
+<li><p>pacman/AURのフロントエンドを何か選ぶ -&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/AUR_helpers">https://wiki.archlinux.org/index.php/AUR_helpers</a> -&gt; とりあえず <code class="docutils literal notranslate"><span class="pre">yaourt</span></code> で困っていない。</p></li>
+<li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Yubikey#OpenPGP_.E3.82.B9.E3.83.9E.E3.83.BC.E3.83.88.E3.82.AB.E3.83.BC.E3.83.89.E3.83.A2.E3.83.BC.E3.83.89.E3.82.92.E6.9C.89.E5.8A.B9.E5.8C.96">OpenPGP のスマートカード有効化</a></p></li>
 </ul>
 </div>
 <div class="section" id="reference">
 <h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89">インストールガイド</a></li>
-<li><a class="reference external" href="https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)">Lenovo ThinkPad X1 Carbon (Gen 5)</a></li>
-<li><a class="reference external" href="http://www.thinkwiki.org/wiki/Category:X1_Carbon_(5th_Gen)">Category:X1 Carbon (5th Gen)</a></li>
-<li><a class="reference external" href="https://gist.github.com/HardenedArray/31915e3d73a4ae45adc0efa9ba458b07">Efficient Encrypted UEFI-Booting Arch Installation</a></li>
-<li><a class="reference external" href="https://qiita.com/miy4/items/796c51813417cc90c77f">Thinkpad X1 Carbon (Gen 4)にArch Linuxをインストールする</a> &lt;- なぜ systemd hook をつけてないのに systemd-boot でブートローダーが作れるんだ？</li>
+<li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89">インストールガイド</a></p></li>
+<li><p><a class="reference external" href="https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)">Lenovo ThinkPad X1 Carbon (Gen 5)</a></p></li>
+<li><p><a class="reference external" href="http://www.thinkwiki.org/wiki/Category:X1_Carbon_(5th_Gen)">Category:X1 Carbon (5th Gen)</a></p></li>
+<li><p><a class="reference external" href="https://gist.github.com/HardenedArray/31915e3d73a4ae45adc0efa9ba458b07">Efficient Encrypted UEFI-Booting Arch Installation</a></p></li>
+<li><p><a class="reference external" href="https://qiita.com/miy4/items/796c51813417cc90c77f">Thinkpad X1 Carbon (Gen 4)にArch Linuxをインストールする</a> &lt;- なぜ systemd hook をつけてないのに systemd-boot でブートローダーが作れるんだ？</p></li>
 </ul>
 </div>
 <div class="section" id="arch-linux-installation-to-machine-2">
@@ -643,11 +646,11 @@ input sudo password and the YubiKey is waiting for your touch.</p>
 <h3>OS Install<a class="headerlink" href="#os-install" title="Permalink to this headline">¶</a></h3>
 <p>Same os above, using many tools to setup Arch Installation, except for:</p>
 <ul class="simple">
-<li>No HDD encryption</li>
-<li>No kernel build for ThinkPad; it’s just commodity desktop</li>
-<li>Btrfs for /home: <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">mount</span> <span class="pre">/mnt/home</span> <span class="pre">/dev/sdb</span></code> where sdb is one of Btrfs disks</li>
-<li>Static IP address configuration</li>
-<li>NVIDIA driver</li>
+<li><p>No HDD encryption</p></li>
+<li><p>No kernel build for ThinkPad; it’s just commodity desktop</p></li>
+<li><p>Btrfs for /home: <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">mount</span> <span class="pre">/mnt/home</span> <span class="pre">/dev/sdb</span></code> where sdb is one of Btrfs disks</p></li>
+<li><p>Static IP address configuration</p></li>
+<li><p>NVIDIA driver</p></li>
 </ul>
 </div>
 <div class="section" id="btrfs-setup">
@@ -657,6 +660,92 @@ input sudo password and the YubiKey is waiting for your touch.</p>
 <span class="c1"># mount /dev/sde /mnt</span>
 </pre></div>
 </div>
+<p>単体の例:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkfs.btrfs -d single /dev/sdf</span>
+<span class="n">btrfs</span><span class="o">-</span><span class="n">progs</span> <span class="n">v5</span><span class="o">.</span><span class="mf">6.1</span>
+<span class="n">See</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">btrfs</span><span class="o">.</span><span class="n">wiki</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+
+<span class="n">Detected</span> <span class="n">a</span> <span class="n">SSD</span><span class="p">,</span> <span class="n">turning</span> <span class="n">off</span> <span class="n">metadata</span> <span class="n">duplication</span><span class="o">.</span>  <span class="n">Mkfs</span> <span class="k">with</span> <span class="o">-</span><span class="n">m</span> <span class="n">dup</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">force</span> <span class="n">metadata</span> <span class="n">duplication</span><span class="o">.</span>
+<span class="n">Label</span><span class="p">:</span>              <span class="p">(</span><span class="n">null</span><span class="p">)</span>
+<span class="n">UUID</span><span class="p">:</span>               <span class="n">e092a2dc</span><span class="o">-</span><span class="n">b65d</span><span class="o">-</span><span class="mf">45e4</span><span class="o">-</span><span class="mi">8</span><span class="n">dee</span><span class="o">-</span><span class="mi">46529</span><span class="n">c1949a0</span>
+<span class="n">Node</span> <span class="n">size</span><span class="p">:</span>          <span class="mi">16384</span>
+<span class="n">Sector</span> <span class="n">size</span><span class="p">:</span>        <span class="mi">4096</span>
+<span class="n">Filesystem</span> <span class="n">size</span><span class="p">:</span>    <span class="mf">931.51</span><span class="n">GiB</span>
+<span class="n">Block</span> <span class="n">group</span> <span class="n">profiles</span><span class="p">:</span>
+  <span class="n">Data</span><span class="p">:</span>             <span class="n">single</span>            <span class="mf">8.00</span><span class="n">MiB</span>
+  <span class="n">Metadata</span><span class="p">:</span>         <span class="n">single</span>            <span class="mf">8.00</span><span class="n">MiB</span>
+  <span class="n">System</span><span class="p">:</span>           <span class="n">single</span>            <span class="mf">4.00</span><span class="n">MiB</span>
+<span class="n">SSD</span> <span class="n">detected</span><span class="p">:</span>       <span class="n">yes</span>
+<span class="n">Incompat</span> <span class="n">features</span><span class="p">:</span>  <span class="n">extref</span><span class="p">,</span> <span class="n">skinny</span><span class="o">-</span><span class="n">metadata</span>
+<span class="n">Checksum</span><span class="p">:</span>           <span class="n">crc32c</span>
+<span class="n">Number</span> <span class="n">of</span> <span class="n">devices</span><span class="p">:</span>  <span class="mi">1</span>
+<span class="n">Devices</span><span class="p">:</span>
+   <span class="n">ID</span>        <span class="n">SIZE</span>  <span class="n">PATH</span>
+    <span class="mi">1</span>   <span class="mf">931.51</span><span class="n">GiB</span>  <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sdf</span>
+</pre></div>
+</div>
+<p>マウントしてサブボリュームを作る:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mount /dev/sdf /mnt</span>
+<span class="c1"># btrfs sub create /mnt/kuenishi</span>
+<span class="c1"># chown kuenishi:kuenishi /mnt/kuenishi</span>
+</pre></div>
+</div>
+<p>いろいろファイルをコピーする:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd
+$ mv -v * /mnt/kuenishi/
+$ cp -v -r .* /mnt/kuenishi/
+</pre></div>
+</div>
+<p>サブボリュームを <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> に書く:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UUID</span><span class="o">=</span><span class="n">e092a2dc</span><span class="o">-</span><span class="n">b65d</span><span class="o">-</span><span class="mf">45e4</span><span class="o">-</span><span class="mi">8</span><span class="n">dee</span><span class="o">-</span><span class="mi">46529</span><span class="n">c1949a0</span>       <span class="o">/</span><span class="n">home</span>           <span class="n">btrfs</span>           <span class="n">rw</span><span class="p">,</span><span class="n">relatime</span><span class="p">,</span><span class="n">space_cache</span><span class="p">,</span><span class="n">subvolid</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">subvol</span><span class="o">=/</span>     <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>これで再起動するとホームディレクトリが btrfs のパーティションになっているはずだ。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo btrfs filesystem show /home
+Label: none  uuid: e092a2dc-b65d-45e4-8dee-46529c1949a0
+        Total devices 1 FS bytes used 32.64GiB
+        devid    1 size 931.51GiB used 36.01GiB path /dev/sdf
+</pre></div>
+</div>
+<p>以前作った大きめの btrfs ボリュームが <code class="docutils literal notranslate"><span class="pre">/data</span></code> にあるものとする。予め
+スナップショット用のサブボリュームを作っておく。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># btrfs sub create /home/ss</span>
+<span class="c1"># btrfs sub create /data/home-backup</span>
+</pre></div>
+</div>
+<p>今度はバックアップを実行する。シェルにしてしまった。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/sh
+
+set -eux
+
+TS=`date &#39;+%Y%m%d-%H%M%S&#39;`
+btrfs sub snap /home/kuenishi /home/ss/kuenishi-${TS}
+btrfs property set -ts /home/ss/kuenishi-${TS} ro true
+btrfs send /home/ss/kuenishi-${TS} | btrfs receive /data/home-backup
+btrfs sub delete /home/ss/kuenishi-${TS}
+</pre></div>
+</div>
+<p>これであとは適当にcronにでもしておけばよい。あとは Docker を使っている
+場合、レイヤーを btrfs に保存する方法は簡単で、 <code class="docutils literal notranslate"><span class="pre">btrfs</span> <span class="pre">sub</span> <span class="pre">create</span>
+<span class="pre">/data/docker</span></code> とやってサブボリュームを作っておく。それから、
+<code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> に:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UUID</span><span class="o">=</span><span class="mi">5</span><span class="n">fdf336d</span><span class="o">-</span><span class="mi">09</span><span class="n">b3</span><span class="o">-</span><span class="mi">4</span><span class="n">b98</span><span class="o">-</span><span class="mf">8e52</span><span class="o">-</span><span class="n">d78b72ceedcf</span>       <span class="o">/</span><span class="n">data</span>           <span class="n">btrfs</span>           <span class="n">rw</span><span class="p">,</span><span class="n">relatime</span><span class="p">,</span><span class="n">space_cache</span><span class="p">,</span><span class="n">subvolid</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">subvol</span><span class="o">=/</span>     <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">UUID</span><span class="o">=</span><span class="mi">5</span><span class="n">fdf336d</span><span class="o">-</span><span class="mi">09</span><span class="n">b3</span><span class="o">-</span><span class="mi">4</span><span class="n">b98</span><span class="o">-</span><span class="mf">8e52</span><span class="o">-</span><span class="n">d78b72ceedcf</span>       <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">docker</span>         <span class="n">btrfs</span>           <span class="n">rw</span><span class="p">,</span><span class="n">relatime</span><span class="p">,</span><span class="n">space_cache</span><span class="p">,</span><span class="n">subvol</span><span class="o">=</span><span class="n">docker</span>   <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>とかいておくと、 <code class="docutils literal notranslate"><span class="pre">/data</span></code> にも使われているボリュームを名前を変えて
+<code class="docutils literal notranslate"><span class="pre">/var/lib/docker</span></code> に置き換えて使ってくれる。Dockerの方でも、btrfs で
+あることを検知して勝手にoverlayしてくれるようになる。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ df -h /data /var/lib/docker
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdb        1.8T  461G  784G  37% /data
+/dev/sdb        1.8T  461G  784G  37% /var/lib/docker
+</pre></div>
+</div>
+<p>マシンを再起動する前に一度 <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span> <span class="pre">/var/lib/docker/*</span></code> を実行して綺麗
+にしておいた方がよいだろう。ちなみにしばらく使ったあとに <code class="docutils literal notranslate"><span class="pre">btrfs</span> <span class="pre">sub</span>
+<span class="pre">list</span> <span class="pre">/data</span></code> すると大量のレイヤーが表示されて、Dockerが使われているこ
+とがよくわかる。</p>
 </div>
 <div class="section" id="static-ip-address">
 <h3>Static IP address<a class="headerlink" href="#static-ip-address" title="Permalink to this headline">¶</a></h3>
@@ -695,7 +784,6 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 </div>
 <div class="section" id="general-trouble-shooting">
 <h2>General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Permalink to this headline">¶</a></h2>
-<p>ok</p>
 <div class="section" id="locale">
 <h3>Locale再生成<a class="headerlink" href="#locale" title="Permalink to this headline">¶</a></h3>
 <p>ロケールが変になったらいつでも作り直すことができる。
@@ -706,7 +794,7 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 </div>
 <p>と実行することでロケールが作成される。</p>
 <ul class="simple">
-<li><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB">https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB</a></li>
+<li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB">https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB</a></p></li>
 </ul>
 </div>
 <div class="section" id="mac-mini-mid-2011">
@@ -724,14 +812,14 @@ $ sudo systemctl enable dhcpcd
 </div>
 <p>WiFiを使うために</p>
 <ul class="simple">
-<li><a class="reference external" href="https://aur.archlinux.org/packages/yay/">yay</a> をインストール</li>
-<li><a class="reference external" href="https://wiki.archlinux.org/index.php/broadcom_wireless#b43">b43</a> をインストール</li>
-<li><code class="docutils literal notranslate"><span class="pre">broadcom-wl</span></code> もインストールして再起動。 dmesg で BCM4331 が見えていることを確認</li>
-<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">cp</span> <span class="pre">/etc/netctl/examples/wireless-wpa</span> <span class="pre">/etc/netctl/&lt;profile-name&gt;</span></code> をやって内容を編集</li>
-<li>デバイス名は <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">link</span></code> で一覧して結果を確認。それらの内容を <code class="docutils literal notranslate"><span class="pre">/etc/netctl/&lt;profile-name&gt;</span></code> に書き込む</li>
-<li><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">netctl;</span> <span class="pre">sudo</span> <span class="pre">netctl</span> <span class="pre">start</span> <span class="pre">&lt;profile-name&gt;</span></code></li>
-<li><a class="reference external" href="https://wiki.archlinux.jp/index.php/Netctl">netctl</a></li>
-<li>多分これでいける</li>
+<li><p><a class="reference external" href="https://aur.archlinux.org/packages/yay/">yay</a> をインストール</p></li>
+<li><p><a class="reference external" href="https://wiki.archlinux.org/index.php/broadcom_wireless#b43">b43</a> をインストール</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">broadcom-wl</span></code> もインストールして再起動。 dmesg で BCM4331 が見えていることを確認</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">cp</span> <span class="pre">/etc/netctl/examples/wireless-wpa</span> <span class="pre">/etc/netctl/&lt;profile-name&gt;</span></code> をやって内容を編集</p></li>
+<li><p>デバイス名は <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">link</span></code> で一覧して結果を確認。それらの内容を <code class="docutils literal notranslate"><span class="pre">/etc/netctl/&lt;profile-name&gt;</span></code> に書き込む</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">netctl;</span> <span class="pre">sudo</span> <span class="pre">netctl</span> <span class="pre">start</span> <span class="pre">&lt;profile-name&gt;</span></code></p></li>
+<li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Netctl">netctl</a></p></li>
+<li><p>多分これでいける</p></li>
 </ul>
 <p>xorg入れたけどなぜかGUIがでてこない</p>
 </div>
@@ -789,16 +877,22 @@ initrd を再作成していなかったため何かがズレて起動だけは�
 途中に電源長押しで再起動なんかしてはいけないし、 <em>金曜夕方の退勤間際に
 間違ってもOSのアップデートなんかしてはいけない</em> 。</p>
 </div>
+<div class="section" id="id9">
+<h3>急にWiFiがつながらなくなったら<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>パソコンのハードスイッチからオフになっている可能性がある。推し間違いなど。
+<code class="docutils literal notranslate"><span class="pre">rfkill</span></code> で状態を確認できるので、それ経由でオンにするとつながる。</p>
+</div>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Arch Linux Installation &amp; Maintenance</a><ul>
 <li><a class="reference internal" href="#iso-image-download">ISO Image Download</a></li>
@@ -833,6 +927,7 @@ initrd を再作成していなかったため何かがズレて起動だけは�
 <li><a class="reference internal" href="#mac-mini-mid-2011">Mac Mini mid 2011 にインストール</a></li>
 <li><a class="reference internal" href="#pacman-gnupg">Pacman のアップデートで GnuPG エラーが出る</a></li>
 <li><a class="reference internal" href="#fix-kernel-or-other-files-2018-4-6">Fix kernel or other files 2018/4/6</a></li>
+<li><a class="reference internal" href="#id9">急にWiFiがつながらなくなったら</a></li>
 </ul>
 </li>
 </ul>
@@ -840,8 +935,8 @@ initrd を再作成していなかったため何かがズレて起動だけは�
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="../persona.html"
-                        title="previous chapter">Persona</a></p>
+  <p class="topless"><a href="../opensource.html"
+                        title="previous chapter">Open Source Contributions</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="zfs.html"
                         title="next chapter">ZFS Memo</a></p>
@@ -853,17 +948,15 @@ initrd を再作成していなかったため何かがズレて起動だけは�
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" />
       <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -878,14 +971,15 @@ initrd を再作成していなかったため何かがズレて起動だけは�
           <a href="zfs.html" title="ZFS Memo"
              >next</a> |</li>
         <li class="right" >
-          <a href="../persona.html" title="Persona"
+          <a href="../opensource.html" title="Open Source Contributions"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Arch Linux Installation &amp; Maintenance</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2018, UENISHI Kota.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
     </div>
   </body>
 </html>
