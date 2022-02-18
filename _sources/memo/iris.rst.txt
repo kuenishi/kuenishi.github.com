@@ -69,15 +69,15 @@ Lighting with LED
     2 AO3416 MOSFETs
     2 4.7kΩ resistors
 
-  Optional - LEDs and 470Ω resistors 
-  
+  Optional - LEDs and 470Ω resistors
+
 
 But they're not included in the kit so I seeked for them in Akihabara, in 2018/12/28 . And found:
 
 - 100PCS 1/4w 470Ω resistors 金属被覆 @ 300JPY x2
 - 10PCS Nch MOSFET IRFML8244TRPBFTR @ 160JPY
 - 10PCS Nch MOSFET IRLML6344TRPBFTR @ 240JPY
-- `10PCS 角形2.3.4 赤色LED 輝度:1000～1500mcd 指向角:120° 波長:625～630nm 順電圧:1.9～2.3V 順電流:30mA <https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GP>`_ @ 500JPY 
+- `10PCS 角形2.3.4 赤色LED 輝度:1000～1500mcd 指向角:120° 波長:625～630nm 順電圧:1.9～2.3V 順電流:30mA <https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GP>`_ @ 500JPY
 - 10PCS 角形2.3.4 白色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA @ 500JPY
 - 10PCS 角形2.3.4 青色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA @ 500JPY
 - `10PCS 角形2.3.4 緑色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA <https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GS>`_ @ 500JPY
@@ -100,7 +100,100 @@ thought the key typing itself worked very fine.
    :align: center
 
 
+On 2018/12/30 I tried buying `another LED
+<https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GS>`_
+::
+
+  順電圧:3.0～3.4V
+  順電流:20mA
+  1500～2500mcd
+  指向角:120°
+  波長:515～521nm
+
+
+But it didn't worked. The reason was that there wasn't enough current
+provided to LED. `The old Iris build guide <https://docs.keeb.io/iris-build-guide-archive/#solder-led-support-components-40optional41>`_ says::
+
+  470Ω resistors are commonly used, but this value might vary, based
+  on the LEDs you use and the amount of current they draw.
+
+
+`Here's what I unsuccessfully built, a black one <https://www.instagram.com/p/BsNHNU5Am8t/>`_ ....
+
+.. image:: ../_static/IMG_20190104_165042_047.jpg
+   :alt: a working failure built black
+   :align: center
+
+For LEDs to glow, `Iris rev2.5 ビルドメモ
+<https://qiita.com/natten/items/95a57ee77e1e66ba88e6>`_ uses 4.7Ω (
+RK73H2ATTD471F ) for LED resistors...
+
+But how much? What to buy??? `This comment
+<https://www.reddit.com/r/MechanicalKeyboards/comments/7evx0x/iris_keyboard_with_led_backlighting/dq7v7y0/>`_
+gives a clear description::
+
+  USB 2 spec devices are supposed to keep their power draw under 500mA
+  per port, or roughly 2.5W. Your power budget should also include
+  running 2 pro-micros, and possibly RGB underglow. But let's say we
+  budget 50mA per each half of the Iris.
+
+  That's a maximum of 56 keys, or 28 per half, so 28 LEDs for the left
+  and right sides.
+
+  Using this website http://ledcalc.com/
+
+  We can input
+
+    1. input voltage of 5v (USB)
+    2. voltage drop across LEDs - the forward voltage value For some green LEDs I bought from mehkee this value is 3-3.2v. So say 3.1v
+    3. 28 LEDs.
+
+  Now playing with the desired LED current, the nearest value is 1.9mA
+  per LED. This calculates 1.2KOhm resistor, so you would need 28
+  1.2KOhm resistors. This would consume 44mA per Iris half or 88mA for
+  both sides.
+
+  The next nearest resistor value takes us to 54mA with a 1KOhm
+  resistor which would use 108mA which is slightly above our power
+  budget, but you may be able to get away with it.
+
+  In summary, for a given 1.8mm or 2x3x4mm LED you need the forward
+  voltage to calculate it's power consumption.
+
+
+So I should have soldered right combination of resistors and LEDs.
+LEDs require enough amount of current, equally power to glow, with
+enough voltage. Those values are described as each spec.. if the
+registors are too large enough current won't be provided, but if it's
+too small, then too much current may break the system (possibly?).
+
+
+`A comment for another article
+<https://www.reddit.com/r/MechanicalKeyboards/comments/7lihur/help_questions_about_smd_leds_for_an_iris/drmkras/>`_
+gives a link to resistor value calculator. According to `the
+calculator
+<https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor>`_
+my configuration with 2x3x4 shows the registor value is only 100
+Ohms. But I bought 470 Ohms, which provides < 7mA current to LEDs.
+The comment also describes the sense of scale::
+
+  You will need resistors and the value will depend on what LED's you
+  get. 470 Ohm is a safe bet but can vary depending on the type of LED
+  you get. There is a formula to figure it out. I ended up using 330's
+  on mine and the Yellow LED's are just bright enough. 470 was too dim
+
+Next time I'll get another bunch of resistors, say, like 4.7Ω or 47Ω.
+
 Wrist Rest
 ==========
 
 https://www.instagram.com/p/Br2C0N5gomw/
+
+
+
+References
+==========
+
+- `Iris rev2.5 ビルドメモ <https://qiita.com/natten/items/95a57ee77e1e66ba88e6>`_
+- `reddit: Iris keyboard with LED backlighting <https://www.reddit.com/r/MechanicalKeyboards/comments/7evx0x/iris_keyboard_with_led_backlighting/>`_
+- `LED Series Resistor Calculator <https://www.digikey.com/en/resources/conversion-calculators/conversion-calculator-led-series-resistor>`_
