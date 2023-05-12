@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>ErgoDox EZ &#8212; kuenishi(7)</title>
+    <title>Arch Linux (misc) &#8212; kuenishi(7)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/pyramid.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -13,8 +13,8 @@
     <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Memo on Block Chain Study Group meeting #2" href="blockchain.html" />
-    <link rel="prev" title="Iris build log" href="iris.html" />
+    <link rel="next" title="Arch Linux (FAQ)" href="arch-faq.html" />
+    <link rel="prev" title="Arch Linux Setup (GUI)" href="arch-gui.html" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -30,13 +30,13 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="blockchain.html" title="Memo on Block Chain Study Group meeting #2"
+          <a href="arch-faq.html" title="Arch Linux (FAQ)"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="iris.html" title="Iris build log"
+          <a href="arch-gui.html" title="Arch Linux Setup (GUI)"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">ErgoDox EZ</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Arch Linux (misc)</a></li> 
       </ul>
     </div>  
 
@@ -45,42 +45,35 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="ergodox-ez">
-<h1>ErgoDox EZ<a class="headerlink" href="#ergodox-ez" title="Permalink to this heading">¶</a></h1>
-<p>2017/12/7</p>
-<ul class="simple">
-<li><p>Buy -&gt; <a class="reference external" href="https://ergodox-ez.com/">ErgoDox-ez.com</a> ~330USD, Import tax 2500JPY</p></li>
-<li><p>3 weeks expected; (11/21 buy -&gt; 12/6 arrive)</p></li>
-<li><p>It works out of the box; while…</p></li>
-</ul>
-<p>Build your own firmware:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(mac)$ sudo port install avr-libc
-(arch)$ yaourt -S avr-libc avr-gcc
-$ git clone git@github.com:kuenishi/qmk_firmware
-$ cd qmk_firmware
-$ make ergodox_ez:default
-$ ls ergodox_ez_default.hex
-ergodox_ez_default.hex
+  <section id="arch-linux-misc">
+<h1>Arch Linux (misc)<a class="headerlink" href="#arch-linux-misc" title="Permalink to this heading">¶</a></h1>
+<section id="docker">
+<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this heading">¶</a></h2>
+<p>インストールしたら自分をDockerグループに入れて一旦ログアウト（グループ追加を有効にするため）:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S docker
+$ vigr
+$ exit (WMもログアウト）
 </pre></div>
 </div>
-<p>I configured my keymap as <a class="reference external" href="https://github.com/kuenishi/qmk_firmware/blob/kinesislike/keyboards/ergodox_ez/keymaps/kinesislike/keymap.c">Kinesis-like keymap</a> . To build it:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone git@github.com:kuenishi/qmk_firmware
-$ cd qmk_firmware
-$ git checkout kinesislike
-$ make ergodox_ez:kinesislike
-$ ls ergodox_ez_kinesislike.hex
-ergodox_ez_kinesislike.hex
+<p>その後Daemonを上げてアクセス:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl start docker
+$ docker run -it ubuntu /bin/bash
 </pre></div>
 </div>
-<p>Burn it! See <a class="reference external" href="https://github.com/qmk/qmk_firmware/tree/master/keyboards/ergodox_ez">doc</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(arch)$ yaourt -S teensy-loader-cli
-$ teensy_loader_cli -mmcu=atmega32u4 -w ergodox_ez_kinesislike.hex
+</section>
+<section id="windows-on-virtualbox">
+<h2>Windows on VirtualBox<a class="headerlink" href="#windows-on-virtualbox" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://www.microsoft.com/ja-jp/software-download/windows10ISO">Windows 10 Downlaod</a> からダウンロードしつつ、VirtualBoxをインストールする:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S virtualbox virtualbox-guest-iso vde2
 </pre></div>
 </div>
-<p>And press reset button. For macOS, <a class="reference external" href="https://www.pjrc.com/teensy/loader.html">downlaod the application</a></p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://ergodox-ez.com/pages/our-firmware">https://ergodox-ez.com/pages/our-firmware</a>.</p></li>
-</ul>
+<p>Windows予定のイメージを作ってDVDブートすると <code class="docutils literal notranslate"><span class="pre">VT-x</span> <span class="pre">is</span> <span class="pre">disabled</span> <span class="pre">in</span> <span class="pre">the</span>
+<span class="pre">BIOS</span> <span class="pre">for</span> <span class="pre">all</span> <span class="pre">CPU</span> <span class="pre">modes</span></code> と叱られたので、BIOSで設定をオンにする。最近
+は VT-d とかいうのまであるらしい。</p>
+<p>予めWindowsのプロダクトキーは Windows Product Key Viewer というので抜
+いておいた。ふつうにインストールできているっぽい。</p>
+<p>image:: windows10-product-key-thinkpad-x1c-5th.jpg</p>
+</section>
 </section>
 
 
@@ -91,19 +84,30 @@ $ teensy_loader_cli -mmcu=atmega32u4 -w ergodox_ez_kinesislike.hex
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Arch Linux (misc)</a><ul>
+<li><a class="reference internal" href="#docker">Docker</a></li>
+<li><a class="reference internal" href="#windows-on-virtualbox">Windows on VirtualBox</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="iris.html"
-                          title="previous chapter">Iris build log</a></p>
+    <p class="topless"><a href="arch-gui.html"
+                          title="previous chapter">Arch Linux Setup (GUI)</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="blockchain.html"
-                          title="next chapter">Memo on Block Chain Study Group meeting #2</a></p>
+    <p class="topless"><a href="arch-faq.html"
+                          title="next chapter">Arch Linux (FAQ)</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/memo/ergodox-ez.rst.txt"
+      <li><a href="../_sources/memo/arch-misc.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -128,13 +132,13 @@ $ teensy_loader_cli -mmcu=atmega32u4 -w ergodox_ez_kinesislike.hex
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="blockchain.html" title="Memo on Block Chain Study Group meeting #2"
+          <a href="arch-faq.html" title="Arch Linux (FAQ)"
              >next</a> |</li>
         <li class="right" >
-          <a href="iris.html" title="Iris build log"
+          <a href="arch-gui.html" title="Arch Linux Setup (GUI)"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">ErgoDox EZ</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Arch Linux (misc)</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

@@ -22,6 +22,7 @@ Mainly active in twitter, facebook and his blog.
 Publication (en)
 ================
 
+- Seiya Tokui, Ryosuke Okuta, Takuya Akiba, Yusuke Niitani, Toru Ogawa, Shunta Saito, Shuji Suzuki, **Kota Uenishi**, Brian Vogel, and Hiroyuki Yamazaki Vincent. 2019. Chainer: A Deep Learning Framework for Accelerating the Research Cycle. KDD '19. [ `arXiv <https://arxiv.org/abs/1908.00213>`_ , `ACM <https://dl.acm.org/citation.cfm?id=3330756>`_ ]
 - Satoshi Oda, Kota Uenishi, and Shingo Kinoshita, `"Jubatus: Scalable Distributed Processing Framework for Realtime Analysis of Big Data" <https://www.ntt-review.jp/archive/ntttechnical.php?contents=ntr201206ra2.html>`_ , NTT Technical Review, 2012.
 
 Publications (ja)

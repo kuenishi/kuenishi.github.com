@@ -1,21 +1,19 @@
-
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Arch Linux Installation &amp; Maintenance &#8212; kuenishi(7)</title>
-    <link rel="stylesheet" href="../_static/pyramid.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pyramid.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/language_data.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="ZFS Memo" href="zfs.html" />
+    <link rel="next" title="Arch Linux Setup (GUI)" href="arch-gui.html" />
     <link rel="prev" title="Persona" href="../persona.html" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
@@ -32,7 +30,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="zfs.html" title="ZFS Memo"
+          <a href="arch-gui.html" title="Arch Linux Setup (GUI)"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="../persona.html" title="Persona"
@@ -47,15 +45,15 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="arch-linux-installation-maintenance">
-<h1>Arch Linux Installation &amp; Maintenance<a class="headerlink" href="#arch-linux-installation-maintenance" title="Permalink to this headline">¶</a></h1>
+  <section id="arch-linux-installation-maintenance">
+<h1>Arch Linux Installation &amp; Maintenance<a class="headerlink" href="#arch-linux-installation-maintenance" title="Permalink to this heading">¶</a></h1>
 <p>2017/10/19 - 2017/10/20</p>
 <p>2018/9/9 Mac mini mid 2011 のインストールを追加
 2018/3/15 カーネルパッチの部分を削除
 2018/4/6 Trouble Shooting追加
 2020/6/17 btrfs まわりを追加</p>
-<div class="section" id="iso-image-download">
-<h2>ISO Image Download<a class="headerlink" href="#iso-image-download" title="Permalink to this headline">¶</a></h2>
+<section id="iso-image-download">
+<h2>ISO Image Download<a class="headerlink" href="#iso-image-download" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://www.archlinux.org/download/">https://www.archlinux.org/download/</a> からPGP署名ファイルとISOイメージをダウンロード:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2017.10.01/archlinux-2017.10.01-x86_64.iso
 $ wget https://www.archlinux.org/iso/2017.10.01/archlinux-2017.10.01-x86_64.iso.sig
@@ -117,9 +115,9 @@ $ sudo dd if=archlinux-2017.10.01-x86_64.iso of=/dev/sdf status=progress &amp;&a
 548405248 bytes (548 MB, 523 MiB) copied, 201.131 s, 2.7 MB/s
 </pre></div>
 </div>
-</div>
-<div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
 <p>ThinkPad届く。</p>
 <p>Secure Bootをオフに必ずしておく。
 Bootパスはまあこの際後でもいっか。</p>
@@ -200,7 +198,7 @@ Verify passphrase:
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># cryptsetup open /dev/nvme0n1p2 crypt-root</span>
 <span class="n">Enter</span> <span class="n">passphrase</span> <span class="k">for</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nvme0n1p2</span><span class="p">:</span>
 <span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># mkfs.ext4 /dev/mapper/crypt-root</span>
-<span class="n">mke2fs</span> <span class="mf">1.43</span><span class="o">.</span><span class="mi">6</span> <span class="p">(</span><span class="mi">29</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2017</span><span class="p">)</span>
+<span class="n">mke2fs</span> <span class="mf">1.43.6</span> <span class="p">(</span><span class="mi">29</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2017</span><span class="p">)</span>
 <span class="n">Creating</span> <span class="n">filesystem</span> <span class="k">with</span> <span class="mi">124894976</span> <span class="mi">4</span><span class="n">k</span> <span class="n">blocks</span> <span class="ow">and</span> <span class="mi">31227904</span> <span class="n">inodes</span>
 <span class="n">Filesystem</span> <span class="n">UUID</span><span class="p">:</span> <span class="mi">01</span><span class="n">dbc4c4</span><span class="o">-</span><span class="n">bebe</span><span class="o">-</span><span class="mi">4</span><span class="n">ee5</span><span class="o">-</span><span class="mi">92</span><span class="n">a1</span><span class="o">-</span><span class="mi">2568</span><span class="n">aaef4c1f</span>
 <span class="n">Superblock</span> <span class="n">backups</span> <span class="n">stored</span> <span class="n">on</span> <span class="n">blocks</span><span class="p">:</span>
@@ -232,25 +230,26 @@ Verify passphrase:
 </pre></div>
 </div>
 <p>ミラーを日本だけのものにしとく。grepだと ‘–’ という余計なものが入るの
-で、消しておくこと。で、最後にベースシステムを <code class="docutils literal notranslate"><span class="pre">pacstrap</span></code> でインストー
-ルする:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># grep Japan -A 1 /etc/pacman.d/mirrorlist &gt; mirrorlist</span>
-<span class="p">(</span><span class="n">remove</span>  <span class="o">--</span> <span class="n">here</span><span class="p">)</span>
-<span class="c1"># vi mirrorlist</span>
-<span class="c1"># mv mirrorlist /etc/pacman.d/</span>
-<span class="c1"># pacstrap /mnt base base-devel</span>
-</pre></div>
-</div>
-<p>この時点で <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> を作ったり、基本的なファイルを先においておく。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># genfstab -U /mnt &gt;&gt; /mnt/etc/fstab</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># locale-gen</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># echo KEYMAP=us &gt; /etc/vconsole.conf</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># echo utaha &gt; /etc/hostname</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># pacman -S emacs-nox</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># emacs /etc/hosts</span>
-<span class="p">(</span><span class="nb">set</span> <span class="n">hostname</span><span class="o">.</span><span class="n">localdomain</span><span class="p">)</span>
+で、消しておくこと。ベースシステムを <code class="docutils literal notranslate"><span class="pre">pacstrap</span></code> でインストールしてか
+ら、この時点で <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> を作っておく。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span> # grep Japan -A 1 /etc/pacman.d/mirrorlist &gt; mirrorlist
+ (remove  -- here)
+ # vi mirrorlist
+ # mv mirrorlist /etc/pacman.d/
+ # pacstrap /mnt base base-devel linux linux-firmware
+ # genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+
+``chroot`` して、OS環境の作成を開始する。まず、基本的なファイルを先においておく。::
+
+ root@archiso ~ # arch-chroot /mnt
+ [root@archiso /]# ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+ [root@archiso /]# echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf
+ [root@archiso /]# locale-gen
+ [root@archiso /]# echo KEYMAP=us &gt; /etc/vconsole.conf
+ [root@archiso /]# echo utaha &gt; /etc/hostname
+ [root@archiso /]# pacman -S emacs-nox
+ [root@archiso /]# emacs /etc/hosts
+ (set hostname.localdomain)
 </pre></div>
 </div>
 <p>ひととおり設定できたら、initramfsを作る。 <code class="docutils literal notranslate"><span class="pre">/etc/mkinitcpio.conf</span></code> を
@@ -306,329 +305,9 @@ sd-lvm.</a>
 <ul class="simple">
 <li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Systemd-boot">https://wiki.archlinux.jp/index.php/Systemd-boot</a></p></li>
 </ul>
-</div>
-<div class="section" id="gui">
-<h2>GUI<a class="headerlink" href="#gui" title="Permalink to this headline">¶</a></h2>
-<p>まずは基本的なユーザー作成:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># mkdir /home/kuenishi
-# chown kuenishi:kuenishi /home/kuenishi
-# useradd kuenishi
-# passwd kuenishi
-# vigr -&gt; add kuenishi to wheel
-# pacman -S sudo
-# visudo -&gt; enable wheel as ALL=ALL
-$ sudo pacman -S git
-</pre></div>
-</div>
-<p>このままだと <a class="reference external" href="https://wiki.archlinux.jp/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)#.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.9D.E3.82.A4.E3.83.B3.E3.83.88.2F.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.91.E3.83.83.E3.83.89.E3.81.8C.E6.A9.9F.E8.83.BD.E3.81.97.E3.81.AA.E3.81.84">トラックポイント/トラックパッドが機能しない</a>
-という問題にぶつかるので、それを回避するため設定を入れる。
-<code class="docutils literal notranslate"><span class="pre">psmouse.synaptics_intertouch=1</span></code> をカーネルパラメータに追加する。カー
-ネルパラメータを設定するには
-<code class="docutils literal notranslate"><span class="pre">/boot/loader/entries/encrypted-arch.conf</span></code> を書き換える。カーネルと
-initrd の新しいファイルが <code class="docutils literal notranslate"><span class="pre">/boot</span></code> に置かれているので、両方を置き換え
-たら再起動。たとえばこんな感じ(<code class="docutils literal notranslate"><span class="pre">-tp-x1-carbon-5th</span></code> がついているもの
-は 4.14 からはもう不要になった):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ls /boot</span>
-<span class="n">EFI</span>                                            <span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">tp</span><span class="o">-</span><span class="n">x1</span><span class="o">-</span><span class="n">carbon</span><span class="o">-</span><span class="mi">5</span><span class="n">th</span><span class="o">.</span><span class="n">img</span>  <span class="n">loader</span>
-<span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">fallback</span><span class="o">.</span><span class="n">img</span>                   <span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">.</span><span class="n">img</span>                   <span class="n">vmlinuz</span><span class="o">-</span><span class="n">linux</span>
-<span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">tp</span><span class="o">-</span><span class="n">x1</span><span class="o">-</span><span class="n">carbon</span><span class="o">-</span><span class="mi">5</span><span class="n">th</span><span class="o">-</span><span class="n">fallback</span><span class="o">.</span><span class="n">img</span>  <span class="n">intel</span><span class="o">-</span><span class="n">ucode</span><span class="o">.</span><span class="n">img</span>                       <span class="n">vmlinuz</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">tp</span><span class="o">-</span><span class="n">x1</span><span class="o">-</span><span class="n">carbon</span><span class="o">-</span><span class="mi">5</span><span class="n">th</span>
-<span class="c1"># cat /boot/loader/entries/encrypted-arch.conf</span>
-<span class="n">title</span> <span class="n">Arch</span> <span class="n">Linux</span> <span class="n">Encrypted</span>
-<span class="n">linux</span> <span class="o">/</span><span class="n">vmlinuz</span><span class="o">-</span><span class="n">linux</span>
-<span class="n">initrd</span> <span class="o">/</span><span class="n">intel</span><span class="o">-</span><span class="n">ucode</span><span class="o">.</span><span class="n">img</span>
-<span class="n">initrd</span> <span class="o">/</span><span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">.</span><span class="n">img</span>
-<span class="n">options</span> <span class="n">luks</span><span class="o">.</span><span class="n">uuid</span><span class="o">=</span><span class="mi">1</span><span class="n">cf54a61</span><span class="o">-</span><span class="n">cd17</span><span class="o">-</span><span class="mf">43e3</span><span class="o">-</span><span class="n">ad00</span><span class="o">-</span><span class="n">bf94c29dc922</span> <span class="n">luks</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="mi">1</span><span class="n">cf54a61</span><span class="o">-</span><span class="n">cd17</span><span class="o">-</span><span class="mf">43e3</span><span class="o">-</span><span class="n">ad00</span><span class="o">-</span><span class="n">bf94c29dc922</span><span class="o">=</span><span class="n">crypt</span><span class="o">-</span><span class="n">root</span> <span class="n">root</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">crypt</span><span class="o">-</span><span class="n">root</span> <span class="n">rw</span> <span class="n">intel_pstate</span><span class="o">=</span><span class="n">no_hwp</span> <span class="n">psmouse</span><span class="o">.</span><span class="n">synaptics_intertouch</span><span class="o">=</span><span class="mi">1</span>
-</pre></div>
-</div>
-<p>Enlightenment を少し試してみたが、使いにくいので xfce4 に戻る。インストールと起動テスト:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S xorg-server xfce4 xfce4-goodies
-$ startxfce4
-</pre></div>
-</div>
-<p>これで起動を確認する。変なことになって失敗したら <code class="docutils literal notranslate"><span class="pre">Ctrl+Alt+Del</span></code> で戻
-れる。lightdm は最初失敗。ログをみるのもだるいので sddm に。  <a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3">SDDM を
-有効にするには</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S sddm
-$ sudo systemctl enable sddm
-</pre></div>
-</div>
-<p>これでリブートしてみる。テストしたければ enable 前に <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">sddm</span></code> で。
-CtrlとCaps Lockを入れ替えるのは、とりあえず:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &#39;setxkbmap -option ctrl:nocaps&#39; &gt; swapctrlcaps.sh
-$ chmod 755 swapctrlcaps.sh
-$ ./swapctrlcaps.sh
-</pre></div>
-</div>
-<p>で Caps lock を Ctrl にする。他にもキーボードマッピングをいじる方法と
-かがあるけど、複数のものが絡まって複雑になると困ってしまうので、なるべ
-く上位でやりたいので今ここ。</p>
-<p>DPIはAppearance （外観）から変更。とりあえず字大きめの160で。</p>
-<div class="section" id="weird-display-vibrarion">
-<h3>Weird display vibrarion<a class="headerlink" href="#weird-display-vibrarion" title="Permalink to this headline">¶</a></h3>
-<p>Sometimes a screen vibrates suddenly with a dmesg line including <code class="docutils literal notranslate"><span class="pre">[drm:intel_cpu_fifo_underrun_irq_handler</span> <span class="pre">[i915]]</span> <span class="pre">*ERROR*</span> <span class="pre">CPU</span> <span class="pre">pipe</span> <span class="pre">A</span> <span class="pre">FIFO</span> <span class="pre">underrun</span></code>  … which may be solved with installing <code class="docutils literal notranslate"><span class="pre">xf86-video-intel</span></code>  .</p>
-<ul class="simple">
-<li><p><a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?id=198157">Linux console goes crazy (“cpu pipe a fifo underrun”) when Xorg quits.</a></p></li>
-</ul>
-</div>
-</div>
-<div class="section" id="id2">
-<h2>日本語入力<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88#.E6.97.A5.E6.9C.AC.E8.AA.9E">Japanese fonts</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra adobe-source-han-sans-jp-fonts otf-ipafont ttf-sazanami ttf-hanazono
-$ sudo pacman -S fcitx-im fcitx-mozc fcitx-configtool
-$ echo &#39;export GTK_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx&#39; &gt; ~/.xprofile
-</pre></div>
-</div>
-<p>で一旦ログアウトして、いろいろGUIをいじっていたら動いた。もしかしたら:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fcitx-autostart
-</pre></div>
-</div>
-<p>が必要かも。どうにも変だったら <code class="docutils literal notranslate"><span class="pre">fcitx-diagnose</span></code> こまんどで原因調査するとよい。 <a class="reference external" href="https://wiki.archlinux.jp/index.php/ロケール">ろけーるが変だった</a> ことがある。</p>
-<p>Properly render PDF without embedded Japanese fonts:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S poppler-data
-</pre></div>
-</div>
-</div>
-<div class="section" id="system-update">
-<h2>System update<a class="headerlink" href="#system-update" title="Permalink to this headline">¶</a></h2>
-<p>システムアップデートは</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -Syu
-</pre></div>
-</div>
-<p>このときAURで入れていたパッケージに注意すること。</p>
-<p>パッケージを探すのは:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pacman -Ss &lt;pkgname&gt;
-</pre></div>
-</div>
-</div>
-<div class="section" id="installed-application">
-<h2>Installed Application<a class="headerlink" href="#installed-application" title="Permalink to this headline">¶</a></h2>
-<p>いろんなアプリを入れる:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S tmux firefox emacs slock
-$ sudo pacman -S bash-completion
-</pre></div>
-</div>
-<p>Spotlightのようなアプリケーションランチャーがあると便利だなと思ってい
-たが <a class="reference external" href="http://www.webupd8.org/2014/06/xfce-app-launcher-whisker-menu-sees-new.html">Whisker Menu</a>
-を <a class="reference external" href="http://thinkonbytes.blogspot.jp/2014/04/xubuntu-open-whisker-menu-with-windows.html">Windowsキーに割り当て</a>
-て一見落着。</p>
-<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Slock">Slock</a> is just a screen
-locker. Type ‘slock’ when you leave your seat temporariliy or for a
-long time. -&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/List_of_applications/Security#Screen_lockers">Other screen lockers</a></p>
-<p><code class="docutils literal notranslate"><span class="pre">bash-completion</span></code> があれば、ターミナルに出た適当な長さのワードを拾って補完してくれるので特にzshとかいらない。</p>
-<p>AURでは <code class="docutils literal notranslate"><span class="pre">yaourt</span></code> だけを入れる。 <code class="docutils literal notranslate"><span class="pre">package-query</span></code> に依存しているので、それを先に入れる。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://aur.archlinux.org/package-query.git
-$ cd package-query
-$ makepkg -is
-$ cd ..
-$ git clone https://aur.archlinux.org/yaourt.git
-$ cd yaourt
-$ makepkg -is
-$ cd ..
-</pre></div>
-</div>
-<p>いろいろ入れる:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ yaourt -S --noconfirm google-chrome slack-desktop gyazo
-</pre></div>
-</div>
-</div>
-<div class="section" id="sound">
-<h2>Sound<a class="headerlink" href="#sound" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Advanced_Linux_Sound_Architecture">サウンド</a> は:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S alsa-utils
-$ alsamixer
-</pre></div>
-</div>
-<p>これだけで音が鳴るようになる。 <a class="reference external" href="https://wiki.archlinux.org/index.php/xfce#Keyboard_volume_buttons">XfceのUI</a>
-や、ThinkPadのF1~F3 でのコントロールはできていない。Xfce4のPulseAudio
-pluginは <code class="docutils literal notranslate"><span class="pre">pavucontrol</span></code> をインストールして再起動？したら使えるように
-なった。</p>
-<p>-&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/List_of_applications#Volume_managers">https://wiki.archlinux.org/index.php/List_of_applications#Volume_managers</a></p>
-</div>
-<div class="section" id="wifi">
-<h2>WiFi<a class="headerlink" href="#wifi" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Wicd">Wicd</a> を入れたらそれなりに快適に動く:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S wicd wicd-gtk gksu python2-notify
-$ sudo systemctl enable wicd
-$ sudo systemctl start wicd
-</pre></div>
-</div>
-<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/WPA_supplicant">WiFi</a> なぜか一
-度適当に設定したらいつの間にか動くようになってしまった…　電波強度をパ
-ネルに出すのに wavelan というのをつけてある。ツールは他にも
-<code class="docutils literal notranslate"><span class="pre">wifi-menu</span></code> とかいろいろある。-&gt;
-<a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A">https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A</a></p>
-<p>WPA2 Enterpriseでクライアント認証でWiFi APに接続するときに、 EAP-TLSで
-接続してPKCS#12の秘密鍵とパスフレーズだけで接続する場合にはなぜかWicd
-ではうまく接続できず、結局 <code class="docutils literal notranslate"><span class="pre">netctl</span></code> でやった。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl stop wicd
-$ sudo systemctl disable wicd
-$ sudo pacman -R wicd wicd-gtk
-$ sudo pacman -S netctl
-$ sudo netctl list
-$ sudo wifi-menu wlp4s0
-(...find the SSID of WPA2 Enterprise and try to setup...)
-$ sudoedit /etc/netctl/wlp4s0-&lt;ssid&gt;
-$ cat /etc/netctl/wlp4s0-&lt;ssid&gt;
-Description=&#39;Automatically generated profile by wifi-menu&#39;
-Interface=wlp4s0
-Connection=wireless
-Security=wpa-configsection
-IP=dhcp
-WPAConfigSection=(
-      &#39;ssid=&quot;hoge&quot;&#39;
-      &#39;key_mgmt=WPA-EAP&#39;
-      &#39;eap=TLS&#39;
-      &#39;proto=WPA RSN&#39;
-      &#39;identity=&quot;kuenishi&quot;&#39;
-      &#39;private_key=&quot;/home/kuenishi/.pki/kuenishi_aho.p12&quot;&#39;
-      &#39;private_key_passwd=&quot;**********&quot;&#39;
-      &#39;priority=1&#39;
-      &#39;phase2=&quot;auth=PAP&quot;&#39;
-)
-</pre></div>
-</div>
-<p>このファイルはたしか
-<code class="docutils literal notranslate"><span class="pre">/etc/netctl/examples/wireless-wpa-configsection</span></code> からのコピペだった
-気がする。これで接続できたら systemd 設定をする。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo netctl list
-* wlp4s0-hoge
-$ sudo netctl enable wlp4s0-hoge
-</pre></div>
-</div>
-</div>
-<div class="section" id="docker">
-<h2>Docker<a class="headerlink" href="#docker" title="Permalink to this headline">¶</a></h2>
-<p>インストールしたら自分をDockerグループに入れて一旦ログアウト（グループ追加を有効にするため）:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S docker
-$ vigr
-$ exit (WMもログアウト）
-</pre></div>
-</div>
-<p>その後Daemonを上げてアクセス:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl start docker
-$ docker run -it ubuntu /bin/bash
-</pre></div>
-</div>
-</div>
-<div class="section" id="gpg-keys">
-<h2>GPG keys<a class="headerlink" href="#gpg-keys" title="Permalink to this headline">¶</a></h2>
-<p>GPG key setup esp. pinentry:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cat .gnupg/gpg-agent.conf
-# PIN entry program
-# pinentry-program /usr/bin/pinentry-curses
-# pinentry-program /usr/bin/pinentry-qt
-# pinentry-program /usr/bin/pinentry-kwallet
-
-pinentry-program /usr/bin/pinentry-gtk-2
-</pre></div>
-</div>
-<p><a class="reference external" href="http://kuenishi.hatenadiary.jp/entry/2016/07/12/013041">GPG signature は作成またはインポート</a> する。Gitも
-それで。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git config --global gpg.program gpg2
-$ gpg2 --list-secret-keys
-$ git config --global user.signingkey xxxxxxxx
-$ git log --show-signature
-$ git tag -s tagname
-$ git show tagname
-</pre></div>
-</div>
-<ul class="simple">
-<li><p><a class="reference external" href="https://www.gnupg.org/gph/en/manual/x334.html">https://www.gnupg.org/gph/en/manual/x334.html</a></p></li>
-<li><p><a class="reference external" href="https://github.com/kuenishi/baccounts">baccounts</a> -&gt; GnuPG 2.0ま
-でのフォーマットしか対応してないが、新しい GnuPG だと旧フォーマット
-で出力できる。自前で GnuPG 1.x を入れてると pacman-keyring とかと干
-渉してシステムアップデートできなくなるトラブルがあったので、自前では
-入れずに公式でやること。</p></li>
-</ul>
-</div>
-<div class="section" id="clamav">
-<h2>ClamAV<a class="headerlink" href="#clamav" title="Permalink to this headline">¶</a></h2>
-<p>セキュリティチェックでウイルスソフトが必要なのでインストール:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S clamav
-$ sudo freshclam
-$ sudo systemctl enable freshclamd.service
-$ sudo systemctl start freshclamd.service
-$ sudo systemctl enable clamd.service
-$ sudo systemctl start clamd.service
-</pre></div>
-</div>
-<p>実際にウイルス検知ができるかチェックする:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ curl http://www.eicar.org/download/eicar.com.txt | clamscan -
-</pre></div>
-</div>
-<p>以下が出力されれば検出成功です:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stdin</span><span class="p">:</span> <span class="n">Eicar</span><span class="o">-</span><span class="n">Test</span><span class="o">-</span><span class="n">Signature</span> <span class="n">FOUND</span>
-</pre></div>
-</div>
-<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/ClamAV">Further info</a></p>
-</div>
-<div class="section" id="id6">
-<h2>マルチ（外部）ディスプレイ<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<p>家のASUSの4KディスプレイはHDMIを刺すだけで特になにもなく 3000x2000 く
-らいで認識されて映った。なにかあったら <a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%9E%E3%83%AB%E3%83%81%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4">マルチディスプレイ</a>
-を参照。</p>
-</div>
-<div class="section" id="windows-on-virtualbox">
-<h2>Windows on VirtualBox<a class="headerlink" href="#windows-on-virtualbox" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://www.microsoft.com/ja-jp/software-download/windows10ISO">Windows 10 Downlaod</a> からダウンロードしつつ、VirtualBoxをインストールする:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S virtualbox virtualbox-guest-iso vde2
-</pre></div>
-</div>
-<p>Windows予定のイメージを作ってDVDブートすると <code class="docutils literal notranslate"><span class="pre">VT-x</span> <span class="pre">is</span> <span class="pre">disabled</span> <span class="pre">in</span> <span class="pre">the</span>
-<span class="pre">BIOS</span> <span class="pre">for</span> <span class="pre">all</span> <span class="pre">CPU</span> <span class="pre">modes</span></code> と叱られたので、BIOSで設定をオンにする。最近
-は VT-d とかいうのまであるらしい。</p>
-<p>予めWindowsのプロダクトキーは Windows Product Key Viewer というので抜
-いておいた。ふつうにインストールできているっぽい。</p>
-<p>image:: windows10-product-key-thinkpad-x1c-5th.jpg</p>
-</div>
-<div class="section" id="yubikey-authentication">
-<h2>YubiKey authentication<a class="headerlink" href="#yubikey-authentication" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://developers.yubico.com/yubico-pam/Authentication_Using_Challenge-Response.html">Local Authentication Using Challenge Response</a>
-would be enough to prove personality, with 2FA. YubiCloud requires
-network connectivity and its not given for free…:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S yubico-pam
-(insert yubikey)
-$ mkdir ~/.yubico
-$ ykpamcfg -2 -v
-(a file will be saved to ~/.yubico/challenge-xxxxxx)
-</pre></div>
-</div>
-<p>Move challenge-xxx file to <code class="docutils literal notranslate"><span class="pre">/var/yubico</span></code> following instructions
-described in the page above; and in Arch <code class="docutils literal notranslate"><span class="pre">/etc/pam.d/system-auth</span></code> is
-used rather than <code class="docutils literal notranslate"><span class="pre">common-auth</span></code> in the document. Before hand, make
-sure you have another terminal window with root privilege just in case
-to roll back <code class="docutils literal notranslate"><span class="pre">system-auth</span></code> file. The edit will be:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudoedit /etc/pam.d/system-auth
-(add
-&#39;auth   required        pam_yubico.so mode=challenge-response chalresp_path=/var/yubico&#39;
-after a line of pam_unix.so)
-$ cat /etc/pam.d/system-auth
-#%PAM-1.0
-
-auth      required  pam_unix.so     try_first_pass nullok
-auth      required  pam_yubico.so mode=challenge-response chalresp_path=/var/yubico
-auth      optional  pam_permit.so
-auth      required  pam_env.so
-(.. snip ..)
-</pre></div>
-</div>
-<p>Wait for moment, and test with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">-s</span></code> which will block after you
-input sudo password and the YubiKey is waiting for your touch.</p>
-<p>See also:  <a class="reference external" href="https://developers.yubico.com/yubico-pam/Manuals/ykpamcfg.1.html">ykpamcfg(1)</a></p>
-</div>
-<div class="section" id="todo">
-<h2>TODO<a class="headerlink" href="#todo" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>いつの間にかF1~F12 のキーのうちいくつかが使えるようになっていた。不思議</p></li>
-<li><p>YubiKeyを入れるとキーボードのCaps Lockが戻ってしまう</p></li>
-<li><p>pacman/AURのフロントエンドを何か選ぶ -&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/AUR_helpers">https://wiki.archlinux.org/index.php/AUR_helpers</a> -&gt; とりあえず <code class="docutils literal notranslate"><span class="pre">yaourt</span></code> で困っていない。</p></li>
-<li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Yubikey#OpenPGP_.E3.82.B9.E3.83.9E.E3.83.BC.E3.83.88.E3.82.AB.E3.83.BC.E3.83.89.E3.83.A2.E3.83.BC.E3.83.89.E3.82.92.E6.9C.89.E5.8A.B9.E5.8C.96">OpenPGP のスマートカード有効化</a></p></li>
-</ul>
-</div>
-<div class="section" id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89">インストールガイド</a></p></li>
 <li><p><a class="reference external" href="https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)">Lenovo ThinkPad X1 Carbon (Gen 5)</a></p></li>
@@ -636,13 +315,13 @@ input sudo password and the YubiKey is waiting for your touch.</p>
 <li><p><a class="reference external" href="https://gist.github.com/HardenedArray/31915e3d73a4ae45adc0efa9ba458b07">Efficient Encrypted UEFI-Booting Arch Installation</a></p></li>
 <li><p><a class="reference external" href="https://qiita.com/miy4/items/796c51813417cc90c77f">Thinkpad X1 Carbon (Gen 4)にArch Linuxをインストールする</a> &lt;- なぜ systemd hook をつけてないのに systemd-boot でブートローダーが作れるんだ？</p></li>
 </ul>
-</div>
-<div class="section" id="arch-linux-installation-to-machine-2">
-<h2>Arch Linux Installation to machine #2<a class="headerlink" href="#arch-linux-installation-to-machine-2" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="arch-linux-installation-to-machine-2">
+<h2>Arch Linux Installation to machine #2<a class="headerlink" href="#arch-linux-installation-to-machine-2" title="Permalink to this heading">¶</a></h2>
 <p>2018/2/4</p>
 <p>To my desktop machine, with NVIDIA GeForce 760, and several hetero HDDs.</p>
-<div class="section" id="os-install">
-<h3>OS Install<a class="headerlink" href="#os-install" title="Permalink to this headline">¶</a></h3>
+<section id="os-install">
+<h3>OS Install<a class="headerlink" href="#os-install" title="Permalink to this heading">¶</a></h3>
 <p>Same os above, using many tools to setup Arch Installation, except for:</p>
 <ul class="simple">
 <li><p>No HDD encryption</p></li>
@@ -651,9 +330,9 @@ input sudo password and the YubiKey is waiting for your touch.</p>
 <li><p>Static IP address configuration</p></li>
 <li><p>NVIDIA driver</p></li>
 </ul>
-</div>
-<div class="section" id="btrfs-setup">
-<h3>Btrfs setup<a class="headerlink" href="#btrfs-setup" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="btrfs-setup">
+<h3>Btrfs setup<a class="headerlink" href="#btrfs-setup" title="Permalink to this heading">¶</a></h3>
 <p>See <a class="reference external" href="https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices">Using Btrfs with Multiple Devices</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkfs.btrfs -d single /dev/sdb /dev/sdc /dev/sdd /dev/sde</span>
 <span class="c1"># mount /dev/sde /mnt</span>
@@ -661,7 +340,7 @@ input sudo password and the YubiKey is waiting for your touch.</p>
 </div>
 <p>単体の例:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkfs.btrfs -d single /dev/sdf</span>
-<span class="n">btrfs</span><span class="o">-</span><span class="n">progs</span> <span class="n">v5</span><span class="o">.</span><span class="mf">6.1</span>
+<span class="n">btrfs</span><span class="o">-</span><span class="n">progs</span> <span class="n">v5</span><span class="mf">.6.1</span>
 <span class="n">See</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">btrfs</span><span class="o">.</span><span class="n">wiki</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
 
 <span class="n">Detected</span> <span class="n">a</span> <span class="n">SSD</span><span class="p">,</span> <span class="n">turning</span> <span class="n">off</span> <span class="n">metadata</span> <span class="n">duplication</span><span class="o">.</span>  <span class="n">Mkfs</span> <span class="k">with</span> <span class="o">-</span><span class="n">m</span> <span class="n">dup</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">force</span> <span class="n">metadata</span> <span class="n">duplication</span><span class="o">.</span>
@@ -745,9 +424,9 @@ Filesystem      Size  Used Avail Use% Mounted on
 にしておいた方がよいだろう。ちなみにしばらく使ったあとに <code class="docutils literal notranslate"><span class="pre">btrfs</span> <span class="pre">sub</span>
 <span class="pre">list</span> <span class="pre">/data</span></code> すると大量のレイヤーが表示されて、Dockerが使われているこ
 とがよくわかる。</p>
-</div>
-<div class="section" id="static-ip-address">
-<h3>Static IP address<a class="headerlink" href="#static-ip-address" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="static-ip-address">
+<h3>Static IP address<a class="headerlink" href="#static-ip-address" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Netctl#.E6.9C.89.E7.B7.9A">Use netctl</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip a</span>
 <span class="o">...</span> <span class="p">(</span><span class="n">see</span> <span class="n">device</span> <span class="n">name</span><span class="p">)</span> <span class="o">...</span>
@@ -767,24 +446,24 @@ Filesystem      Size  Used Avail Use% Mounted on
 </pre></div>
 </div>
 <p>Don’t do any fucking typoes here. Troutbleshoot with <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">journalctl</span> <span class="pre">-xe</span></code>, like <a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?id=161263">this</a> .</p>
-</div>
-<div class="section" id="nvidia-driver">
-<h3>Nvidia driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="nvidia-driver">
+<h3>Nvidia driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this heading">¶</a></h3>
 <p>Nouvearu is kind of general and just works - but was too slow for me
 at runtime. With <a class="reference external" href="https://wiki.archlinux.org/index.php/NVIDIA">official guide</a> you can find your device version:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lspci -k | grep -A 2 -E &quot;(VGA|3D)&quot;
 </pre></div>
 </div>
-</div>
-<div class="section" id="install-yaourt">
-<h3>Install yaourt<a class="headerlink" href="#install-yaourt" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="install-yaourt">
+<h3>Install yaourt<a class="headerlink" href="#install-yaourt" title="Permalink to this heading">¶</a></h3>
 <p>Obsolete… yaourt is not maintained any more.</p>
-</div>
-</div>
-<div class="section" id="general-trouble-shooting">
-<h2>General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="locale">
-<h3>Locale再生成<a class="headerlink" href="#locale" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="general-trouble-shooting">
+<h2>General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Permalink to this heading">¶</a></h2>
+<section id="locale">
+<h3>Locale再生成<a class="headerlink" href="#locale" title="Permalink to this heading">¶</a></h3>
 <p>ロケールが変になったらいつでも作り直すことができる。
 <code class="docutils literal notranslate"><span class="pre">/etc/locale.gen</span></code> を編集して、必要なロケールのコメントアウトをとりの
 ぞく。そのあと再度:</p>
@@ -795,9 +474,9 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 <ul class="simple">
 <li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB">https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB</a></p></li>
 </ul>
-</div>
-<div class="section" id="mac-mini-mid-2011">
-<h3>Mac Mini mid 2011 にインストール<a class="headerlink" href="#mac-mini-mid-2011" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mac-mini-mid-2011">
+<h3>Mac Mini mid 2011 にインストール<a class="headerlink" href="#mac-mini-mid-2011" title="Permalink to this heading">¶</a></h3>
 <p>2018/9の時点で <a class="reference external" href="https://apple-history.com/mac_mini_mid_11">mid 2011</a>
 のモデルが最後のアップデート。もうMacOSは動かないくらいのスペックなの
 で、 Arch Linux を入れた。 <a class="reference external" href="https://support.apple.com/ja-jp/HT202796">ブート USB を指して、 Options キーを押しな
@@ -821,68 +500,9 @@ $ sudo systemctl enable dhcpcd
 <li><p>多分これでいける</p></li>
 </ul>
 <p>xorg入れたけどなぜかGUIがでてこない</p>
-</div>
-<div class="section" id="pacman-gnupg">
-<h3>Pacman のアップデートで GnuPG エラーが出る<a class="headerlink" href="#pacman-gnupg" title="Permalink to this headline">¶</a></h3>
-<p>パッケージアップデート時に <code class="docutils literal notranslate"><span class="pre">gnupg:</span> <span class="pre">signature</span> <span class="pre">from</span> <span class="pre">&quot;Gaetan</span> <span class="pre">Bisson</span>
-<span class="pre">&lt;bisson&#64;archlinux.org&gt;&quot;</span> <span class="pre">is</span> <span class="pre">invalid</span></code> 的なエラーがでて失敗したら、以下
-の手順でキーを更新する:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo rm /var/lib/pacman/sync/*
-$ sudo pacman-key --init
-$ sudo pacman-key --populate archlinux
-$ sudo pacman-key --refresh-keys
-</pre></div>
-</div>
-</div>
-<div class="section" id="fix-kernel-or-other-files-2018-4-6">
-<h3>Fix kernel or other files 2018/4/6<a class="headerlink" href="#fix-kernel-or-other-files-2018-4-6" title="Permalink to this headline">¶</a></h3>
-<p><code class="docutils literal notranslate"><span class="pre">yaourt</span> <span class="pre">-Syu</span></code> が妙に時間がかかったのでマシンを途中で止めてしまったと
-ころ、起動時（LUKSのパスワード入力）時にキーボードが効かなくなり、パス
-ワードを入力できなくなった。このためその後のブートシーケンスを継続でき
-ない。</p>
-<p>まずは起動して <code class="docutils literal notranslate"><span class="pre">yaourt</span> <span class="pre">-Syu</span></code> の続きを完了することを目指す。ブートディ
-スクを使って、まずブートディスクのカーネルで起動しておく。それでchroot
-環境をつくる。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># cryptsetup open /dev/nvme0n1p2 crypt-root</span>
-<span class="n">Enter</span> <span class="n">passphrase</span> <span class="k">for</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">nvme0n1p2</span><span class="p">:</span>
-<span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># mount /dev/mapper/crypt-root /mnt</span>
-<span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># mount /dev/nvme0n1p1 /mnt/boot</span>
-<span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># timedatectl set-ntp true</span>
-<span class="n">root</span><span class="nd">@archiso</span> <span class="o">~</span> <span class="c1"># timedatectl status</span>
-<span class="o">...</span>
-<span class="c1"># arch-chroot /mnt</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># yaourt -Syu</span>
-</pre></div>
-</div>
-<p>とやると、 <code class="docutils literal notranslate"><span class="pre">pacman</span> <span class="pre">-Syu</span></code> やってるんじゃないの？といわれる。定番のロッ
-クファイルが残っているやつなのでロックファイルを消す。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># rm /var/lib/pacman/db.lck</span>
-<span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># yaourt -Syu</span>
-<span class="o">...</span>
-</pre></div>
-</div>
-<p>今度は普通に最後まで動く。というわけでchroot環境を出てから再起動
-<code class="docutils literal notranslate"><span class="pre">shutdown</span> <span class="pre">-r</span> <span class="pre">now</span></code> してみてもやっぱりパスワードを入力できない（キーボー
-ドが使えていない）。はっそういえば…と思いなおして、また同じ手順を繰り
-返して chroot 環境に入って、:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@archiso</span> <span class="o">/</span><span class="p">]</span><span class="c1"># mkinitcpio -p linux</span>
-<span class="o">...</span>
-</pre></div>
-</div>
-<p>として、 initrd を作り直して再起動したところ無事にキーボードが使えるよ
-うになった。おそらくは vmlinuz (カーネルのファイル) を作っただけで
-initrd を再作成していなかったため何かがズレて起動だけはするけどキーボー
-ドが使えなくなっていたのだろうと思われる。教訓: カーネルのアップデート
-途中に電源長押しで再起動なんかしてはいけないし、 <em>金曜夕方の退勤間際に
-間違ってもOSのアップデートなんかしてはいけない</em> 。</p>
-</div>
-<div class="section" id="id9">
-<h3>急にWiFiがつながらなくなったら<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<p>パソコンのハードスイッチからオフになっている可能性がある。推し間違いなど。
-<code class="docutils literal notranslate"><span class="pre">rfkill</span></code> で状態を確認できるので、それ経由でオンにするとつながる。</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -891,27 +511,12 @@ initrd を再作成していなかったため何かがズレて起動だけは�
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Arch Linux Installation &amp; Maintenance</a><ul>
 <li><a class="reference internal" href="#iso-image-download">ISO Image Download</a></li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#gui">GUI</a><ul>
-<li><a class="reference internal" href="#weird-display-vibrarion">Weird display vibrarion</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#id2">日本語入力</a></li>
-<li><a class="reference internal" href="#system-update">System update</a></li>
-<li><a class="reference internal" href="#installed-application">Installed Application</a></li>
-<li><a class="reference internal" href="#sound">Sound</a></li>
-<li><a class="reference internal" href="#wifi">WiFi</a></li>
-<li><a class="reference internal" href="#docker">Docker</a></li>
-<li><a class="reference internal" href="#gpg-keys">GPG keys</a></li>
-<li><a class="reference internal" href="#clamav">ClamAV</a></li>
-<li><a class="reference internal" href="#id6">マルチ（外部）ディスプレイ</a></li>
-<li><a class="reference internal" href="#windows-on-virtualbox">Windows on VirtualBox</a></li>
-<li><a class="reference internal" href="#yubikey-authentication">YubiKey authentication</a></li>
-<li><a class="reference internal" href="#todo">TODO</a></li>
 <li><a class="reference internal" href="#reference">Reference</a></li>
 <li><a class="reference internal" href="#arch-linux-installation-to-machine-2">Arch Linux Installation to machine #2</a><ul>
 <li><a class="reference internal" href="#os-install">OS Install</a></li>
@@ -924,25 +529,27 @@ initrd を再作成していなかったため何かがズレて起動だけは�
 <li><a class="reference internal" href="#general-trouble-shooting">General Trouble Shooting</a><ul>
 <li><a class="reference internal" href="#locale">Locale再生成</a></li>
 <li><a class="reference internal" href="#mac-mini-mid-2011">Mac Mini mid 2011 にインストール</a></li>
-<li><a class="reference internal" href="#pacman-gnupg">Pacman のアップデートで GnuPG エラーが出る</a></li>
-<li><a class="reference internal" href="#fix-kernel-or-other-files-2018-4-6">Fix kernel or other files 2018/4/6</a></li>
-<li><a class="reference internal" href="#id9">急にWiFiがつながらなくなったら</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../persona.html"
-                        title="previous chapter">Persona</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="zfs.html"
-                        title="next chapter">ZFS Memo</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../persona.html"
+                          title="previous chapter">Persona</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="arch-gui.html"
+                          title="next chapter">Arch Linux Setup (GUI)</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/memo/arch.rst.txt"
+      <li><a href="../_sources/memo/arch-core-system.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -950,12 +557,12 @@ initrd を再作成していなかったため何かがズレて起動だけは�
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -967,7 +574,7 @@ initrd を再作成していなかったため何かがズレて起動だけは�
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="zfs.html" title="ZFS Memo"
+          <a href="arch-gui.html" title="Arch Linux Setup (GUI)"
              >next</a> |</li>
         <li class="right" >
           <a href="../persona.html" title="Persona"
@@ -978,7 +585,7 @@ initrd を再作成していなかったため何かがズレて起動だけは�
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2012-2018, UENISHI Kota.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.1.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
     </div>
   </body>
 </html>

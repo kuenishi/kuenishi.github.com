@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Arch Linux Setup (GUI) &#8212; kuenishi(7)</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pyramid.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Arch Linux (misc)" href="arch-misc.html" />
+    <link rel="prev" title="Arch Linux Installation &amp; Maintenance" href="arch-core-system.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="arch-misc.html" title="Arch Linux (misc)"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="arch-core-system.html" title="Arch Linux Installation &amp; Maintenance"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Arch Linux Setup (GUI)</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="arch-linux-setup-gui">
+<h1>Arch Linux Setup (GUI)<a class="headerlink" href="#arch-linux-setup-gui" title="Permalink to this heading">¶</a></h1>
+<section id="gui">
+<h2>GUI<a class="headerlink" href="#gui" title="Permalink to this heading">¶</a></h2>
+<p>まずは基本的なユーザー作成:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># mkdir /home/kuenishi
+# chown kuenishi:kuenishi /home/kuenishi
+# useradd kuenishi
+# passwd kuenishi
+# vigr -&gt; add kuenishi to wheel
+# pacman -S sudo
+# visudo -&gt; enable wheel as ALL=ALL
+$ sudo pacman -S git
+</pre></div>
+</div>
+<p>このままだと <a class="reference external" href="https://wiki.archlinux.jp/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)#.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.9D.E3.82.A4.E3.83.B3.E3.83.88.2F.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.91.E3.83.83.E3.83.89.E3.81.8C.E6.A9.9F.E8.83.BD.E3.81.97.E3.81.AA.E3.81.84">トラックポイント/トラックパッドが機能しない</a>
+という問題にぶつかるので、それを回避するため設定を入れる。
+<code class="docutils literal notranslate"><span class="pre">psmouse.synaptics_intertouch=1</span></code> をカーネルパラメータに追加する。カー
+ネルパラメータを設定するには
+<code class="docutils literal notranslate"><span class="pre">/boot/loader/entries/encrypted-arch.conf</span></code> を書き換える。カーネルと
+initrd の新しいファイルが <code class="docutils literal notranslate"><span class="pre">/boot</span></code> に置かれているので、両方を置き換え
+たら再起動。たとえばこんな感じ(<code class="docutils literal notranslate"><span class="pre">-tp-x1-carbon-5th</span></code> がついているもの
+は 4.14 からはもう不要になった):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ls /boot</span>
+<span class="n">EFI</span>                                            <span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">tp</span><span class="o">-</span><span class="n">x1</span><span class="o">-</span><span class="n">carbon</span><span class="o">-</span><span class="mi">5</span><span class="n">th</span><span class="o">.</span><span class="n">img</span>  <span class="n">loader</span>
+<span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">fallback</span><span class="o">.</span><span class="n">img</span>                   <span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">.</span><span class="n">img</span>                   <span class="n">vmlinuz</span><span class="o">-</span><span class="n">linux</span>
+<span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">tp</span><span class="o">-</span><span class="n">x1</span><span class="o">-</span><span class="n">carbon</span><span class="o">-</span><span class="mi">5</span><span class="n">th</span><span class="o">-</span><span class="n">fallback</span><span class="o">.</span><span class="n">img</span>  <span class="n">intel</span><span class="o">-</span><span class="n">ucode</span><span class="o">.</span><span class="n">img</span>                       <span class="n">vmlinuz</span><span class="o">-</span><span class="n">linux</span><span class="o">-</span><span class="n">tp</span><span class="o">-</span><span class="n">x1</span><span class="o">-</span><span class="n">carbon</span><span class="o">-</span><span class="mi">5</span><span class="n">th</span>
+<span class="c1"># cat /boot/loader/entries/encrypted-arch.conf</span>
+<span class="n">title</span> <span class="n">Arch</span> <span class="n">Linux</span> <span class="n">Encrypted</span>
+<span class="n">linux</span> <span class="o">/</span><span class="n">vmlinuz</span><span class="o">-</span><span class="n">linux</span>
+<span class="n">initrd</span> <span class="o">/</span><span class="n">intel</span><span class="o">-</span><span class="n">ucode</span><span class="o">.</span><span class="n">img</span>
+<span class="n">initrd</span> <span class="o">/</span><span class="n">initramfs</span><span class="o">-</span><span class="n">linux</span><span class="o">.</span><span class="n">img</span>
+<span class="n">options</span> <span class="n">luks</span><span class="o">.</span><span class="n">uuid</span><span class="o">=</span><span class="mi">1</span><span class="n">cf54a61</span><span class="o">-</span><span class="n">cd17</span><span class="o">-</span><span class="mf">43e3</span><span class="o">-</span><span class="n">ad00</span><span class="o">-</span><span class="n">bf94c29dc922</span> <span class="n">luks</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="mi">1</span><span class="n">cf54a61</span><span class="o">-</span><span class="n">cd17</span><span class="o">-</span><span class="mf">43e3</span><span class="o">-</span><span class="n">ad00</span><span class="o">-</span><span class="n">bf94c29dc922</span><span class="o">=</span><span class="n">crypt</span><span class="o">-</span><span class="n">root</span> <span class="n">root</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">crypt</span><span class="o">-</span><span class="n">root</span> <span class="n">rw</span> <span class="n">intel_pstate</span><span class="o">=</span><span class="n">no_hwp</span> <span class="n">psmouse</span><span class="o">.</span><span class="n">synaptics_intertouch</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Enlightenment を少し試してみたが、使いにくいので xfce4 に戻る。インストールと起動テスト:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S xorg-server xfce4 xfce4-goodies
+$ startxfce4
+</pre></div>
+</div>
+<p>これで起動を確認する。変なことになって失敗したら <code class="docutils literal notranslate"><span class="pre">Ctrl+Alt+Del</span></code> で戻
+れる。lightdm は最初失敗。ログをみるのもだるいので sddm に。  <a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3">SDDM を
+有効にするには</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S sddm
+$ sudo systemctl enable sddm
+</pre></div>
+</div>
+<p>これでリブートしてみる。テストしたければ enable 前に <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">sddm</span></code> で。
+CtrlとCaps Lockを入れ替えるのは、とりあえず:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ echo &#39;setxkbmap -option ctrl:nocaps&#39; &gt; swapctrlcaps.sh
+$ chmod 755 swapctrlcaps.sh
+$ ./swapctrlcaps.sh
+</pre></div>
+</div>
+<p>で Caps lock を Ctrl にする。他にもキーボードマッピングをいじる方法と
+かがあるけど、複数のものが絡まって複雑になると困ってしまうので、なるべ
+く上位でやりたいので今ここ。</p>
+<p>DPIはAppearance （外観）から変更。とりあえず字大きめの160で。</p>
+<section id="weird-display-vibrarion">
+<h3>Weird display vibrarion<a class="headerlink" href="#weird-display-vibrarion" title="Permalink to this heading">¶</a></h3>
+<p>Sometimes a screen vibrates suddenly with a dmesg line including <code class="docutils literal notranslate"><span class="pre">[drm:intel_cpu_fifo_underrun_irq_handler</span> <span class="pre">[i915]]</span> <span class="pre">*ERROR*</span> <span class="pre">CPU</span> <span class="pre">pipe</span> <span class="pre">A</span> <span class="pre">FIFO</span> <span class="pre">underrun</span></code>  … which may be solved with installing <code class="docutils literal notranslate"><span class="pre">xf86-video-intel</span></code>  .</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?id=198157">Linux console goes crazy (“cpu pipe a fifo underrun”) when Xorg quits.</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>日本語入力<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88#.E6.97.A5.E6.9C.AC.E8.AA.9E">Japanese fonts</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra adobe-source-han-sans-jp-fonts otf-ipafont ttf-sazanami ttf-hanazono
+$ sudo pacman -S fcitx-im fcitx-mozc fcitx-configtool
+$ echo &#39;export GTK_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx&#39; &gt; ~/.xprofile
+</pre></div>
+</div>
+<p>で一旦ログアウトして、いろいろGUIをいじっていたら動いた。もしかしたら:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fcitx-autostart
+</pre></div>
+</div>
+<p>が必要かも。どうにも変だったら <code class="docutils literal notranslate"><span class="pre">fcitx-diagnose</span></code> こまんどで原因調査するとよい。 <a class="reference external" href="https://wiki.archlinux.jp/index.php/ロケール">ろけーるが変だった</a> ことがある。</p>
+<p>Properly render PDF without embedded Japanese fonts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S poppler-data
+</pre></div>
+</div>
+</section>
+<section id="system-update">
+<h2>System update<a class="headerlink" href="#system-update" title="Permalink to this heading">¶</a></h2>
+<p>システムアップデートは</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -Syu
+</pre></div>
+</div>
+<p>このときAURで入れていたパッケージに注意すること。</p>
+<p>パッケージを探すのは:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pacman -Ss &lt;pkgname&gt;
+</pre></div>
+</div>
+</section>
+<section id="installed-application">
+<h2>Installed Application<a class="headerlink" href="#installed-application" title="Permalink to this heading">¶</a></h2>
+<p>いろんなアプリを入れる:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S tmux firefox emacs slock
+$ sudo pacman -S bash-completion
+</pre></div>
+</div>
+<p>Spotlightのようなアプリケーションランチャーがあると便利だなと思ってい
+たが <a class="reference external" href="http://www.webupd8.org/2014/06/xfce-app-launcher-whisker-menu-sees-new.html">Whisker Menu</a>
+を <a class="reference external" href="http://thinkonbytes.blogspot.jp/2014/04/xubuntu-open-whisker-menu-with-windows.html">Windowsキーに割り当て</a>
+て一見落着。</p>
+<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Slock">Slock</a> is just a screen
+locker. Type ‘slock’ when you leave your seat temporariliy or for a
+long time. -&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/List_of_applications/Security#Screen_lockers">Other screen lockers</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">bash-completion</span></code> があれば、ターミナルに出た適当な長さのワードを拾って補完してくれるので特にzshとかいらない。</p>
+<p>AURでは <code class="docutils literal notranslate"><span class="pre">yaourt</span></code> だけを入れる。 <code class="docutils literal notranslate"><span class="pre">package-query</span></code> に依存しているので、それを先に入れる。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone https://aur.archlinux.org/package-query.git
+$ cd package-query
+$ makepkg -is
+$ cd ..
+$ git clone https://aur.archlinux.org/yaourt.git
+$ cd yaourt
+$ makepkg -is
+$ cd ..
+</pre></div>
+</div>
+<p>いろいろ入れる:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ yaourt -S --noconfirm google-chrome slack-desktop gyazo
+</pre></div>
+</div>
+</section>
+<section id="sound">
+<h2>Sound<a class="headerlink" href="#sound" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Advanced_Linux_Sound_Architecture">サウンド</a> は:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S alsa-utils
+$ alsamixer
+</pre></div>
+</div>
+<p>これだけで音が鳴るようになる。 <a class="reference external" href="https://wiki.archlinux.org/index.php/xfce#Keyboard_volume_buttons">XfceのUI</a>
+や、ThinkPadのF1~F3 でのコントロールはできていない。Xfce4のPulseAudio
+pluginは <code class="docutils literal notranslate"><span class="pre">pavucontrol</span></code> をインストールして再起動？したら使えるように
+なった。</p>
+<p>-&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/List_of_applications#Volume_managers">https://wiki.archlinux.org/index.php/List_of_applications#Volume_managers</a></p>
+</section>
+<section id="wifi">
+<h2>WiFi<a class="headerlink" href="#wifi" title="Permalink to this heading">¶</a></h2>
+<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Wicd">Wicd</a> を入れたらそれなりに快適に動く:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S wicd wicd-gtk gksu python2-notify
+$ sudo systemctl enable wicd
+$ sudo systemctl start wicd
+</pre></div>
+</div>
+<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/WPA_supplicant">WiFi</a> なぜか一
+度適当に設定したらいつの間にか動くようになってしまった…　電波強度をパ
+ネルに出すのに wavelan というのをつけてある。ツールは他にも
+<code class="docutils literal notranslate"><span class="pre">wifi-menu</span></code> とかいろいろある。-&gt;
+<a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A">https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A</a></p>
+<p>WPA2 Enterpriseでクライアント認証でWiFi APに接続するときに、 EAP-TLSで
+接続してPKCS#12の秘密鍵とパスフレーズだけで接続する場合にはなぜかWicd
+ではうまく接続できず、結局 <code class="docutils literal notranslate"><span class="pre">netctl</span></code> でやった。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl stop wicd
+$ sudo systemctl disable wicd
+$ sudo pacman -R wicd wicd-gtk
+$ sudo pacman -S netctl
+$ sudo netctl list
+$ sudo wifi-menu wlp4s0
+(...find the SSID of WPA2 Enterprise and try to setup...)
+$ sudoedit /etc/netctl/wlp4s0-&lt;ssid&gt;
+$ cat /etc/netctl/wlp4s0-&lt;ssid&gt;
+Description=&#39;Automatically generated profile by wifi-menu&#39;
+Interface=wlp4s0
+Connection=wireless
+Security=wpa-configsection
+IP=dhcp
+WPAConfigSection=(
+      &#39;ssid=&quot;hoge&quot;&#39;
+      &#39;key_mgmt=WPA-EAP&#39;
+      &#39;eap=TLS&#39;
+      &#39;proto=WPA RSN&#39;
+      &#39;identity=&quot;kuenishi&quot;&#39;
+      &#39;private_key=&quot;/home/kuenishi/.pki/kuenishi_aho.p12&quot;&#39;
+      &#39;private_key_passwd=&quot;**********&quot;&#39;
+      &#39;priority=1&#39;
+      &#39;phase2=&quot;auth=PAP&quot;&#39;
+)
+</pre></div>
+</div>
+<p>このファイルはたしか
+<code class="docutils literal notranslate"><span class="pre">/etc/netctl/examples/wireless-wpa-configsection</span></code> からのコピペだった
+気がする。これで接続できたら systemd 設定をする。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo netctl list
+* wlp4s0-hoge
+$ sudo netctl enable wlp4s0-hoge
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h2>マルチ（外部）ディスプレイ<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<p>家のASUSの4KディスプレイはHDMIを刺すだけで特になにもなく 3000x2000 く
+らいで認識されて映った。なにかあったら <a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%9E%E3%83%AB%E3%83%81%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4">マルチディスプレイ</a>
+を参照。</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">Arch Linux Setup (GUI)</a><ul>
+<li><a class="reference internal" href="#gui">GUI</a><ul>
+<li><a class="reference internal" href="#weird-display-vibrarion">Weird display vibrarion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">日本語入力</a></li>
+<li><a class="reference internal" href="#system-update">System update</a></li>
+<li><a class="reference internal" href="#installed-application">Installed Application</a></li>
+<li><a class="reference internal" href="#sound">Sound</a></li>
+<li><a class="reference internal" href="#wifi">WiFi</a></li>
+<li><a class="reference internal" href="#id6">マルチ（外部）ディスプレイ</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="arch-core-system.html"
+                          title="previous chapter">Arch Linux Installation &amp; Maintenance</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="arch-misc.html"
+                          title="next chapter">Arch Linux (misc)</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/memo/arch-gui.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="arch-misc.html" title="Arch Linux (misc)"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="arch-core-system.html" title="Arch Linux Installation &amp; Maintenance"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Arch Linux Setup (GUI)</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2018, UENISHI Kota.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>LuKS &#8212; kuenishi(7)</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pyramid.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ZFS Memo" href="zfs.html" />
+    <link rel="prev" title="Arch Linux (FAQ)" href="arch-faq.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="zfs.html" title="ZFS Memo"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="arch-faq.html" title="Arch Linux (FAQ)"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">LuKS</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="luks">
+<h1>LuKS<a class="headerlink" href="#luks" title="Permalink to this heading">¶</a></h1>
+<p>Arch Linux de LuKS</p>
+<p>Set up a new drive ( say <code class="docutils literal notranslate"><span class="pre">/dev/sdc</span></code> ). Create <code class="docutils literal notranslate"><span class="pre">/dev/sdc1</span></code> with <code class="docutils literal notranslate"><span class="pre">fdisk</span></code> with full volume:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># fdisk /dev/sdc</span>
+<span class="o">...</span>
+<span class="c1"># fdisk -l /dev/sdc</span>
+<span class="n">ディスク</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sdc</span><span class="p">:</span> <span class="mf">931.51</span> <span class="n">GiB</span><span class="p">,</span> <span class="mi">1000204886016</span> <span class="n">バイト</span><span class="p">,</span> <span class="mi">1953525168</span> <span class="n">セクタ</span>
+<span class="n">ディスク型式</span><span class="p">:</span> <span class="n">SanDisk</span> <span class="n">SSD</span> <span class="n">PLUS</span>
+<span class="n">単位</span><span class="p">:</span> <span class="n">セクタ</span> <span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="mi">512</span> <span class="o">=</span> <span class="mi">512</span> <span class="n">バイト</span><span class="p">)</span>
+<span class="n">セクタサイズ</span> <span class="p">(</span><span class="n">論理</span> <span class="o">/</span> <span class="n">物理</span><span class="p">):</span> <span class="mi">512</span> <span class="n">バイト</span> <span class="o">/</span> <span class="mi">512</span> <span class="n">バイト</span>
+<span class="n">I</span><span class="o">/</span><span class="n">O</span> <span class="n">サイズ</span> <span class="p">(</span><span class="n">最小</span> <span class="o">/</span> <span class="n">推奨</span><span class="p">):</span> <span class="mi">512</span> <span class="n">バイト</span> <span class="o">/</span> <span class="mi">512</span> <span class="n">バイト</span>
+<span class="n">ディスクラベルのタイプ</span><span class="p">:</span> <span class="n">gpt</span>
+<span class="n">ディスク識別子</span><span class="p">:</span> <span class="mi">926</span><span class="n">D429E</span><span class="o">-</span><span class="mi">4</span><span class="n">D84</span><span class="o">-</span><span class="mi">1842</span><span class="o">-</span><span class="mi">8</span><span class="n">FD8</span><span class="o">-</span><span class="mi">9476</span><span class="n">CEE3DEB2</span>
+
+<span class="n">デバイス</span>   <span class="n">開始位置</span>   <span class="n">終了位置</span>     <span class="n">セクタ</span> <span class="n">サイズ</span> <span class="n">タイプ</span>
+<span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sdc1</span>      <span class="mi">2048</span> <span class="mi">1953523711</span> <span class="mi">1953521664</span> <span class="mf">931.5</span><span class="n">G</span> <span class="n">Linux</span> <span class="n">ファイルシステム</span>
+</pre></div>
+</div>
+<p>Install cryptsetup and btrfs:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># yay -S cryptset btrfs-progs
+# cryptsetup luksFormat /dev/sdc1
+...
+Are you sure? (Type uppercase yes): YES
+Enter passphrase:
+Verify passphrase:
+# cryptsetup open /dev/sdc1 data-tank
+Enter passphrase for /dev/sdc1:
+# mkfs.btrfs /dev/mapper/data-tank
+....
+
+# mount /mnt/ /dev/mapper/datatank
+</pre></div>
+</div>
+<p>Check the UUID with lsblk:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>NAME     FSTYPE      FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+...
+sdc
+└─sdc1   crypto_LUKS 2           da0d9d95-8ca2-404f-9db5-2717aa429d80
+  └─datatank btrfs                   00b1bf82-f7eb-405f-8f8b-c6c7bd389c18  360.1G    61% /mnt
+</pre></div>
+</div>
+<p>If it’s not for boot partition, then let it sit in <code class="docutils literal notranslate"><span class="pre">/etc/crypttab</span></code> to make it visible in fstab.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># sudoedit /etc/crypttab</span>
+<span class="o">...</span>
+<span class="c1"># tail -n 1</span>
+<span class="n">datatank</span>         <span class="n">UUID</span><span class="o">=</span><span class="n">da0d9d95</span><span class="o">-</span><span class="mi">8</span><span class="n">ca2</span><span class="o">-</span><span class="mi">404</span><span class="n">f</span><span class="o">-</span><span class="mi">9</span><span class="n">db5</span><span class="o">-</span><span class="mi">2717</span><span class="n">aa429d80</span>    <span class="n">none</span>
+</pre></div>
+</div>
+<p>Test it out with reboot and make sure <code class="docutils literal notranslate"><span class="pre">/dev/mapper/datatank</span></code> exists.
+Afterwards, set the UUID of btrfs as <code class="docutils literal notranslate"><span class="pre">00b1bf82-f7eb-405f-8f8b-c6c7bd389c18</span></code> like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># sudoedit /etc/fstab
+$ tail -n 1 /etc/fstab
+UUID=00b1bf82-f7eb-405f-8f8b-c6c7bd389c18       /datatank   btrfs   rw,relatime     0 0
+</pre></div>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="arch-faq.html"
+                          title="previous chapter">Arch Linux (FAQ)</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="zfs.html"
+                          title="next chapter">ZFS Memo</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/memo/arch-cryptsetup.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="zfs.html" title="ZFS Memo"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="arch-faq.html" title="Arch Linux (FAQ)"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">LuKS</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2012-2018, UENISHI Kota.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+    </div>
+  </body>
+</html>
