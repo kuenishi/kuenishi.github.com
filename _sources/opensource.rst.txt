@@ -8,43 +8,35 @@ with product name will motivate me for sure. See my `Github
 <https://github.com/kuenishi>`_ or `Bitbucket
 <https://bitbucket.org/kuenishi>`_ account for all personal software.
 
+- `Apache Ozone <https://ozone.apache.org>`_
 - `cppetcd <https://github.com/kuenishi/cppetcd>`_ - a tiny `etcd
   <http://etcd.io>`_ v3 client in C++ (2018 -)
-
 - `ChainerMN <https://github.com/chainer/chainermn>`_ along with Deep
   learning framework `Chainer <https://chainer.org>`_ (2017 -)
   Distributed Deep Learning Framework (in 2018 it was merged to Chainer v5)
-
 - `Retz <https://github.com/retz/retz>`_ (2016 - 2018) Job scheduler as
   Apache Mesos framework
-
 - `baccounts <https://github.com/kuenishi/baccounts>`_ (2016) - a tiny
   CUI password and account manager built with PGP encryption
-
 - `A small piece of my work
   <https://github.com/erlang/otp/commit/966e9e7ed0951db306c3c5dc4b1fd4c6eac25cf9>`_
   is included in `Erlang/OTP 18.0
   <http://www.erlang.org/download/otp_src_18.0.readme>`_ !
-
 - `meddatum <https://github.com/kuenishi/meddatum>`_ (2013-2015) : A
   tool to import/search/handle medical record formats with Riak
   Search 2.
 - `fluent-logger-erlang <https://github.com/fluent/fluent-logger-erlang>`_
-
 - `Riak <https://github.com/basho/riak>`_ , `Riak CS <https://github.com/basho/riak_cs>`_ (2012-2016)
-
- - `fluent-plugin-riak <https://github.com/kuenishi/fluent-plugin-riak>`_
- - `presto-riak <https://github.com/kuenishi/presto-riak>`_ : A `PrestoDB <https://prestodb.io>`_ connector of Riak.
-
-- `Jubatus <http://jubat.us>`_ (2009-2012)
-
- - Jubatus is a distributed online machine learning framework and
-   library. Jubatus is a joint work of `Preferreed Infrastructure
-   <http://preferred.jp>`_ and `NTT Information Sharing Platform
-   Laboratory <http://www2.pflab.ecl.ntt.co.jp/>`_. I designed the
-   architecture the "mix" - softly synchronizing data for parallel
-   machine learning and the server framework to make it applicable to
-   various machine learning algorithms.
+- `fluent-plugin-riak <https://github.com/kuenishi/fluent-plugin-riak>`_
+- `presto-riak <https://github.com/kuenishi/presto-riak>`_ : A `PrestoDB <https://prestodb.io>`_ connector of Riak.
+- `Jubatus <http://jubat.us>`_ (2009-2012) is a distributed
+  online machine learning framework and library. Jubatus is a joint
+  work of `Preferreed Infrastructure <http://preferred.jp>`_ and `NTT
+  Information Sharing Platform Laboratory
+  <http://www2.pflab.ecl.ntt.co.jp/>`_. I designed the architecture
+  the "mix" - softly synchronizing data for parallel machine learning
+  and the server framework to make it applicable to various machine
+  learning algorithms.
 
  - Modified Python generation of `msgpack-idl
    <http://hackage.haskell.org/package/msgpack-idl>`_ to use in

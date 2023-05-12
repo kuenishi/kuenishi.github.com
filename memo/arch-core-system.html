@@ -3,57 +3,239 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
     <title>Arch Linux Installation &amp; Maintenance &#8212; kuenishi(7)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pyramid.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Arch Linux Setup (GUI)" href="arch-gui.html" />
-    <link rel="prev" title="Persona" href="../persona.html" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<!--[if lte IE 6]>
-<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
-<![endif]-->
+    <link rel="prev" title="Open Source Contributions" href="../opensource.html" />
+  
+   
 
-  </head><body>
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=blue>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#memo/arch-core-system" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="kuenishi(7)"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">kuenishi(7)</span>
+          <span class="md-header-nav__topic"> Arch Linux Installation &amp; Maintenance </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="arch-gui.html" title="Arch Linux Setup (GUI)"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../persona.html" title="Persona"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Arch Linux Installation &amp; Maintenance</a></li> 
+      </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">kuenishi(7)</a></li>
       </ul>
-    </div>  
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="kuenishi(7)" class="md-nav__button md-logo">
+      
+        <img src="../_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="../index.html"
+       title="kuenishi(7)">kuenishi(7)</a>
+  </label>
+  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#memo-arch-core-system--page-root" class="md-nav__link">Arch Linux Installation & Maintenance</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#iso-image-download" class="md-nav__link">ISO Image Download</a>
+        </li>
+        <li class="md-nav__item"><a href="#installation" class="md-nav__link">Installation</a>
+        </li>
+        <li class="md-nav__item"><a href="#reference" class="md-nav__link">Reference</a>
+        </li>
+        <li class="md-nav__item"><a href="#arch-linux-installation-to-machine-2" class="md-nav__link">Arch Linux Installation to machine #2</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#os-install" class="md-nav__link">OS Install</a>
+        </li>
+        <li class="md-nav__item"><a href="#btrfs-setup" class="md-nav__link">Btrfs setup</a>
+        </li>
+        <li class="md-nav__item"><a href="#static-ip-address" class="md-nav__link">Static IP address</a>
+        </li>
+        <li class="md-nav__item"><a href="#nvidia-driver" class="md-nav__link">Nvidia driver</a>
+        </li>
+        <li class="md-nav__item"><a href="#install-yaourt" class="md-nav__link">Install yaourt</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#general-trouble-shooting" class="md-nav__link">General Trouble Shooting</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#locale" class="md-nav__link">Locale再生成</a>
+        </li>
+        <li class="md-nav__item"><a href="#mac-mini-mid-2011" class="md-nav__link">Mac Mini mid 2011 にインストール</a>
+        </li></ul>
+            </nav>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/memo/arch-core-system.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
             
   <section id="arch-linux-installation-maintenance">
-<h1>Arch Linux Installation &amp; Maintenance<a class="headerlink" href="#arch-linux-installation-maintenance" title="Permalink to this heading">¶</a></h1>
+<h1 id="memo-arch-core-system--page-root">Arch Linux Installation &amp; Maintenance<a class="headerlink" href="#memo-arch-core-system--page-root" title="Permalink to this heading">¶</a></h1>
 <p>2017/10/19 - 2017/10/20</p>
 <p>2018/9/9 Mac mini mid 2011 のインストールを追加
 2018/3/15 カーネルパッチの部分を削除
 2018/4/6 Trouble Shooting追加
 2020/6/17 btrfs まわりを追加</p>
 <section id="iso-image-download">
-<h2>ISO Image Download<a class="headerlink" href="#iso-image-download" title="Permalink to this heading">¶</a></h2>
+<h2 id="iso-image-download">ISO Image Download<a class="headerlink" href="#iso-image-download" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://www.archlinux.org/download/">https://www.archlinux.org/download/</a> からPGP署名ファイルとISOイメージをダウンロード:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ wget http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2017.10.01/archlinux-2017.10.01-x86_64.iso
 $ wget https://www.archlinux.org/iso/2017.10.01/archlinux-2017.10.01-x86_64.iso.sig
@@ -63,10 +245,10 @@ archlinux-2017.10.01-x86_64.iso  archlinux-2017.10.01-x86_64.iso.sig
 </div>
 <p>ダウンロードしたファイルの検証。公開鍵がないので一旦失敗する:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ LANG=C gpg --verbose --verify archlinux-2017.10.01-x86_64.iso.sig
-gpg: assuming signed data in &#39;archlinux-2017.10.01-x86_64.iso&#39;
+gpg: assuming signed data in 'archlinux-2017.10.01-x86_64.iso'
 gpg: Signature made Sun Oct  1 14:29:43 2017 JST
 gpg:                using RSA key 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
-gpg: Can&#39;t check signature: No public key
+gpg: Can't check signature: No public key
 </pre></div>
 </div>
 <p>公開鍵を調べてとりあえずインポートする:</p>
@@ -74,9 +256,9 @@ gpg: Can&#39;t check signature: No public key
 gpg: data source: https://176.9.147.41:443
 (1)     Pierre Schmitz &lt;pierre@archlinux.de&gt;
         2048 bit RSA key 7F2D434B9741E8AC, 作成: 2011-04-10
-Keys 1-1 of 1 for &quot;4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC&quot;.  番号(s)、N)次、またはQ)中止を入力してください &gt;N
+Keys 1-1 of 1 for "4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC".  番号(s)、N)次、またはQ)中止を入力してください &gt;N
 $ gpg --recv-keys  7F2D434B9741E8AC
-gpg: 鍵7F2D434B9741E8AC: 公開鍵&quot;Pierre Schmitz &lt;pierre@archlinux.de&gt;&quot;をインポートしました
+gpg: 鍵7F2D434B9741E8AC: 公開鍵"Pierre Schmitz &lt;pierre@archlinux.de&gt;"をインポートしました
 gpg: marginals needed: 3  completes needed: 1  trust model: pgp
 gpg: 深さ: 0  有効性:   2  署名:   1  信用: 0-, 0q, 0n, 0m, 0f, 2u
 gpg: 深さ: 1  有効性:   1  署名:   0  信用: 0-, 0q, 0n, 0m, 1f, 0u
@@ -87,10 +269,10 @@ gpg:             インポート: 1
 </div>
 <p>改めてVerify:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ LANG=C gpg --verify archlinux-2017.10.01-x86_64.iso.sig
-gpg: assuming signed data in &#39;archlinux-2017.10.01-x86_64.iso&#39;
+gpg: assuming signed data in 'archlinux-2017.10.01-x86_64.iso'
 gpg: Signature made Sun Oct  1 14:29:43 2017 JST
 gpg:                using RSA key 4AA4767BBC9C4B1D18AE28B77F2D434B9741E8AC
-gpg: Good signature from &quot;Pierre Schmitz &lt;pierre@archlinux.de&gt;&quot; [unknown]
+gpg: Good signature from "Pierre Schmitz &lt;pierre@archlinux.de&gt;" [unknown]
 gpg: WARNING: This key is not certified with a trusted signature!
 gpg:          There is no indication that the signature belongs to the owner.
 Primary key fingerprint: 4AA4 767B BC9C 4B1D 18AE  28B7 7F2D 434B 9741 E8AC
@@ -117,7 +299,7 @@ $ sudo dd if=archlinux-2017.10.01-x86_64.iso of=/dev/sdf status=progress &amp;&a
 </div>
 </section>
 <section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permalink to this heading">¶</a></h2>
 <p>ThinkPad届く。</p>
 <p>Secure Bootをオフに必ずしておく。
 Bootパスはまあこの際後でもいっか。</p>
@@ -243,7 +425,7 @@ Verify passphrase:
 
  root@archiso ~ # arch-chroot /mnt
  [root@archiso /]# ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
- [root@archiso /]# echo &quot;LANG=en_US.UTF-8&quot; &gt; /etc/locale.conf
+ [root@archiso /]# echo "LANG=en_US.UTF-8" &gt; /etc/locale.conf
  [root@archiso /]# locale-gen
  [root@archiso /]# echo KEYMAP=us &gt; /etc/vconsole.conf
  [root@archiso /]# echo utaha &gt; /etc/hostname
@@ -255,7 +437,7 @@ Verify passphrase:
 <p>ひととおり設定できたら、initramfsを作る。 <code class="docutils literal notranslate"><span class="pre">/etc/mkinitcpio.conf</span></code> を
 編集して、 <code class="docutils literal notranslate"><span class="pre">systemd</span></code> と <code class="docutils literal notranslate"><span class="pre">sd-encrypt</span></code> を <a class="reference external" href="https://wiki.archlinux.org/index.php/Dm-crypt/System_configuration#mkinitcpio">HOOKSに追加する</a>
 。いまのところはこういう並びでうまくいっている。 <code class="docutils literal notranslate"><span class="pre">sd-encrypt</span></code> は <code class="docutils literal notranslate"><span class="pre">block</span></code> の前にないとだめそう。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HOOKS</span><span class="o">=</span><span class="s2">&quot;base systemd udev autodetect modconf sd-encrypt block filesystems keyboard fsck&quot;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HOOKS</span><span class="o">=</span><span class="s2">"base systemd udev autodetect modconf sd-encrypt block filesystems keyboard fsck"</span>
 </pre></div>
 </div>
 <p>巷には LVM と <code class="docutils literal notranslate"><span class="pre">encrypt</span></code> を使ってなぜか <code class="docutils literal notranslate"><span class="pre">systemd-boot</span></code> でうまく行っ
@@ -307,7 +489,7 @@ sd-lvm.</a>
 </ul>
 </section>
 <section id="reference">
-<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h2>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89">インストールガイド</a></p></li>
 <li><p><a class="reference external" href="https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)">Lenovo ThinkPad X1 Carbon (Gen 5)</a></p></li>
@@ -317,11 +499,11 @@ sd-lvm.</a>
 </ul>
 </section>
 <section id="arch-linux-installation-to-machine-2">
-<h2>Arch Linux Installation to machine #2<a class="headerlink" href="#arch-linux-installation-to-machine-2" title="Permalink to this heading">¶</a></h2>
+<h2 id="arch-linux-installation-to-machine-2">Arch Linux Installation to machine #2<a class="headerlink" href="#arch-linux-installation-to-machine-2" title="Permalink to this heading">¶</a></h2>
 <p>2018/2/4</p>
 <p>To my desktop machine, with NVIDIA GeForce 760, and several hetero HDDs.</p>
 <section id="os-install">
-<h3>OS Install<a class="headerlink" href="#os-install" title="Permalink to this heading">¶</a></h3>
+<h3 id="os-install">OS Install<a class="headerlink" href="#os-install" title="Permalink to this heading">¶</a></h3>
 <p>Same os above, using many tools to setup Arch Installation, except for:</p>
 <ul class="simple">
 <li><p>No HDD encryption</p></li>
@@ -332,7 +514,7 @@ sd-lvm.</a>
 </ul>
 </section>
 <section id="btrfs-setup">
-<h3>Btrfs setup<a class="headerlink" href="#btrfs-setup" title="Permalink to this heading">¶</a></h3>
+<h3 id="btrfs-setup">Btrfs setup<a class="headerlink" href="#btrfs-setup" title="Permalink to this heading">¶</a></h3>
 <p>See <a class="reference external" href="https://btrfs.wiki.kernel.org/index.php/Using_Btrfs_with_Multiple_Devices">Using Btrfs with Multiple Devices</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># mkfs.btrfs -d single /dev/sdb /dev/sdc /dev/sdd /dev/sde</span>
 <span class="c1"># mount /dev/sde /mnt</span>
@@ -396,7 +578,7 @@ Label: none  uuid: e092a2dc-b65d-45e4-8dee-46529c1949a0
 
 set -eux
 
-TS=`date &#39;+%Y%m%d-%H%M%S&#39;`
+TS=`date '+%Y%m%d-%H%M%S'`
 btrfs sub snap /home/kuenishi /home/ss/kuenishi-${TS}
 btrfs property set -ts /home/ss/kuenishi-${TS} ro true
 btrfs send /home/ss/kuenishi-${TS} | btrfs receive /data/home-backup
@@ -426,7 +608,7 @@ Filesystem      Size  Used Avail Use% Mounted on
 とがよくわかる。</p>
 </section>
 <section id="static-ip-address">
-<h3>Static IP address<a class="headerlink" href="#static-ip-address" title="Permalink to this heading">¶</a></h3>
+<h3 id="static-ip-address">Static IP address<a class="headerlink" href="#static-ip-address" title="Permalink to this heading">¶</a></h3>
 <p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Netctl#.E6.9C.89.E7.B7.9A">Use netctl</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># ip a</span>
 <span class="o">...</span> <span class="p">(</span><span class="n">see</span> <span class="n">device</span> <span class="n">name</span><span class="p">)</span> <span class="o">...</span>
@@ -438,9 +620,9 @@ Filesystem      Size  Used Avail Use% Mounted on
 <span class="n">Interface</span><span class="o">=</span><span class="n">enp1s0</span>
 <span class="n">Connection</span><span class="o">=</span><span class="n">ethernet</span>
 <span class="n">IP</span><span class="o">=</span><span class="n">static</span>
-<span class="n">Address</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;10.1.10.2/24&#39;</span><span class="p">)</span>
-<span class="n">Gateway</span><span class="o">=</span><span class="s1">&#39;10.1.10.1&#39;</span>
-<span class="n">DNS</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;10.1.10.1&#39;</span><span class="p">)</span>
+<span class="n">Address</span><span class="o">=</span><span class="p">(</span><span class="s1">'10.1.10.2/24'</span><span class="p">)</span>
+<span class="n">Gateway</span><span class="o">=</span><span class="s1">'10.1.10.1'</span>
+<span class="n">DNS</span><span class="o">=</span><span class="p">(</span><span class="s1">'10.1.10.1'</span><span class="p">)</span>
 <span class="c1"># netctl start enp4s0   // to start now</span>
 <span class="c1"># netctl enable enp4s0  // to enable it on startup</span>
 </pre></div>
@@ -448,22 +630,22 @@ Filesystem      Size  Used Avail Use% Mounted on
 <p>Don’t do any fucking typoes here. Troutbleshoot with <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">journalctl</span> <span class="pre">-xe</span></code>, like <a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?id=161263">this</a> .</p>
 </section>
 <section id="nvidia-driver">
-<h3>Nvidia driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this heading">¶</a></h3>
+<h3 id="nvidia-driver">Nvidia driver<a class="headerlink" href="#nvidia-driver" title="Permalink to this heading">¶</a></h3>
 <p>Nouvearu is kind of general and just works - but was too slow for me
 at runtime. With <a class="reference external" href="https://wiki.archlinux.org/index.php/NVIDIA">official guide</a> you can find your device version:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lspci -k | grep -A 2 -E &quot;(VGA|3D)&quot;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ lspci -k | grep -A 2 -E "(VGA|3D)"
 </pre></div>
 </div>
 </section>
 <section id="install-yaourt">
-<h3>Install yaourt<a class="headerlink" href="#install-yaourt" title="Permalink to this heading">¶</a></h3>
+<h3 id="install-yaourt">Install yaourt<a class="headerlink" href="#install-yaourt" title="Permalink to this heading">¶</a></h3>
 <p>Obsolete… yaourt is not maintained any more.</p>
 </section>
 </section>
 <section id="general-trouble-shooting">
-<h2>General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Permalink to this heading">¶</a></h2>
+<h2 id="general-trouble-shooting">General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Permalink to this heading">¶</a></h2>
 <section id="locale">
-<h3>Locale再生成<a class="headerlink" href="#locale" title="Permalink to this heading">¶</a></h3>
+<h3 id="locale">Locale再生成<a class="headerlink" href="#locale" title="Permalink to this heading">¶</a></h3>
 <p>ロケールが変になったらいつでも作り直すことができる。
 <code class="docutils literal notranslate"><span class="pre">/etc/locale.gen</span></code> を編集して、必要なロケールのコメントアウトをとりの
 ぞく。そのあと再度:</p>
@@ -476,7 +658,7 @@ at runtime. With <a class="reference external" href="https://wiki.archlinux.org/
 </ul>
 </section>
 <section id="mac-mini-mid-2011">
-<h3>Mac Mini mid 2011 にインストール<a class="headerlink" href="#mac-mini-mid-2011" title="Permalink to this heading">¶</a></h3>
+<h3 id="mac-mini-mid-2011">Mac Mini mid 2011 にインストール<a class="headerlink" href="#mac-mini-mid-2011" title="Permalink to this heading">¶</a></h3>
 <p>2018/9の時点で <a class="reference external" href="https://apple-history.com/mac_mini_mid_11">mid 2011</a>
 のモデルが最後のアップデート。もうMacOSは動かないくらいのスペックなの
 で、 Arch Linux を入れた。 <a class="reference external" href="https://support.apple.com/ja-jp/HT202796">ブート USB を指して、 Options キーを押しな
@@ -505,87 +687,61 @@ $ sudo systemctl enable dhcpcd
 </section>
 
 
-            <div class="clearer"></div>
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="../opensource.html" title="Open Source Contributions"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> Open Source Contributions </span>
+              </div>
+            </a>
+          
+          
+            <a href="arch-gui.html" title="Arch Linux Setup (GUI)"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> Arch Linux Setup (GUI) </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2012-2022, UENISHI Kota.
+              
           </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Arch Linux Installation &amp; Maintenance</a><ul>
-<li><a class="reference internal" href="#iso-image-download">ISO Image Download</a></li>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#reference">Reference</a></li>
-<li><a class="reference internal" href="#arch-linux-installation-to-machine-2">Arch Linux Installation to machine #2</a><ul>
-<li><a class="reference internal" href="#os-install">OS Install</a></li>
-<li><a class="reference internal" href="#btrfs-setup">Btrfs setup</a></li>
-<li><a class="reference internal" href="#static-ip-address">Static IP address</a></li>
-<li><a class="reference internal" href="#nvidia-driver">Nvidia driver</a></li>
-<li><a class="reference internal" href="#install-yaourt">Install yaourt</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#general-trouble-shooting">General Trouble Shooting</a><ul>
-<li><a class="reference internal" href="#locale">Locale再生成</a></li>
-<li><a class="reference internal" href="#mac-mini-mid-2011">Mac Mini mid 2011 にインストール</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-  </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="../persona.html"
-                          title="previous chapter">Persona</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="arch-gui.html"
-                          title="next chapter">Arch Linux Setup (GUI)</a></p>
-  </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/memo/arch-core-system.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
     </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="arch-gui.html" title="Arch Linux Setup (GUI)"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../persona.html" title="Persona"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Arch Linux Installation &amp; Maintenance</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2012-2018, UENISHI Kota.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
-    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
   </body>
 </html>

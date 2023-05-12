@@ -3,11 +3,52 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
     <title>Memo on Block Chain Study Group meeting #2 &#8212; kuenishi(7)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pyramid.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
@@ -15,38 +56,181 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="the cost of erlang:send_after/3" href="cost-of-send-after3.html" />
     <link rel="prev" title="ErgoDox EZ" href="ergodox-ez.html" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<!--[if lte IE 6]>
-<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
-<![endif]-->
+  
+   
 
-  </head><body>
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=blue>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#memo/blockchain" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="kuenishi(7)"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">kuenishi(7)</span>
+          <span class="md-header-nav__topic"> Memo on Block Chain Study Group meeting #2 </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="cost-of-send-after3.html" title="the cost of erlang:send_after/3"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="ergodox-ez.html" title="ErgoDox EZ"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Memo on Block Chain Study Group meeting #2</a></li> 
+      </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">kuenishi(7)</a></li>
       </ul>
-    </div>  
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="kuenishi(7)" class="md-nav__button md-logo">
+      
+        <img src="../_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="../index.html"
+       title="kuenishi(7)">kuenishi(7)</a>
+  </label>
+  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#memo-blockchain--page-root" class="md-nav__link">Memo on Block Chain Study Group meeting #2</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#bitcoin" class="md-nav__link">BitCoinにおける合意（といわれているやつ）</a>
+        </li>
+        <li class="md-nav__item"><a href="#altcoins" class="md-nav__link">AltCoins</a>
+        </li>
+        <li class="md-nav__item"><a href="#proof-of-work" class="md-nav__link">Proof of Work</a>
+        </li>
+        <li class="md-nav__item"><a href="#proof-of-stake" class="md-nav__link">Proof of Stake</a>
+        </li>
+        <li class="md-nav__item"><a href="#id1" class="md-nav__link">他</a>
+        </li>
+        <li class="md-nav__item"><a href="#ghost-protocol" class="md-nav__link">GHOST Protocol</a>
+        </li>
+        <li class="md-nav__item"><a href="#major-altcoins" class="md-nav__link">Major AltCoins</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#ripple-proof-of-work-trust" class="md-nav__link">Ripple: proof of work, TRUST?</a>
+        </li></ul>
+            </nav>
+        </li>
+        <li class="md-nav__item"><a href="#stellar-stellar-consensus-protocol-trust" class="md-nav__link">Stellar: Stellar consensus protocol (TRUST)</a>
+        </li>
+        <li class="md-nav__item"><a href="#bitshares-dpos-delegated-pos" class="md-nav__link">BitShares: DPOS (Delegated PoS)</a>
+        </li>
+        <li class="md-nav__item"><a href="#qointum-qdpos" class="md-nav__link">Qointum; QDPoS</a>
+        </li>
+        <li class="md-nav__item"><a href="#references" class="md-nav__link">References</a>
+        </li>
+        <li class="md-nav__item"><a href="#misc" class="md-nav__link">Misc</a>
+        </li>
+        <li class="md-nav__item"><a href="#others" class="md-nav__link">Others</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/memo/blockchain.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
             
   <section id="memo-on-block-chain-study-group-meeting-2">
-<h1>Memo on Block Chain Study Group meeting #2<a class="headerlink" href="#memo-on-block-chain-study-group-meeting-2" title="Permalink to this heading">¶</a></h1>
+<h1 id="memo-blockchain--page-root">Memo on Block Chain Study Group meeting #2<a class="headerlink" href="#memo-blockchain--page-root" title="Permalink to this heading">¶</a></h1>
 <p>(ブロックチェーン勉強会２)</p>
 <ul class="simple">
 <li><p>[Thursday, May 26](<a class="reference external" href="https://www.facebook.com/events/607357016084911/">https://www.facebook.com/events/607357016084911/</a>)</p></li>
@@ -78,30 +262,30 @@
 ...
 $ gpg -u kuenishi@gmail.com --clearsign hello.py
 $ gpg -d hello.py.asc
-print(&quot;Hello Python!&quot;)
+print("Hello Python!")
 gpg: Signature made Sun May 22 11:53:10 2016 JST using RSA key ID 1EB41214
-gpg: Good signature from &quot;Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;&quot;
+gpg: Good signature from "Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;"
 $ echo $?
 0
 $ gpg -d hello.py.asc.cracked
-print(&quot;Hello Ruby!&quot;)
+print("Hello Ruby!")
 gpg: Signature made Sun May 22 11:53:10 2016 JST using RSA key ID 1EB41214
-gpg: BAD signature from &quot;Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;&quot;
+gpg: BAD signature from "Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;"
 $ echo $?
 1
 </pre></div>
 </div>
 <p>改竄してから署名してしまえばよい:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gpg -d hello.py.cracked.asc
-print(&quot;Hello Ruby!&quot;)
+print("Hello Ruby!")
 gpg: Signature made Sun May 22 11:57:01 2016 JST using RSA key ID 1EB41214
-gpg: Good signature from &quot;Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;&quot;
+gpg: Good signature from "Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;"
 $ echo $?
 0
 </pre></div>
 </div>
 <section id="bitcoin">
-<h2>BitCoinにおける合意（といわれているやつ）<a class="headerlink" href="#bitcoin" title="Permalink to this heading">¶</a></h2>
+<h2 id="bitcoin">BitCoinにおける合意（といわれているやつ）<a class="headerlink" href="#bitcoin" title="Permalink to this heading">¶</a></h2>
 <p>TL;DR 分散システムでいうところの合意ではない</p>
 <p><code class="docutils literal notranslate"><span class="pre">Block(n)</span></code> が合意されるか</p>
 <ul class="simple">
@@ -128,7 +312,7 @@ $ echo $?
 <p>その程度のコストを支払える計算機があれば合意（？）された値を変更できる。</p>
 </section>
 <section id="altcoins">
-<h2>AltCoins<a class="headerlink" href="#altcoins" title="Permalink to this heading">¶</a></h2>
+<h2 id="altcoins">AltCoins<a class="headerlink" href="#altcoins" title="Permalink to this heading">¶</a></h2>
 <p>バリエーションは沢山ある、暗号化や署名のアルゴリズム、通貨としての利用
 や交換形態、通貨じゃないやつ、Public or Private, 運営や開発の主体、分
 岐したチェーンの破棄方法、実装やパラメータなど様々な分類軸がある</p>
@@ -145,7 +329,7 @@ $ echo $?
 </ul>
 </section>
 <section id="proof-of-work">
-<h2>Proof of Work<a class="headerlink" href="#proof-of-work" title="Permalink to this heading">¶</a></h2>
+<h2 id="proof-of-work">Proof of Work<a class="headerlink" href="#proof-of-work" title="Permalink to this heading">¶</a></h2>
 <p>BitCoinと同様、Nonceの計算を競う早い者勝ちのプロトコル。より早くNonce
 を見つけるためには、より多くのコンピュータがあった方がよい。</p>
 <ul class="simple">
@@ -154,7 +338,7 @@ $ echo $?
 </ul>
 </section>
 <section id="proof-of-stake">
-<h2>Proof of Stake<a class="headerlink" href="#proof-of-stake" title="Permalink to this heading">¶</a></h2>
+<h2 id="proof-of-stake">Proof of Stake<a class="headerlink" href="#proof-of-stake" title="Permalink to this heading">¶</a></h2>
 <p>投票によりより多くのコインを集めたBlockが正しいものになる。</p>
 <ul class="simple">
 <li><p>Pros: PoWよりはエコ, attacker は過半数に近いコインを集める必要がある, lower latency</p></li>
@@ -169,11 +353,11 @@ $ echo $?
 竄する。</p></li>
 </ul>
 <p>Stake Grinding:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Both benevolent and malevolent monopoly are potentially profitable,</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">"Both benevolent and malevolent monopoly are potentially profitable,</span>
 <span class="n">so</span> <span class="n">there</span> <span class="n">are</span> <span class="n">reasons</span> <span class="n">to</span> <span class="n">suspect</span> <span class="n">that</span> <span class="n">an</span> <span class="n">entrepreneurial</span> <span class="n">miner</span> <span class="n">might</span>
 <span class="n">attempt</span> <span class="n">to</span> <span class="n">become</span> <span class="n">a</span> <span class="n">monopolist</span> <span class="n">at</span> <span class="n">some</span> <span class="n">point</span><span class="o">.</span> <span class="n">Due</span> <span class="n">to</span> <span class="n">the</span> <span class="n">Tragedy</span> <span class="n">of</span>
 <span class="n">the</span> <span class="n">Commons</span> <span class="n">effect</span><span class="p">,</span> <span class="n">attempts</span> <span class="n">at</span> <span class="n">monopoly</span> <span class="n">become</span> <span class="n">increasingly</span> <span class="n">likely</span>
-<span class="n">over</span> <span class="n">time</span><span class="o">.</span><span class="s2">&quot;</span>
+<span class="n">over</span> <span class="n">time</span><span class="o">.</span><span class="s2">"</span>
 </pre></div>
 </div>
 <p>現実的には需要と供給の関係によって、独占するには $20M必要と見積もられ
@@ -188,7 +372,7 @@ $ echo $?
 </ul>
 </section>
 <section id="id1">
-<h2>他<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<h2 id="id1">他<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Proof of Activity Proposal](<a class="reference external" href="https://bitcointalk.org/index.php?topic=102355.0">https://bitcointalk.org/index.php?topic=102355.0</a>)</p></li>
 <li><p>[Proof of burn](<a class="reference external" href="https://en.bitcoin.it/wiki/Proof_of_burn">https://en.bitcoin.it/wiki/Proof_of_burn</a>) - Coinを “burn” する=利用不可能なWalletに送金するとProofになる</p></li>
@@ -198,7 +382,7 @@ $ echo $?
 </ul>
 </section>
 <section id="ghost-protocol">
-<h2>GHOST Protocol<a class="headerlink" href="#ghost-protocol" title="Permalink to this heading">¶</a></h2>
+<h2 id="ghost-protocol">GHOST Protocol<a class="headerlink" href="#ghost-protocol" title="Permalink to this heading">¶</a></h2>
 <p>[Accelerating Bitcoin’s Transaction Processing - Fast Money Grows on Trees, Not Chains](<a class="reference external" href="https://eprint.iacr.org/2013/881.pdf">https://eprint.iacr.org/2013/881.pdf</a>)</p>
 <p>1. Bitcoinのやつだとブランチしやすい→アタックを受けた時などにスループットが頭打ちになる（らしい
 1. Branch selection 戦略を変える
@@ -217,9 +401,9 @@ $ echo $?
 <p>ところが… =&gt; Casper</p>
 </section>
 <section id="major-altcoins">
-<h2>Major AltCoins<a class="headerlink" href="#major-altcoins" title="Permalink to this heading">¶</a></h2>
+<h2 id="major-altcoins">Major AltCoins<a class="headerlink" href="#major-altcoins" title="Permalink to this heading">¶</a></h2>
 <section id="ripple-proof-of-work-trust">
-<h3>Ripple: proof of work, TRUST?<a class="headerlink" href="#ripple-proof-of-work-trust" title="Permalink to this heading">¶</a></h3>
+<h3 id="ripple-proof-of-work-trust">Ripple: proof of work, TRUST?<a class="headerlink" href="#ripple-proof-of-work-trust" title="Permalink to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Heuristics, to assume some limitations on network latency</p></li>
 <li><p>The Ripple protocol can achieve consensus in the face of (n-1)/5 failures +several other desirable features</p></li>
@@ -266,7 +450,7 @@ Minerが現れるのでブロックが進みやすい（レイテンシを短く
 </section>
 </section>
 <section id="stellar-stellar-consensus-protocol-trust">
-<h2>Stellar: Stellar consensus protocol (TRUST)<a class="headerlink" href="#stellar-stellar-consensus-protocol-trust" title="Permalink to this heading">¶</a></h2>
+<h2 id="stellar-stellar-consensus-protocol-trust">Stellar: Stellar consensus protocol (TRUST)<a class="headerlink" href="#stellar-stellar-consensus-protocol-trust" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Federated Byzantine Agreementというプロトコルを開発し、 PoW, PoS の問題を全て解決したと主張</p></li>
 <li><p>Byzantine General Problem を限定的な状況について効率的に解いたとのこと</p></li>
@@ -279,7 +463,7 @@ Minerが現れるのでブロックが進みやすい（レイテンシを短く
 </ul>
 </section>
 <section id="bitshares-dpos-delegated-pos">
-<h2>BitShares: DPOS (Delegated PoS)<a class="headerlink" href="#bitshares-dpos-delegated-pos" title="Permalink to this heading">¶</a></h2>
+<h2 id="bitshares-dpos-delegated-pos">BitShares: DPOS (Delegated PoS)<a class="headerlink" href="#bitshares-dpos-delegated-pos" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Delegated Proof-of-Stake](<a class="reference external" href="https://bitshares.org/technology/delegated-proof-of-stake-consensus/">https://bitshares.org/technology/delegated-proof-of-stake-consensus/</a>):</p>
 <ul>
@@ -298,7 +482,7 @@ decentralization.</p></li>
 <p>詳しいものを発見できてない</p>
 </section>
 <section id="qointum-qdpos">
-<h2>Qointum; QDPoS<a class="headerlink" href="#qointum-qdpos" title="Permalink to this heading">¶</a></h2>
+<h2 id="qointum-qdpos">Qointum; QDPoS<a class="headerlink" href="#qointum-qdpos" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Queued Delegated Proof-of-Stake](<a class="reference external" href="https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake">https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake</a>)</p></li>
 </ul>
@@ -313,7 +497,7 @@ decentralization.</p></li>
 </ul>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Proof of Stake versus Proof of Work white paper](<a class="reference external" href="http://bitfury.com/content/5-white-papers-research/pos-vs-pow-1.0.2.pdf">http://bitfury.com/content/5-white-papers-research/pos-vs-pow-1.0.2.pdf</a>)</p></li>
 <li><p>[Infographic: The Blockchain Ecosystem in 2016](<a class="reference external" href="https://ibsintelligence.com/ibs-journal/ibs-news/infographic-the-blockchain-ecosystem-in-2016/">https://ibsintelligence.com/ibs-journal/ibs-news/infographic-the-blockchain-ecosystem-in-2016/</a>)</p></li>
@@ -338,20 +522,20 @@ decentralization.</p></li>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gpg -u kuenishi@gmail.com --clearsign hello.py.2
 
 You need a passphrase to unlock the secret key for
-user: &quot;Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;&quot;
+user: "Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;"
 4096-bit RSA key, ID 1EB41214, created 2016-05-22
 
 $ gpg -d hello.py.2.asc
-print(&quot;Hello Python, 2&quot;)
-print(&quot;MD5 (hello.py.asc) = a1b90918efe7ce659b919a76b29e4eca&quot;)
+print("Hello Python, 2")
+print("MD5 (hello.py.asc) = a1b90918efe7ce659b919a76b29e4eca")
 gpg: Signature made Sun May 22 14:22:16 2016 JST using RSA key ID 1EB41214
-gpg: Good signature from &quot;Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;&quot;
+gpg: Good signature from "Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;"
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">hello.py</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.asc</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.2</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.2.asc</span></code> =&gt; … =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.$n</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.$n.asc</span></code> =&gt; …</p>
 </section>
 <section id="misc">
-<h2>Misc<a class="headerlink" href="#misc" title="Permalink to this heading">¶</a></h2>
+<h2 id="misc">Misc<a class="headerlink" href="#misc" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Landscape](<a class="reference external" href="http://startupmanagement.org/wp-content/uploads/2015/12/Blockchain-in-Financial-Services-Landscape.jpg">http://startupmanagement.org/wp-content/uploads/2015/12/Blockchain-in-Financial-Services-Landscape.jpg</a>)</p></li>
 <li><p>[Distributed Ledger Technology: beyond block chain](<a class="reference external" href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16-1-distributed-ledger-technology.pdf">https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16-1-distributed-ledger-technology.pdf</a>)</p></li>
@@ -368,7 +552,7 @@ Bitsharesにおける取引承認のシステムは、DPOS(Delegated Proof of St
 </ul>
 </section>
 <section id="others">
-<h2>Others<a class="headerlink" href="#others" title="Permalink to this heading">¶</a></h2>
+<h2 id="others">Others<a class="headerlink" href="#others" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[20 MINS INTRO TO CONSENSUS](<a class="reference external" href="https://devcon.ethereum.org/slides/consensus_williams.pdf">https://devcon.ethereum.org/slides/consensus_williams.pdf</a>)</p></li>
 <li><p>A Prunable Blockchain Consensus Protocol Based on Non-Interactive
@@ -389,87 +573,61 @@ Agreement using Cryptography, 2000 Cachin, Kursawe, Shoup</p></li>
 </section>
 
 
-            <div class="clearer"></div>
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="ergodox-ez.html" title="ErgoDox EZ"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> ErgoDox EZ </span>
+              </div>
+            </a>
+          
+          
+            <a href="cost-of-send-after3.html" title="the cost of erlang:send_after/3"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> the cost of erlang:send_after/3 </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2012-2022, UENISHI Kota.
+              
           </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Memo on Block Chain Study Group meeting #2</a><ul>
-<li><a class="reference internal" href="#bitcoin">BitCoinにおける合意（といわれているやつ）</a></li>
-<li><a class="reference internal" href="#altcoins">AltCoins</a></li>
-<li><a class="reference internal" href="#proof-of-work">Proof of Work</a></li>
-<li><a class="reference internal" href="#proof-of-stake">Proof of Stake</a></li>
-<li><a class="reference internal" href="#id1">他</a></li>
-<li><a class="reference internal" href="#ghost-protocol">GHOST Protocol</a></li>
-<li><a class="reference internal" href="#major-altcoins">Major AltCoins</a><ul>
-<li><a class="reference internal" href="#ripple-proof-of-work-trust">Ripple: proof of work, TRUST?</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#stellar-stellar-consensus-protocol-trust">Stellar: Stellar consensus protocol (TRUST)</a></li>
-<li><a class="reference internal" href="#bitshares-dpos-delegated-pos">BitShares: DPOS (Delegated PoS)</a></li>
-<li><a class="reference internal" href="#qointum-qdpos">Qointum; QDPoS</a></li>
-<li><a class="reference internal" href="#references">References</a></li>
-<li><a class="reference internal" href="#misc">Misc</a></li>
-<li><a class="reference internal" href="#others">Others</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="ergodox-ez.html"
-                          title="previous chapter">ErgoDox EZ</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="cost-of-send-after3.html"
-                          title="next chapter">the cost of erlang:send_after/3</a></p>
-  </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/memo/blockchain.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
     </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="cost-of-send-after3.html" title="the cost of erlang:send_after/3"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="ergodox-ez.html" title="ErgoDox EZ"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Memo on Block Chain Study Group meeting #2</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2012-2018, UENISHI Kota.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
-    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
   </body>
 </html>

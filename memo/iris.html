@@ -3,11 +3,52 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="lang:clipboard.copy" content="Copy to clipboard">
+  <meta name="lang:clipboard.copied" content="Copied to clipboard">
+  <meta name="lang:search.language" content="en">
+  <meta name="lang:search.pipeline.stopwords" content="True">
+  <meta name="lang:search.pipeline.trimmer" content="True">
+  <meta name="lang:search.result.none" content="No matching documents">
+  <meta name="lang:search.result.one" content="1 matching document">
+  <meta name="lang:search.result.other" content="# matching documents">
+  <meta name="lang:search.tokenizer" content="[\s\-]+">
+
+  
+    <link href="https://fonts.gstatic.com/" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,500,700|Roboto:300,400,400i,700&display=fallback" rel="stylesheet">
+
+    <style>
+      body,
+      input {
+        font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif
+      }
+
+      code,
+      kbd,
+      pre {
+        font-family: "Roboto Mono", "Courier New", Courier, monospace
+      }
+    </style>
+  
+
+  <link rel="stylesheet" href="../_static/stylesheets/application.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-palette.css"/>
+  <link rel="stylesheet" href="../_static/stylesheets/application-fixes.css"/>
+  
+  <link rel="stylesheet" href="../_static/fonts/material-icons.css"/>
+  
+  <meta name="theme-color" content="#3f51b5">
+  <script src="../_static/javascripts/modernizr.js"></script>
+  
+  
+  
     <title>Iris build log &#8212; kuenishi(7)</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pyramid.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
@@ -15,38 +56,161 @@
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="ErgoDox EZ" href="ergodox-ez.html" />
     <link rel="prev" title="ZFS Memo" href="zfs.html" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<!--[if lte IE 6]>
-<link rel="stylesheet" href="../_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
-<![endif]-->
+  
+   
 
-  </head><body>
+  </head>
+  <body dir=ltr
+        data-md-color-primary=blue-grey data-md-color-accent=blue>
+  
+  <svg class="md-svg">
+    <defs data-children-count="0">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+      
+    </defs>
+  </svg>
+  
+  <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer">
+  <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search">
+  <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <a href="#memo/iris" tabindex="1" class="md-skip"> Skip to content </a>
+  <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex navheader">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="kuenishi(7)"
+           class="md-header-nav__button md-logo">
+          
+            &nbsp;
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          <span class="md-header-nav__topic">kuenishi(7)</span>
+          <span class="md-header-nav__topic"> Iris build log </span>
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+        
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" action="../search.html" method="get" name="search">
+      <input type="text" class="md-search__input" name="q" placeholder="Search"
+             autocapitalize="off" autocomplete="off" spellcheck="false"
+             data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="ergodox-ez.html" title="ErgoDox EZ"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="zfs.html" title="ZFS Memo"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Iris build log</a></li> 
+      </div>
+      
+      
+  
+  <script src="../_static/javascripts/version_dropdown.js"></script>
+  <script>
+    var json_loc = "../"versions.json"",
+        target_loc = "../../",
+        text = "Versions";
+    $( document ).ready( add_version_dropdown(json_loc, target_loc, text));
+  </script>
+  
+
+    </div>
+  </nav>
+</header>
+
+  
+  <div class="md-container">
+    
+    
+    
+  <nav class="md-tabs" data-md-component="tabs">
+    <div class="md-tabs__inner md-grid">
+      <ul class="md-tabs__list">
+          <li class="md-tabs__item"><a href="../index.html" class="md-tabs__link">kuenishi(7)</a></li>
       </ul>
-    </div>  
+    </div>
+  </nav>
+    <main class="md-main">
+      <div class="md-main__inner md-grid" data-md-component="container">
+        
+          <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../index.html" title="kuenishi(7)" class="md-nav__button md-logo">
+      
+        <img src="../_static/" alt=" logo" width="48" height="48">
+      
+    </a>
+    <a href="../index.html"
+       title="kuenishi(7)">kuenishi(7)</a>
+  </label>
+  
 
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body" role="main">
+</nav>
+              </div>
+            </div>
+          </div>
+          <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+            <div class="md-sidebar__scrollwrap">
+              <div class="md-sidebar__inner">
+                
+<nav class="md-nav md-nav--secondary">
+    <label class="md-nav__title" for="__toc">Contents</label>
+  <ul class="md-nav__list" data-md-scrollfix="">
+        <li class="md-nav__item"><a href="#memo-iris--page-root" class="md-nav__link">Iris build log</a><nav class="md-nav">
+              <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#built-without-led" class="md-nav__link">Built without LED</a>
+        </li>
+        <li class="md-nav__item"><a href="#low-profile" class="md-nav__link">Low Profile</a>
+        </li>
+        <li class="md-nav__item"><a href="#lighting-with-led" class="md-nav__link">Lighting with LED</a>
+        </li>
+        <li class="md-nav__item"><a href="#wrist-rest" class="md-nav__link">Wrist Rest</a>
+        </li>
+        <li class="md-nav__item"><a href="#references" class="md-nav__link">References</a>
+        </li></ul>
+            </nav>
+        </li>
+    
+<li class="md-nav__item"><a class="md-nav__extra_link" href="../_sources/memo/iris.rst.txt">Show Source</a> </li>
+
+<li id="searchbox" class="md-nav__item"></li>
+
+  </ul>
+</nav>
+              </div>
+            </div>
+          </div>
+        
+        <div class="md-content">
+          <article class="md-content__inner md-typeset" role="main">
             
   <section id="iris-build-log">
-<h1>Iris build log<a class="headerlink" href="#iris-build-log" title="Permalink to this heading">¶</a></h1>
+<h1 id="memo-iris--page-root">Iris build log<a class="headerlink" href="#memo-iris--page-root" title="Permalink to this heading">¶</a></h1>
 <p>Build firmware:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone git://github.com/qmk/qmk_firmware.git
 $ cd qmk_firmware
@@ -66,28 +230,28 @@ $ avrdude -p atmega32u4 -c avr109 -P /dev/tty.usbmodem1432301 -U flash:w:iris_re
 directory. Maybe you might have to reset the Pro Micro by
 shorting the <code class="docutils literal notranslate"><span class="pre">RST</span></code> and <code class="docutils literal notranslate"><span class="pre">GND</span></code>.</p>
 <section id="built-without-led">
-<h2>Built without LED<a class="headerlink" href="#built-without-led" title="Permalink to this heading">¶</a></h2>
+<h2 id="built-without-led">Built without LED<a class="headerlink" href="#built-without-led" title="Permalink to this heading">¶</a></h2>
 <p>All below was made with <a class="reference external" href="https://www.aliexpress.com/item/Free-Shipping-New-Pro-Micro-for-arduino-ATmega32U4-5V-16MHz-Module-with-2-row-pin-header/2021987137.html?spm=a2g0s.9042311.0.0.34124c4diC0nIN">this Pro Micro</a>
 which seem very stable. Also I bought <a class="reference external" href="https://www.aliexpress.com/item/Gateron-mx-switch-3-pin-and-5-pin-transparent-case-mx-green-brown-blue-switches-for/32835653175.html?spm=a2g0s.9042311.0.0.27424c4d7W0QUU">cherry mx compatible switch</a> , red and clear.</p>
 <p><a class="reference external" href="https://www.instagram.com/p/Bq5P7nDANwt/">https://www.instagram.com/p/Bq5P7nDANwt/</a></p>
-<img alt="First success!" class="align-center" src="../_images/IMG_20181203_030909.jpg" />
+<img alt="First success!" class="align-center" src="../_images/IMG_20181203_030909.jpg"/>
 <p><a class="reference external" href="https://www.instagram.com/p/BrDYypKAexl/">https://www.instagram.com/p/BrDYypKAexl/</a></p>
 <ul class="simple">
 <li><p>Keycaps : <a class="reference external" href="https://www.aliexpress.com/item/DSA-50-dye-sub-keycaps-for-cherry-mx-switch/32879946574.html">https://www.aliexpress.com/item/DSA-50-dye-sub-keycaps-for-cherry-mx-switch/32879946574.html</a></p></li>
 </ul>
-<img alt="Second success!" class="align-center" src="../_images/IMG_20181207_013803.jpg" />
+<img alt="Second success!" class="align-center" src="../_images/IMG_20181207_013803.jpg"/>
 </section>
 <section id="low-profile">
-<h2>Low Profile<a class="headerlink" href="#low-profile" title="Permalink to this heading">¶</a></h2>
+<h2 id="low-profile">Low Profile<a class="headerlink" href="#low-profile" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.instagram.com/p/Brxmfixg7wA/">Lessons learned</a></p></li>
 <li><p><a class="reference external" href="https://www.aliexpress.com/item/kailh-low-profile-switch-half-high-ultrathin-RGB-Swithes-For-Backlit-Mechanical-Gaming-keyboard-brown-white/32838369089.html?spm=a2g0s.9042311.0.0.34124c4diC0nIN">Low profile key switches</a></p></li>
 <li><p><a class="reference external" href="https://www.aliexpress.com/item/kailh-choc-low-profile-keycap-set-for-kailh-low-profile-swtich-abs-doubleshot-ultra-thin-keycap/32915900901.html?spm=a2g0s.9042311.0.0.34124c4diC0nIN">Low profile keycaps</a></p></li>
 </ul>
-<img alt="First success on low profile" class="align-center" src="../_images/IMG_20181225_001333.jpg" />
+<img alt="First success on low profile" class="align-center" src="../_images/IMG_20181225_001333.jpg"/>
 </section>
 <section id="lighting-with-led">
-<h2>Lighting with LED<a class="headerlink" href="#lighting-with-led" title="Permalink to this heading">¶</a></h2>
+<h2 id="lighting-with-led">Lighting with LED<a class="headerlink" href="#lighting-with-led" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://keeb.io/products/iris-keyboard-split-ergonomic-keyboard?variant=8034004860958">Iris originally requires</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Optional</span> <span class="o">-</span> <span class="n">LED</span> <span class="n">support</span> <span class="n">components</span>
 
@@ -99,13 +263,13 @@ which seem very stable. Also I bought <a class="reference external" href="https:
 </div>
 <p>But they’re not included in the kit so I seeked for them in Akihabara, in 2018/12/28 . And found:</p>
 <ul class="simple">
-<li><p>100PCS 1/4w 470Ω resistors 金属被覆 &#64; 300JPY x2</p></li>
-<li><p>10PCS Nch MOSFET IRFML8244TRPBFTR &#64; 160JPY</p></li>
-<li><p>10PCS Nch MOSFET IRLML6344TRPBFTR &#64; 240JPY</p></li>
-<li><p><a class="reference external" href="https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GP">10PCS 角形2.3.4 赤色LED 輝度:1000～1500mcd 指向角:120° 波長:625～630nm 順電圧:1.9～2.3V 順電流:30mA</a> &#64; 500JPY</p></li>
-<li><p>10PCS 角形2.3.4 白色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA &#64; 500JPY</p></li>
-<li><p>10PCS 角形2.3.4 青色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA &#64; 500JPY</p></li>
-<li><p><a class="reference external" href="https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GS">10PCS 角形2.3.4 緑色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA</a> &#64; 500JPY</p></li>
+<li><p>100PCS 1/4w 470Ω resistors 金属被覆 @ 300JPY x2</p></li>
+<li><p>10PCS Nch MOSFET IRFML8244TRPBFTR @ 160JPY</p></li>
+<li><p>10PCS Nch MOSFET IRLML6344TRPBFTR @ 240JPY</p></li>
+<li><p><a class="reference external" href="https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GP">10PCS 角形2.3.4 赤色LED 輝度:1000～1500mcd 指向角:120° 波長:625～630nm 順電圧:1.9～2.3V 順電流:30mA</a> @ 500JPY</p></li>
+<li><p>10PCS 角形2.3.4 白色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA @ 500JPY</p></li>
+<li><p>10PCS 角形2.3.4 青色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA @ 500JPY</p></li>
+<li><p><a class="reference external" href="https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GS">10PCS 角形2.3.4 緑色LED 輝度:1000～1500mcd 指向角:120° 波長:590～595nm 順電圧:1.9～2.3V 順電圧:30mA</a> @ 500JPY</p></li>
 </ul>
 <p>First Combination I tried was:</p>
 <ul class="simple">
@@ -117,7 +281,7 @@ which seem very stable. Also I bought <a class="reference external" href="https:
 darkness. So I doubted the MOSFET as it’s different from required one,
 and changed to Nch MOSFET IRLML6344TRPBFTR - but didn’t worked well
 thought the key typing itself worked very fine.</p>
-<img alt="Only two LEDs are implemented" class="align-center" src="../_images/IMG_20181228_220815.jpg" />
+<img alt="Only two LEDs are implemented" class="align-center" src="../_images/IMG_20181228_220815.jpg"/>
 <p>On 2018/12/30 I tried buying <a class="reference external" href="https://www.sengoku.co.jp/mod/sgk_cart/detail.php?code=EEHD-00GS">another LED</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>順電圧:3.0～3.4V
 順電流:20mA
@@ -133,17 +297,17 @@ provided to LED. <a class="reference external" href="https://docs.keeb.io/iris-b
 </pre></div>
 </div>
 <p><a class="reference external" href="https://www.instagram.com/p/BsNHNU5Am8t/">Here’s what I unsuccessfully built, a black one</a> ….</p>
-<img alt="a working failure built black" class="align-center" src="../_images/IMG_20190104_165042_047.jpg" />
+<img alt="a working failure built black" class="align-center" src="../_images/IMG_20190104_165042_047.jpg"/>
 <p>For LEDs to glow, <a class="reference external" href="https://qiita.com/natten/items/95a57ee77e1e66ba88e6">Iris rev2.5 ビルドメモ</a> uses 4.7Ω (
 RK73H2ATTD471F ) for LED resistors…</p>
 <p>But how much? What to buy??? <a class="reference external" href="https://www.reddit.com/r/MechanicalKeyboards/comments/7evx0x/iris_keyboard_with_led_backlighting/dq7v7y0/">This comment</a>
 gives a clear description:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">USB</span> <span class="mi">2</span> <span class="n">spec</span> <span class="n">devices</span> <span class="n">are</span> <span class="n">supposed</span> <span class="n">to</span> <span class="n">keep</span> <span class="n">their</span> <span class="n">power</span> <span class="n">draw</span> <span class="n">under</span> <span class="mi">500</span><span class="n">mA</span>
 <span class="n">per</span> <span class="n">port</span><span class="p">,</span> <span class="ow">or</span> <span class="n">roughly</span> <span class="mf">2.5</span><span class="n">W</span><span class="o">.</span> <span class="n">Your</span> <span class="n">power</span> <span class="n">budget</span> <span class="n">should</span> <span class="n">also</span> <span class="n">include</span>
-<span class="n">running</span> <span class="mi">2</span> <span class="n">pro</span><span class="o">-</span><span class="n">micros</span><span class="p">,</span> <span class="ow">and</span> <span class="n">possibly</span> <span class="n">RGB</span> <span class="n">underglow</span><span class="o">.</span> <span class="n">But</span> <span class="n">let</span><span class="s1">&#39;s say we</span>
+<span class="n">running</span> <span class="mi">2</span> <span class="n">pro</span><span class="o">-</span><span class="n">micros</span><span class="p">,</span> <span class="ow">and</span> <span class="n">possibly</span> <span class="n">RGB</span> <span class="n">underglow</span><span class="o">.</span> <span class="n">But</span> <span class="n">let</span><span class="s1">'s say we</span>
 <span class="n">budget</span> <span class="mi">50</span><span class="n">mA</span> <span class="n">per</span> <span class="n">each</span> <span class="n">half</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Iris</span><span class="o">.</span>
 
-<span class="n">That</span><span class="s1">&#39;s a maximum of 56 keys, or 28 per half, so 28 LEDs for the left</span>
+<span class="n">That</span><span class="s1">'s a maximum of 56 keys, or 28 per half, so 28 LEDs for the left</span>
 <span class="ow">and</span> <span class="n">right</span> <span class="n">sides</span><span class="o">.</span>
 
 <span class="n">Using</span> <span class="n">this</span> <span class="n">website</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ledcalc</span><span class="o">.</span><span class="n">com</span><span class="o">/</span>
@@ -164,7 +328,7 @@ gives a clear description:</p>
 <span class="n">budget</span><span class="p">,</span> <span class="n">but</span> <span class="n">you</span> <span class="n">may</span> <span class="n">be</span> <span class="n">able</span> <span class="n">to</span> <span class="n">get</span> <span class="n">away</span> <span class="k">with</span> <span class="n">it</span><span class="o">.</span>
 
 <span class="n">In</span> <span class="n">summary</span><span class="p">,</span> <span class="k">for</span> <span class="n">a</span> <span class="n">given</span> <span class="mf">1.8</span><span class="n">mm</span> <span class="ow">or</span> <span class="mi">2</span><span class="n">x3x4mm</span> <span class="n">LED</span> <span class="n">you</span> <span class="n">need</span> <span class="n">the</span> <span class="n">forward</span>
-<span class="n">voltage</span> <span class="n">to</span> <span class="n">calculate</span> <span class="n">it</span><span class="s1">&#39;s power consumption.</span>
+<span class="n">voltage</span> <span class="n">to</span> <span class="n">calculate</span> <span class="n">it</span><span class="s1">'s power consumption.</span>
 </pre></div>
 </div>
 <p>So I should have soldered right combination of resistors and LEDs.
@@ -178,20 +342,20 @@ calculator</a>
 my configuration with 2x3x4 shows the registor value is only 100
 Ohms. But I bought 470 Ohms, which provides &lt; 7mA current to LEDs.
 The comment also describes the sense of scale:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">You</span> <span class="n">will</span> <span class="n">need</span> <span class="n">resistors</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">value</span> <span class="n">will</span> <span class="n">depend</span> <span class="n">on</span> <span class="n">what</span> <span class="n">LED</span><span class="s1">&#39;s you</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">You</span> <span class="n">will</span> <span class="n">need</span> <span class="n">resistors</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">value</span> <span class="n">will</span> <span class="n">depend</span> <span class="n">on</span> <span class="n">what</span> <span class="n">LED</span><span class="s1">'s you</span>
 <span class="n">get</span><span class="o">.</span> <span class="mi">470</span> <span class="n">Ohm</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">safe</span> <span class="n">bet</span> <span class="n">but</span> <span class="n">can</span> <span class="n">vary</span> <span class="n">depending</span> <span class="n">on</span> <span class="n">the</span> <span class="nb">type</span> <span class="n">of</span> <span class="n">LED</span>
-<span class="n">you</span> <span class="n">get</span><span class="o">.</span> <span class="n">There</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">formula</span> <span class="n">to</span> <span class="n">figure</span> <span class="n">it</span> <span class="n">out</span><span class="o">.</span> <span class="n">I</span> <span class="n">ended</span> <span class="n">up</span> <span class="n">using</span> <span class="mi">330</span><span class="s1">&#39;s</span>
-<span class="n">on</span> <span class="n">mine</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">Yellow</span> <span class="n">LED</span><span class="s1">&#39;s are just bright enough. 470 was too dim</span>
+<span class="n">you</span> <span class="n">get</span><span class="o">.</span> <span class="n">There</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">formula</span> <span class="n">to</span> <span class="n">figure</span> <span class="n">it</span> <span class="n">out</span><span class="o">.</span> <span class="n">I</span> <span class="n">ended</span> <span class="n">up</span> <span class="n">using</span> <span class="mi">330</span><span class="s1">'s</span>
+<span class="n">on</span> <span class="n">mine</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">Yellow</span> <span class="n">LED</span><span class="s1">'s are just bright enough. 470 was too dim</span>
 </pre></div>
 </div>
 <p>Next time I’ll get another bunch of resistors, say, like 4.7Ω or 47Ω.</p>
 </section>
 <section id="wrist-rest">
-<h2>Wrist Rest<a class="headerlink" href="#wrist-rest" title="Permalink to this heading">¶</a></h2>
+<h2 id="wrist-rest">Wrist Rest<a class="headerlink" href="#wrist-rest" title="Permalink to this heading">¶</a></h2>
 <p><a class="reference external" href="https://www.instagram.com/p/Br2C0N5gomw/">https://www.instagram.com/p/Br2C0N5gomw/</a></p>
 </section>
 <section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://qiita.com/natten/items/95a57ee77e1e66ba88e6">Iris rev2.5 ビルドメモ</a></p></li>
 <li><p><a class="reference external" href="https://www.reddit.com/r/MechanicalKeyboards/comments/7evx0x/iris_keyboard_with_led_backlighting/">reddit: Iris keyboard with LED backlighting</a></p></li>
@@ -201,76 +365,61 @@ The comment also describes the sense of scale:</p>
 </section>
 
 
-            <div class="clearer"></div>
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  <footer class="md-footer">
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+          
+            <a href="zfs.html" title="ZFS Memo"
+               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+               rel="prev">
+              <div class="md-flex__cell md-flex__cell--shrink">
+                <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+              </div>
+              <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+                <span class="md-flex__ellipsis">
+                  <span
+                      class="md-footer-nav__direction"> Previous </span> ZFS Memo </span>
+              </div>
+            </a>
+          
+          
+            <a href="ergodox-ez.html" title="ErgoDox EZ"
+               class="md-flex md-footer-nav__link md-footer-nav__link--next"
+               rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title"><span
+                class="md-flex__ellipsis"> <span
+                class="md-footer-nav__direction"> Next </span> ErgoDox EZ </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink"><i
+                class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          
+        </a>
+        
+      </nav>
+    </div>
+    <div class="md-footer-meta md-typeset">
+      <div class="md-footer-meta__inner md-grid">
+        <div class="md-footer-copyright">
+          <div class="md-footer-copyright__highlight">
+              &#169; Copyright 2012-2022, UENISHI Kota.
+              
           </div>
+            Created using
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+             and
+            <a href="https://github.com/bashtage/sphinx-material/">Material for
+              Sphinx</a>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <div>
-    <h3><a href="../index.html">Table of Contents</a></h3>
-    <ul>
-<li><a class="reference internal" href="#">Iris build log</a><ul>
-<li><a class="reference internal" href="#built-without-led">Built without LED</a></li>
-<li><a class="reference internal" href="#low-profile">Low Profile</a></li>
-<li><a class="reference internal" href="#lighting-with-led">Lighting with LED</a></li>
-<li><a class="reference internal" href="#wrist-rest">Wrist Rest</a></li>
-<li><a class="reference internal" href="#references">References</a></li>
-</ul>
-</li>
-</ul>
-
-  </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="zfs.html"
-                          title="previous chapter">ZFS Memo</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="ergodox-ez.html"
-                          title="next chapter">ErgoDox EZ</a></p>
-  </div>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="../_sources/memo/iris.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3 id="searchlabel">Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
-      <input type="submit" value="Go" />
-    </form>
     </div>
-</div>
-<script>document.getElementById('searchbox').style.display = "block"</script>
-        </div>
-      </div>
-      <div class="clearer"></div>
-    </div>
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>Navigation</h3>
-      <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="../genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="ergodox-ez.html" title="ErgoDox EZ"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="zfs.html" title="ZFS Memo"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">kuenishi(7)</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Iris build log</a></li> 
-      </ul>
-    </div>
-    <div class="footer" role="contentinfo">
-        &#169; Copyright 2012-2018, UENISHI Kota.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
-    </div>
+  </footer>
+  <script src="../_static/javascripts/application.js"></script>
+  <script>app.initialize({version: "1.0.4", url: {base: ".."}})</script>
   </body>
 </html>
