@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,11 +47,11 @@
   
   
     <title>Iris build log &#8212; kuenishi(7)</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <script src="../_static/documentation_options.js?v=4838e742"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="ErgoDox EZ" href="ergodox-ez.html" />
@@ -210,7 +210,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="iris-build-log">
-<h1 id="memo-iris--page-root">Iris build log<a class="headerlink" href="#memo-iris--page-root" title="Permalink to this heading">¶</a></h1>
+<h1 id="memo-iris--page-root">Iris build log<a class="headerlink" href="#memo-iris--page-root" title="Link to this heading">¶</a></h1>
 <p>Build firmware:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ git clone git://github.com/qmk/qmk_firmware.git
 $ cd qmk_firmware
@@ -230,7 +230,7 @@ $ avrdude -p atmega32u4 -c avr109 -P /dev/tty.usbmodem1432301 -U flash:w:iris_re
 directory. Maybe you might have to reset the Pro Micro by
 shorting the <code class="docutils literal notranslate"><span class="pre">RST</span></code> and <code class="docutils literal notranslate"><span class="pre">GND</span></code>.</p>
 <section id="built-without-led">
-<h2 id="built-without-led">Built without LED<a class="headerlink" href="#built-without-led" title="Permalink to this heading">¶</a></h2>
+<h2 id="built-without-led">Built without LED<a class="headerlink" href="#built-without-led" title="Link to this heading">¶</a></h2>
 <p>All below was made with <a class="reference external" href="https://www.aliexpress.com/item/Free-Shipping-New-Pro-Micro-for-arduino-ATmega32U4-5V-16MHz-Module-with-2-row-pin-header/2021987137.html?spm=a2g0s.9042311.0.0.34124c4diC0nIN">this Pro Micro</a>
 which seem very stable. Also I bought <a class="reference external" href="https://www.aliexpress.com/item/Gateron-mx-switch-3-pin-and-5-pin-transparent-case-mx-green-brown-blue-switches-for/32835653175.html?spm=a2g0s.9042311.0.0.27424c4d7W0QUU">cherry mx compatible switch</a> , red and clear.</p>
 <p><a class="reference external" href="https://www.instagram.com/p/Bq5P7nDANwt/">https://www.instagram.com/p/Bq5P7nDANwt/</a></p>
@@ -242,7 +242,7 @@ which seem very stable. Also I bought <a class="reference external" href="https:
 <img alt="Second success!" class="align-center" src="../_images/IMG_20181207_013803.jpg"/>
 </section>
 <section id="low-profile">
-<h2 id="low-profile">Low Profile<a class="headerlink" href="#low-profile" title="Permalink to this heading">¶</a></h2>
+<h2 id="low-profile">Low Profile<a class="headerlink" href="#low-profile" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.instagram.com/p/Brxmfixg7wA/">Lessons learned</a></p></li>
 <li><p><a class="reference external" href="https://www.aliexpress.com/item/kailh-low-profile-switch-half-high-ultrathin-RGB-Swithes-For-Backlit-Mechanical-Gaming-keyboard-brown-white/32838369089.html?spm=a2g0s.9042311.0.0.34124c4diC0nIN">Low profile key switches</a></p></li>
@@ -251,7 +251,7 @@ which seem very stable. Also I bought <a class="reference external" href="https:
 <img alt="First success on low profile" class="align-center" src="../_images/IMG_20181225_001333.jpg"/>
 </section>
 <section id="lighting-with-led">
-<h2 id="lighting-with-led">Lighting with LED<a class="headerlink" href="#lighting-with-led" title="Permalink to this heading">¶</a></h2>
+<h2 id="lighting-with-led">Lighting with LED<a class="headerlink" href="#lighting-with-led" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://keeb.io/products/iris-keyboard-split-ergonomic-keyboard?variant=8034004860958">Iris originally requires</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Optional</span> <span class="o">-</span> <span class="n">LED</span> <span class="n">support</span> <span class="n">components</span>
 
@@ -351,11 +351,11 @@ The comment also describes the sense of scale:</p>
 <p>Next time I’ll get another bunch of resistors, say, like 4.7Ω or 47Ω.</p>
 </section>
 <section id="wrist-rest">
-<h2 id="wrist-rest">Wrist Rest<a class="headerlink" href="#wrist-rest" title="Permalink to this heading">¶</a></h2>
+<h2 id="wrist-rest">Wrist Rest<a class="headerlink" href="#wrist-rest" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://www.instagram.com/p/Br2C0N5gomw/">https://www.instagram.com/p/Br2C0N5gomw/</a></p>
 </section>
 <section id="references">
-<h2 id="references">References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://qiita.com/natten/items/95a57ee77e1e66ba88e6">Iris rev2.5 ビルドメモ</a></p></li>
 <li><p><a class="reference external" href="https://www.reddit.com/r/MechanicalKeyboards/comments/7evx0x/iris_keyboard_with_led_backlighting/">reddit: Iris keyboard with LED backlighting</a></p></li>
@@ -411,7 +411,7 @@ The comment also describes the sense of scale:</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

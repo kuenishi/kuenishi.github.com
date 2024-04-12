@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,11 +47,11 @@
   
   
     <title>Run Spark on Riak CS &#8212; kuenishi(7)</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <script src="../_static/documentation_options.js?v=4838e742"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Kudu memo" href="kudu.html" />
@@ -194,7 +194,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="run-spark-on-riak-cs">
-<h1 id="memo-riak-cs-spark--page-root">Run Spark on Riak CS<a class="headerlink" href="#memo-riak-cs-spark--page-root" title="Permalink to this heading">¶</a></h1>
+<h1 id="memo-riak-cs-spark--page-root">Run Spark on Riak CS<a class="headerlink" href="#memo-riak-cs-spark--page-root" title="Link to this heading">¶</a></h1>
 <p>[Spark](<a class="reference external" href="http://spark.apache.org/">http://spark.apache.org/</a>) is fast distributed processing framework, by keeping intermediate data or input data on memory, as known as RDD. Spark not only runs on top of HDFS but also on top of S3 - then it should work on top of [Riak CS](<a class="reference external" href="http://docs.basho.com/riakcs/latest/">http://docs.basho.com/riakcs/latest/</a>) . This document shows result of connectivity test.</p>
 <p>## Test Spark with Local Filesystem</p>
 <p>So easy as ABC. Get whatever Spark release from [download page](<a class="reference external" href="http://spark.apache.org/downloads.html">http://spark.apache.org/downloads.html</a>) .</p>
@@ -373,7 +373,7 @@ result is same.</p>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

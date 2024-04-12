@@ -202,12 +202,30 @@ LUKSはかなり高機能で、YubiKeyで鍵を渡して起動とか、USBメモ
   # pacstrap /mnt base base-devel linux linux-firmware
   # genfstab -U /mnt >> /mnt/etc/fstab
 
- ``chroot`` して、OS環境の作成を開始する。まず、基本的なファイルを先においておく。::
+ ``chroot`` して、OS環境の作成を開始する。::
 
   root@archiso ~ # arch-chroot /mnt
+
+タイムゾーンの設定::
+
   [root@archiso /]# ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
-  [root@archiso /]# echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+`ロケールの生成 <https://wiki.archlinux.jp/index.php/%E3%83%AD%E3%82%B1%E3%83%BC%E3%83%AB#.E3.83.AD.E3.82.B1.E3.83.BC.E3.83.AB.E3.81.AE.E8.A8.AD.E5.AE.9A>`_ ::
+
+  [root@archiso /]# cat /etc/locale.gen
+  en_US.UTF-8 UTF-8
+  ja_JP.UTF-8 UTF-8
   [root@archiso /]# locale-gen
+
+
+ロケールの設定::
+
+  [root@archiso /]# echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+
+キーマップ、ホスト名、ホスト名前解決の設定::
+
+
   [root@archiso /]# echo KEYMAP=us > /etc/vconsole.conf
   [root@archiso /]# echo utaha > /etc/hostname
   [root@archiso /]# pacman -S emacs-nox
@@ -257,9 +275,26 @@ sd-lvm. <https://bbs.archlinux.org/viewtopic.php?pid=1673320#p1673320>`_
   linux /vmlinuz-linux
   initrd /intel-ucode.img
   initrd /initramfs-linux.img
-  options luks.uuid=1cf54a61-cd17-43e3-ad00-bf94c29dc922 luks.name=1cf54a61-cd17-43e3-ad00-bf94c29dc922=crypt-root root=/dev/mapper/crypt-root rw intel_pstate=no_hwp
+  options luks.name=1cf54a61-cd17-43e3-ad00-bf94c29dc922=crypt-root root=/dev/mapper/crypt-root rw
 
 `↑はdm-cryptのやつ <https://wiki.archlinux.jp/index.php/Dm-crypt/%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E8%A8%AD%E5%AE%9A>`_ をみながら編集した。
+
+
+再起動をする *前に* ユーザーを作っておく。::
+
+  # mkdir /home/kuenishi
+  # chown kuenishi:kuenishi /home/kuenishi
+  # useradd kuenishi
+  # passwd kuenishi
+  # vigr -> add kuenishi to wheel
+  # pacman -S sudo
+  # visudo -> enable wheel as ALL=ALL
+  $ sudo pacman -S git
+
+``sudo`` が動けば成功。また、再起動後にネットワークが勝手に設定されていてほしい場合はここで ``dhcpcd`` をインストールしておく。::
+
+  $ sudo pacman -S dhcpcd
+
 
 起動したときにファイルシステムのパスフレーズを要求されて、 login ttyが出れば成功。::
 
