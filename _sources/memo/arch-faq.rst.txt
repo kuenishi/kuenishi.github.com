@@ -9,7 +9,6 @@ TODO
 
 - いつの間にかF1~F12 のキーのうちいくつかが使えるようになっていた。不思議
 - YubiKeyを入れるとキーボードのCaps Lockが戻ってしまう
-- pacman/AURのフロントエンドを何か選ぶ -> https://wiki.archlinux.org/index.php/AUR_helpers -> とりあえず ``yaourt`` で困っていない。
 - `OpenPGP のスマートカード有効化 <https://wiki.archlinux.jp/index.php/Yubikey#OpenPGP_.E3.82.B9.E3.83.9E.E3.83.BC.E3.83.88.E3.82.AB.E3.83.BC.E3.83.89.E3.83.A2.E3.83.BC.E3.83.89.E3.82.92.E6.9C.89.E5.8A.B9.E5.8C.96>`_
 
 Reference

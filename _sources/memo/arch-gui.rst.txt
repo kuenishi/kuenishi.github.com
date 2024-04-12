@@ -68,24 +68,26 @@ Sometimes a screen vibrates suddenly with a dmesg line including ``[drm:intel_cp
 
 `Japanese fonts <https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88#.E6.97.A5.E6.9C.AC.E8.AA.9E>`_ ::
 
-  $ sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra adobe-source-han-sans-jp-fonts otf-ipafont ttf-sazanami ttf-hanazono
-  $ sudo pacman -S fcitx-im fcitx-mozc fcitx-configtool
-  $ echo 'export GTK_IM_MODULE=fcitx
-  export XMODIFIERS=@im=fcitx' > ~/.xprofile
+  $ sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
+  $ sudo pacman -S fcitx5-im fcitx5-mozc fcitx5-configtool
+  $ echo 'export GTK_IM_MODULE=fcitx5
+  export XMODIFIERS=@im=fcitx5' > ~/.xprofile
+  $ echo 'export GTK_IM_MODULE=fcitx5
+  export XMODIFIERS=@im=fcitx5' > ~/.bash_profile
 
 
 で一旦ログアウトして、いろいろGUIをいじっていたら動いた。もしかしたら::
 
-  $ fcitx-autostart
+  $ fcitx5-autostart
 
-が必要かも。どうにも変だったら ``fcitx-diagnose`` こまんどで原因調査するとよい。 `ろけーるが変だった <https://wiki.archlinux.jp/index.php/ロケール>`_ ことがある。
+が必要かも。どうにも変だったら ``fcitx5-diagnose`` こまんどで原因調査するとよい。 `ろけーるが変だった <https://wiki.archlinux.jp/index.php/ロケール>`_ ことがある。See also: `Arch Linuxの日本語入力をfcitxからfcitx5に切り替える <https://note.kurodigi.com/archlinux-fcitx5/>`_
 
 Properly render PDF without embedded Japanese fonts::
 
   $ sudo pacman -S poppler-data
 
-System update
--------------
+System Update +AUR
+-------------------
 
 システムアップデートは ::
 
@@ -97,6 +99,15 @@ System update
 パッケージを探すのは::
 
   $ pacman -Ss <pkgname>
+
+yay を使うとAURもいける::
+
+  $ cd /tmp
+  $ git clone https://aur.archlinux.org/yay.git
+  $ cd yay
+  $ makepkg -si
+  $ yay
+
 
 
 Installed Application

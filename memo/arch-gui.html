@@ -193,7 +193,7 @@
         </li>
         <li class="md-nav__item"><a href="#id3" class="md-nav__link">日本語入力</a>
         </li>
-        <li class="md-nav__item"><a href="#system-update" class="md-nav__link">System update</a>
+        <li class="md-nav__item"><a href="#system-update-aur" class="md-nav__link">System Update +AUR</a>
         </li>
         <li class="md-nav__item"><a href="#installed-application" class="md-nav__link">Installed Application</a>
         </li>
@@ -280,24 +280,26 @@ $ ./swapctrlcaps.sh
 <section id="id3">
 <h2 id="id3">日本語入力<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88#.E6.97.A5.E6.9C.AC.E8.AA.9E">Japanese fonts</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra adobe-source-han-sans-jp-fonts otf-ipafont ttf-sazanami ttf-hanazono
-$ sudo pacman -S fcitx-im fcitx-mozc fcitx-configtool
-$ echo 'export GTK_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx' &gt; ~/.xprofile
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra
+$ sudo pacman -S fcitx5-im fcitx5-mozc fcitx5-configtool
+$ echo 'export GTK_IM_MODULE=fcitx5
+export XMODIFIERS=@im=fcitx5' &gt; ~/.xprofile
+$ echo 'export GTK_IM_MODULE=fcitx5
+export XMODIFIERS=@im=fcitx5' &gt; ~/.bash_profile
 </pre></div>
 </div>
 <p>で一旦ログアウトして、いろいろGUIをいじっていたら動いた。もしかしたら:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fcitx-autostart
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ fcitx5-autostart
 </pre></div>
 </div>
-<p>が必要かも。どうにも変だったら <code class="docutils literal notranslate"><span class="pre">fcitx-diagnose</span></code> こまんどで原因調査するとよい。 <a class="reference external" href="https://wiki.archlinux.jp/index.php/ロケール">ろけーるが変だった</a> ことがある。</p>
+<p>が必要かも。どうにも変だったら <code class="docutils literal notranslate"><span class="pre">fcitx5-diagnose</span></code> こまんどで原因調査するとよい。 <a class="reference external" href="https://wiki.archlinux.jp/index.php/ロケール">ろけーるが変だった</a> ことがある。See also: <a class="reference external" href="https://note.kurodigi.com/archlinux-fcitx5/">Arch Linuxの日本語入力をfcitxからfcitx5に切り替える</a></p>
 <p>Properly render PDF without embedded Japanese fonts:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S poppler-data
 </pre></div>
 </div>
 </section>
-<section id="system-update">
-<h2 id="system-update">System update<a class="headerlink" href="#system-update" title="Link to this heading">¶</a></h2>
+<section id="system-update-aur">
+<h2 id="system-update-aur">System Update +AUR<a class="headerlink" href="#system-update-aur" title="Link to this heading">¶</a></h2>
 <p>システムアップデートは</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -Syu
 </pre></div>
@@ -305,6 +307,14 @@ export XMODIFIERS=@im=fcitx' &gt; ~/.xprofile
 <p>このときAURで入れていたパッケージに注意すること。</p>
 <p>パッケージを探すのは:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pacman -Ss &lt;pkgname&gt;
+</pre></div>
+</div>
+<p>yay を使うとAURもいける:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ cd /tmp
+$ git clone https://aur.archlinux.org/yay.git
+$ cd yay
+$ makepkg -si
+$ yay
 </pre></div>
 </div>
 </section>
