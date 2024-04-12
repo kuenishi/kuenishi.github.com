@@ -2,23 +2,10 @@
 Arch Linux Setup (GUI)
 #####################################
 
+準備
+------
 
-GUI
-----
-
-まずは基本的なユーザー作成::
-
-  # mkdir /home/kuenishi
-  # chown kuenishi:kuenishi /home/kuenishi
-  # useradd kuenishi
-  # passwd kuenishi
-  # vigr -> add kuenishi to wheel
-  # pacman -S sudo
-  # visudo -> enable wheel as ALL=ALL
-  $ sudo pacman -S git
-
-
-このままだと `トラックポイント/トラックパッドが機能しない
+(今はやらなくていいかも)このままだと `トラックポイント/トラックパッドが機能しない
 <https://wiki.archlinux.jp/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)#.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.9D.E3.82.A4.E3.83.B3.E3.83.88.2F.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.91.E3.83.83.E3.83.89.E3.81.8C.E6.A9.9F.E8.83.BD.E3.81.97.E3.81.AA.E3.81.84>`_
 という問題にぶつかるので、それを回避するため設定を入れる。
 ``psmouse.synaptics_intertouch=1`` をカーネルパラメータに追加する。カー
@@ -38,6 +25,9 @@ initrd の新しいファイルが ``/boot`` に置かれているので、両�
   initrd /intel-ucode.img
   initrd /initramfs-linux.img
   options luks.uuid=1cf54a61-cd17-43e3-ad00-bf94c29dc922 luks.name=1cf54a61-cd17-43e3-ad00-bf94c29dc922=crypt-root root=/dev/mapper/crypt-root rw intel_pstate=no_hwp psmouse.synaptics_intertouch=1
+
+GUI
+----
 
 Enlightenment を少し試してみたが、使いにくいので xfce4 に戻る。インストールと起動テスト::
 
@@ -61,7 +51,7 @@ CtrlとCaps Lockを入れ替えるのは、とりあえず::
 
 で Caps lock を Ctrl にする。他にもキーボードマッピングをいじる方法と
 かがあるけど、複数のものが絡まって複雑になると困ってしまうので、なるべ
-く上位でやりたいので今ここ。
+く上位でやりたいので今ここ。また、ログイン時に設定されるようにしておくため、 ``xfce4-settings-manager`` から *Session and Startup* > *Application Autostart* タブにいって、 *Add* から追加する。[ `Link <https://serverfault.com/a/1005911>`_ ]
 
 DPIはAppearance （外観）から変更。とりあえず字大きめの160で。
 
@@ -150,14 +140,14 @@ Sound
 
 `サウンド <https://wiki.archlinux.jp/index.php/Advanced_Linux_Sound_Architecture>`_ は::
 
-  $ sudo pacman -S alsa-utils
+  $ sudo pacman -S alsa-utils pipewire-pulse
   $ alsamixer
 
 これだけで音が鳴るようになる。 `XfceのUI
 <https://wiki.archlinux.org/index.php/xfce#Keyboard_volume_buttons>`_
 や、ThinkPadのF1~F3 でのコントロールはできていない。Xfce4のPulseAudio
-pluginは ``pavucontrol`` をインストールして再起動？したら使えるように
-なった。
+pluginは ``pavucontrol`` をインストールして再起動したら使えるように
+なった。 PulseAudio から Pipewire への移行が進んでいるらしい。
 
 -> https://wiki.archlinux.org/index.php/List_of_applications#Volume_managers
 
@@ -165,55 +155,14 @@ pluginは ``pavucontrol`` をインストールして再起動？したら使え
 WiFi
 ----
 
-`Wicd <https://wiki.archlinux.org/index.php/Wicd>`_ を入れたらそれなりに快適に動く::
+NetworkManagerを入れるだけで十分。::
 
-  $ sudo pacman -S wicd wicd-gtk gksu python2-notify
-  $ sudo systemctl enable wicd
-  $ sudo systemctl start wicd
+  $ sudo pacman -S networkmanager
+  $ sudo systemctl enable NetworkManager
+  $ sudo systemctl start NetworkManager
 
-`WiFi <https://wiki.archlinux.jp/index.php/WPA_supplicant>`_ なぜか一
-度適当に設定したらいつの間にか動くようになってしまった…　電波強度をパ
-ネルに出すのに wavelan というのをつけてある。ツールは他にも
-``wifi-menu`` とかいろいろある。->
-https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A
 
-WPA2 Enterpriseでクライアント認証でWiFi APに接続するときに、 EAP-TLSで
-接続してPKCS#12の秘密鍵とパスフレーズだけで接続する場合にはなぜかWicd
-ではうまく接続できず、結局 ``netctl`` でやった。::
-
-  $ sudo systemctl stop wicd
-  $ sudo systemctl disable wicd
-  $ sudo pacman -R wicd wicd-gtk
-  $ sudo pacman -S netctl
-  $ sudo netctl list
-  $ sudo wifi-menu wlp4s0
-  (...find the SSID of WPA2 Enterprise and try to setup...)
-  $ sudoedit /etc/netctl/wlp4s0-<ssid>
-  $ cat /etc/netctl/wlp4s0-<ssid>
-  Description='Automatically generated profile by wifi-menu'
-  Interface=wlp4s0
-  Connection=wireless
-  Security=wpa-configsection
-  IP=dhcp
-  WPAConfigSection=(
-        'ssid="hoge"'
-        'key_mgmt=WPA-EAP'
-        'eap=TLS'
-        'proto=WPA RSN'
-        'identity="kuenishi"'
-        'private_key="/home/kuenishi/.pki/kuenishi_aho.p12"'
-        'private_key_passwd="**********"'
-        'priority=1'
-        'phase2="auth=PAP"'
-  )
-
-このファイルはたしか
-``/etc/netctl/examples/wireless-wpa-configsection`` からのコピペだった
-気がする。これで接続できたら systemd 設定をする。::
-
-  $ sudo netctl list
-  * wlp4s0-hoge
-  $ sudo netctl enable wlp4s0-hoge
+WiFiもLANも各種設定は ``nmtui(1)`` で実施する。操作は ``nmcli(1)`` でもできる。
 
 
 マルチ（外部）ディスプレイ

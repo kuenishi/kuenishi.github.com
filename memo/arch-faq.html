@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,11 +47,11 @@
   
   
     <title>Arch Linux (FAQ) &#8212; kuenishi(7)</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <script src="../_static/documentation_options.js?v=4838e742"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Arch Linux ops (LuKS)" href="arch-cryptsetup.html" />
@@ -216,9 +216,9 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="arch-linux-faq">
-<h1 id="memo-arch-faq--page-root">Arch Linux (FAQ)<a class="headerlink" href="#memo-arch-faq--page-root" title="Permalink to this heading">¶</a></h1>
+<h1 id="memo-arch-faq--page-root">Arch Linux (FAQ)<a class="headerlink" href="#memo-arch-faq--page-root" title="Link to this heading">¶</a></h1>
 <section id="todo">
-<h2 id="todo">TODO<a class="headerlink" href="#todo" title="Permalink to this heading">¶</a></h2>
+<h2 id="todo">TODO<a class="headerlink" href="#todo" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>いつの間にかF1~F12 のキーのうちいくつかが使えるようになっていた。不思議</p></li>
 <li><p>YubiKeyを入れるとキーボードのCaps Lockが戻ってしまう</p></li>
@@ -227,7 +227,7 @@
 </ul>
 </section>
 <section id="reference">
-<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permalink to this heading">¶</a></h2>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E3%82%AC%E3%82%A4%E3%83%89">インストールガイド</a></p></li>
 <li><p><a class="reference external" href="https://wiki.archlinux.org/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)">Lenovo ThinkPad X1 Carbon (Gen 5)</a></p></li>
@@ -237,9 +237,9 @@
 </ul>
 </section>
 <section id="general-trouble-shooting">
-<h2 id="general-trouble-shooting">General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Permalink to this heading">¶</a></h2>
+<h2 id="general-trouble-shooting">General Trouble Shooting<a class="headerlink" href="#general-trouble-shooting" title="Link to this heading">¶</a></h2>
 <section id="locale">
-<h3 id="locale">Locale再生成<a class="headerlink" href="#locale" title="Permalink to this heading">¶</a></h3>
+<h3 id="locale">Locale再生成<a class="headerlink" href="#locale" title="Link to this heading">¶</a></h3>
 <p>ロケールが変になったらいつでも作り直すことができる。
 <code class="docutils literal notranslate"><span class="pre">/etc/locale.gen</span></code> を編集して、必要なロケールのコメントアウトをとりの
 ぞく。そのあと再度:</p>
@@ -253,7 +253,7 @@
 <p>xorg入れたけどなぜかGUIがでてこない</p>
 </section>
 <section id="pacman-gnupg">
-<h3 id="pacman-gnupg">Pacman のアップデートで GnuPG エラーが出る<a class="headerlink" href="#pacman-gnupg" title="Permalink to this heading">¶</a></h3>
+<h3 id="pacman-gnupg">Pacman のアップデートで GnuPG エラーが出る<a class="headerlink" href="#pacman-gnupg" title="Link to this heading">¶</a></h3>
 <p>パッケージアップデート時に <code class="docutils literal notranslate"><span class="pre">gnupg:</span> <span class="pre">signature</span> <span class="pre">from</span> <span class="pre">"Gaetan</span> <span class="pre">Bisson</span>
 <span class="pre">&lt;bisson@archlinux.org&gt;"</span> <span class="pre">is</span> <span class="pre">invalid</span></code> 的なエラーがでて失敗したら、以下
 の手順でキーを更新する:</p>
@@ -265,7 +265,7 @@ $ sudo pacman-key --refresh-keys
 </div>
 </section>
 <section id="fix-kernel-or-other-files-2018-4-6">
-<h3 id="fix-kernel-or-other-files-2018-4-6">Fix kernel or other files 2018/4/6<a class="headerlink" href="#fix-kernel-or-other-files-2018-4-6" title="Permalink to this heading">¶</a></h3>
+<h3 id="fix-kernel-or-other-files-2018-4-6">Fix kernel or other files 2018/4/6<a class="headerlink" href="#fix-kernel-or-other-files-2018-4-6" title="Link to this heading">¶</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">yaourt</span> <span class="pre">-Syu</span></code> が妙に時間がかかったのでマシンを途中で止めてしまったと
 ころ、起動時（LUKSのパスワード入力）時にキーボードが効かなくなり、パス
 ワードを入力できなくなった。このためその後のブートシーケンスを継続でき
@@ -307,7 +307,7 @@ initrd を再作成していなかったため何かがズレて起動だけは�
 間違ってもOSのアップデートなんかしてはいけない</em> 。</p>
 </section>
 <section id="wifi">
-<h3 id="wifi">急にWiFiがつながらなくなったら<a class="headerlink" href="#wifi" title="Permalink to this heading">¶</a></h3>
+<h3 id="wifi">急にWiFiがつながらなくなったら<a class="headerlink" href="#wifi" title="Link to this heading">¶</a></h3>
 <p>パソコンのハードスイッチからオフになっている可能性がある。推し間違いなど。
 <code class="docutils literal notranslate"><span class="pre">rfkill</span></code> で状態を確認できるので、それ経由でオンにするとつながる。</p>
 </section>
@@ -361,7 +361,7 @@ initrd を再作成していなかったため何かがズレて起動だけは�
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

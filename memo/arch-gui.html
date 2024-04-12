@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,11 +47,11 @@
   
   
     <title>Arch Linux Setup (GUI) &#8212; kuenishi(7)</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <script src="../_static/documentation_options.js?v=4838e742"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Arch Linux (misc)" href="arch-misc.html" />
@@ -183,13 +183,15 @@
   <ul class="md-nav__list" data-md-scrollfix="">
         <li class="md-nav__item"><a href="#memo-arch-gui--page-root" class="md-nav__link">Arch Linux Setup (GUI)</a><nav class="md-nav">
               <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#id1" class="md-nav__link">準備</a>
+        </li>
         <li class="md-nav__item"><a href="#gui" class="md-nav__link">GUI</a><nav class="md-nav">
               <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#weird-display-vibrarion" class="md-nav__link">Weird display vibrarion</a>
         </li></ul>
             </nav>
         </li>
-        <li class="md-nav__item"><a href="#id2" class="md-nav__link">日本語入力</a>
+        <li class="md-nav__item"><a href="#id3" class="md-nav__link">日本語入力</a>
         </li>
         <li class="md-nav__item"><a href="#system-update" class="md-nav__link">System update</a>
         </li>
@@ -218,21 +220,10 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="arch-linux-setup-gui">
-<h1 id="memo-arch-gui--page-root">Arch Linux Setup (GUI)<a class="headerlink" href="#memo-arch-gui--page-root" title="Permalink to this heading">¶</a></h1>
-<section id="gui">
-<h2 id="gui">GUI<a class="headerlink" href="#gui" title="Permalink to this heading">¶</a></h2>
-<p>まずは基本的なユーザー作成:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># mkdir /home/kuenishi
-# chown kuenishi:kuenishi /home/kuenishi
-# useradd kuenishi
-# passwd kuenishi
-# vigr -&gt; add kuenishi to wheel
-# pacman -S sudo
-# visudo -&gt; enable wheel as ALL=ALL
-$ sudo pacman -S git
-</pre></div>
-</div>
-<p>このままだと <a class="reference external" href="https://wiki.archlinux.jp/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)#.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.9D.E3.82.A4.E3.83.B3.E3.83.88.2F.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.91.E3.83.83.E3.83.89.E3.81.8C.E6.A9.9F.E8.83.BD.E3.81.97.E3.81.AA.E3.81.84">トラックポイント/トラックパッドが機能しない</a>
+<h1 id="memo-arch-gui--page-root">Arch Linux Setup (GUI)<a class="headerlink" href="#memo-arch-gui--page-root" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2 id="id1">準備<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>(今はやらなくていいかも)このままだと <a class="reference external" href="https://wiki.archlinux.jp/index.php/Lenovo_ThinkPad_X1_Carbon_(Gen_5)#.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.9D.E3.82.A4.E3.83.B3.E3.83.88.2F.E3.83.88.E3.83.A9.E3.83.83.E3.82.AF.E3.83.91.E3.83.83.E3.83.89.E3.81.8C.E6.A9.9F.E8.83.BD.E3.81.97.E3.81.AA.E3.81.84">トラックポイント/トラックパッドが機能しない</a>
 という問題にぶつかるので、それを回避するため設定を入れる。
 <code class="docutils literal notranslate"><span class="pre">psmouse.synaptics_intertouch=1</span></code> をカーネルパラメータに追加する。カー
 ネルパラメータを設定するには
@@ -252,6 +243,9 @@ initrd の新しいファイルが <code class="docutils literal notranslate"><s
 <span class="n">options</span> <span class="n">luks</span><span class="o">.</span><span class="n">uuid</span><span class="o">=</span><span class="mi">1</span><span class="n">cf54a61</span><span class="o">-</span><span class="n">cd17</span><span class="o">-</span><span class="mf">43e3</span><span class="o">-</span><span class="n">ad00</span><span class="o">-</span><span class="n">bf94c29dc922</span> <span class="n">luks</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="mi">1</span><span class="n">cf54a61</span><span class="o">-</span><span class="n">cd17</span><span class="o">-</span><span class="mf">43e3</span><span class="o">-</span><span class="n">ad00</span><span class="o">-</span><span class="n">bf94c29dc922</span><span class="o">=</span><span class="n">crypt</span><span class="o">-</span><span class="n">root</span> <span class="n">root</span><span class="o">=/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">crypt</span><span class="o">-</span><span class="n">root</span> <span class="n">rw</span> <span class="n">intel_pstate</span><span class="o">=</span><span class="n">no_hwp</span> <span class="n">psmouse</span><span class="o">.</span><span class="n">synaptics_intertouch</span><span class="o">=</span><span class="mi">1</span>
 </pre></div>
 </div>
+</section>
+<section id="gui">
+<h2 id="gui">GUI<a class="headerlink" href="#gui" title="Link to this heading">¶</a></h2>
 <p>Enlightenment を少し試してみたが、使いにくいので xfce4 に戻る。インストールと起動テスト:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S xorg-server xfce4 xfce4-goodies
 $ startxfce4
@@ -273,18 +267,18 @@ $ ./swapctrlcaps.sh
 </div>
 <p>で Caps lock を Ctrl にする。他にもキーボードマッピングをいじる方法と
 かがあるけど、複数のものが絡まって複雑になると困ってしまうので、なるべ
-く上位でやりたいので今ここ。</p>
+く上位でやりたいので今ここ。また、ログイン時に設定されるようにしておくため、 <code class="docutils literal notranslate"><span class="pre">xfce4-settings-manager</span></code> から <em>Session and Startup</em> &gt; <em>Application Autostart</em> タブにいって、 <em>Add</em> から追加する。[ <a class="reference external" href="https://serverfault.com/a/1005911">Link</a> ]</p>
 <p>DPIはAppearance （外観）から変更。とりあえず字大きめの160で。</p>
 <section id="weird-display-vibrarion">
-<h3 id="weird-display-vibrarion">Weird display vibrarion<a class="headerlink" href="#weird-display-vibrarion" title="Permalink to this heading">¶</a></h3>
+<h3 id="weird-display-vibrarion">Weird display vibrarion<a class="headerlink" href="#weird-display-vibrarion" title="Link to this heading">¶</a></h3>
 <p>Sometimes a screen vibrates suddenly with a dmesg line including <code class="docutils literal notranslate"><span class="pre">[drm:intel_cpu_fifo_underrun_irq_handler</span> <span class="pre">[i915]]</span> <span class="pre">*ERROR*</span> <span class="pre">CPU</span> <span class="pre">pipe</span> <span class="pre">A</span> <span class="pre">FIFO</span> <span class="pre">underrun</span></code>  … which may be solved with installing <code class="docutils literal notranslate"><span class="pre">xf86-video-intel</span></code>  .</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://bbs.archlinux.org/viewtopic.php?id=198157">Linux console goes crazy (“cpu pipe a fifo underrun”) when Xorg quits.</a></p></li>
 </ul>
 </section>
 </section>
-<section id="id2">
-<h2 id="id2">日本語入力<a class="headerlink" href="#id2" title="Permalink to this heading">¶</a></h2>
+<section id="id3">
+<h2 id="id3">日本語入力<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%95%E3%82%A9%E3%83%B3%E3%83%88#.E6.97.A5.E6.9C.AC.E8.AA.9E">Japanese fonts</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S noto-fonts-cjk noto-fonts-emoji noto-fonts-extra adobe-source-han-sans-jp-fonts otf-ipafont ttf-sazanami ttf-hanazono
 $ sudo pacman -S fcitx-im fcitx-mozc fcitx-configtool
@@ -303,7 +297,7 @@ export XMODIFIERS=@im=fcitx' &gt; ~/.xprofile
 </div>
 </section>
 <section id="system-update">
-<h2 id="system-update">System update<a class="headerlink" href="#system-update" title="Permalink to this heading">¶</a></h2>
+<h2 id="system-update">System update<a class="headerlink" href="#system-update" title="Link to this heading">¶</a></h2>
 <p>システムアップデートは</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -Syu
 </pre></div>
@@ -315,7 +309,7 @@ export XMODIFIERS=@im=fcitx' &gt; ~/.xprofile
 </div>
 </section>
 <section id="installed-application">
-<h2 id="installed-application">Installed Application<a class="headerlink" href="#installed-application" title="Permalink to this heading">¶</a></h2>
+<h2 id="installed-application">Installed Application<a class="headerlink" href="#installed-application" title="Link to this heading">¶</a></h2>
 <p>いろんなアプリを入れる:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S tmux firefox emacs slock
 $ sudo pacman -S bash-completion
@@ -346,72 +340,30 @@ $ cd ..
 </div>
 </section>
 <section id="sound">
-<h2 id="sound">Sound<a class="headerlink" href="#sound" title="Permalink to this heading">¶</a></h2>
+<h2 id="sound">Sound<a class="headerlink" href="#sound" title="Link to this heading">¶</a></h2>
 <p><a class="reference external" href="https://wiki.archlinux.jp/index.php/Advanced_Linux_Sound_Architecture">サウンド</a> は:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S alsa-utils
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S alsa-utils pipewire-pulse
 $ alsamixer
 </pre></div>
 </div>
 <p>これだけで音が鳴るようになる。 <a class="reference external" href="https://wiki.archlinux.org/index.php/xfce#Keyboard_volume_buttons">XfceのUI</a>
 や、ThinkPadのF1~F3 でのコントロールはできていない。Xfce4のPulseAudio
-pluginは <code class="docutils literal notranslate"><span class="pre">pavucontrol</span></code> をインストールして再起動？したら使えるように
-なった。</p>
+pluginは <code class="docutils literal notranslate"><span class="pre">pavucontrol</span></code> をインストールして再起動したら使えるように
+なった。 PulseAudio から Pipewire への移行が進んでいるらしい。</p>
 <p>-&gt; <a class="reference external" href="https://wiki.archlinux.org/index.php/List_of_applications#Volume_managers">https://wiki.archlinux.org/index.php/List_of_applications#Volume_managers</a></p>
 </section>
 <section id="wifi">
-<h2 id="wifi">WiFi<a class="headerlink" href="#wifi" title="Permalink to this heading">¶</a></h2>
-<p><a class="reference external" href="https://wiki.archlinux.org/index.php/Wicd">Wicd</a> を入れたらそれなりに快適に動く:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S wicd wicd-gtk gksu python2-notify
-$ sudo systemctl enable wicd
-$ sudo systemctl start wicd
+<h2 id="wifi">WiFi<a class="headerlink" href="#wifi" title="Link to this heading">¶</a></h2>
+<p>NetworkManagerを入れるだけで十分。:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo pacman -S networkmanager
+$ sudo systemctl enable NetworkManager
+$ sudo systemctl start NetworkManager
 </pre></div>
 </div>
-<p><a class="reference external" href="https://wiki.archlinux.jp/index.php/WPA_supplicant">WiFi</a> なぜか一
-度適当に設定したらいつの間にか動くようになってしまった…　電波強度をパ
-ネルに出すのに wavelan というのをつけてある。ツールは他にも
-<code class="docutils literal notranslate"><span class="pre">wifi-menu</span></code> とかいろいろある。-&gt;
-<a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A">https://wiki.archlinux.jp/index.php/%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%AC%E3%82%B9%E8%A8%AD%E5%AE%9A</a></p>
-<p>WPA2 Enterpriseでクライアント認証でWiFi APに接続するときに、 EAP-TLSで
-接続してPKCS#12の秘密鍵とパスフレーズだけで接続する場合にはなぜかWicd
-ではうまく接続できず、結局 <code class="docutils literal notranslate"><span class="pre">netctl</span></code> でやった。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo systemctl stop wicd
-$ sudo systemctl disable wicd
-$ sudo pacman -R wicd wicd-gtk
-$ sudo pacman -S netctl
-$ sudo netctl list
-$ sudo wifi-menu wlp4s0
-(...find the SSID of WPA2 Enterprise and try to setup...)
-$ sudoedit /etc/netctl/wlp4s0-&lt;ssid&gt;
-$ cat /etc/netctl/wlp4s0-&lt;ssid&gt;
-Description='Automatically generated profile by wifi-menu'
-Interface=wlp4s0
-Connection=wireless
-Security=wpa-configsection
-IP=dhcp
-WPAConfigSection=(
-      'ssid="hoge"'
-      'key_mgmt=WPA-EAP'
-      'eap=TLS'
-      'proto=WPA RSN'
-      'identity="kuenishi"'
-      'private_key="/home/kuenishi/.pki/kuenishi_aho.p12"'
-      'private_key_passwd="**********"'
-      'priority=1'
-      'phase2="auth=PAP"'
-)
-</pre></div>
-</div>
-<p>このファイルはたしか
-<code class="docutils literal notranslate"><span class="pre">/etc/netctl/examples/wireless-wpa-configsection</span></code> からのコピペだった
-気がする。これで接続できたら systemd 設定をする。:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ sudo netctl list
-* wlp4s0-hoge
-$ sudo netctl enable wlp4s0-hoge
-</pre></div>
-</div>
+<p>WiFiもLANも各種設定は <code class="docutils literal notranslate"><span class="pre">nmtui(1)</span></code> で実施する。操作は <code class="docutils literal notranslate"><span class="pre">nmcli(1)</span></code> でもできる。</p>
 </section>
 <section id="id6">
-<h2 id="id6">マルチ（外部）ディスプレイ<a class="headerlink" href="#id6" title="Permalink to this heading">¶</a></h2>
+<h2 id="id6">マルチ（外部）ディスプレイ<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
 <p>家のASUSの4KディスプレイはHDMIを刺すだけで特になにもなく 3000x2000 く
 らいで認識されて映った。なにかあったら <a class="reference external" href="https://wiki.archlinux.jp/index.php/%E3%83%9E%E3%83%AB%E3%83%81%E3%83%87%E3%82%A3%E3%82%B9%E3%83%97%E3%83%AC%E3%82%A4">マルチディスプレイ</a>
 を参照。</p>
@@ -465,7 +417,7 @@ $ sudo netctl enable wlp4s0-hoge
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

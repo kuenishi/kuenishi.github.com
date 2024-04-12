@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -47,11 +47,11 @@
   
   
     <title>Memo on Block Chain Study Group meeting #2 &#8212; kuenishi(7)</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/material.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/material.css?v=79c92029" />
+    <script src="../_static/documentation_options.js?v=4838e742"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="the cost of erlang:send_after/3" href="cost-of-send-after3.html" />
@@ -230,7 +230,7 @@
           <article class="md-content__inner md-typeset" role="main">
             
   <section id="memo-on-block-chain-study-group-meeting-2">
-<h1 id="memo-blockchain--page-root">Memo on Block Chain Study Group meeting #2<a class="headerlink" href="#memo-blockchain--page-root" title="Permalink to this heading">¶</a></h1>
+<h1 id="memo-blockchain--page-root">Memo on Block Chain Study Group meeting #2<a class="headerlink" href="#memo-blockchain--page-root" title="Link to this heading">¶</a></h1>
 <p>(ブロックチェーン勉強会２)</p>
 <ul class="simple">
 <li><p>[Thursday, May 26](<a class="reference external" href="https://www.facebook.com/events/607357016084911/">https://www.facebook.com/events/607357016084911/</a>)</p></li>
@@ -285,7 +285,7 @@ $ echo $?
 </pre></div>
 </div>
 <section id="bitcoin">
-<h2 id="bitcoin">BitCoinにおける合意（といわれているやつ）<a class="headerlink" href="#bitcoin" title="Permalink to this heading">¶</a></h2>
+<h2 id="bitcoin">BitCoinにおける合意（といわれているやつ）<a class="headerlink" href="#bitcoin" title="Link to this heading">¶</a></h2>
 <p>TL;DR 分散システムでいうところの合意ではない</p>
 <p><code class="docutils literal notranslate"><span class="pre">Block(n)</span></code> が合意されるか</p>
 <ul class="simple">
@@ -312,7 +312,7 @@ $ echo $?
 <p>その程度のコストを支払える計算機があれば合意（？）された値を変更できる。</p>
 </section>
 <section id="altcoins">
-<h2 id="altcoins">AltCoins<a class="headerlink" href="#altcoins" title="Permalink to this heading">¶</a></h2>
+<h2 id="altcoins">AltCoins<a class="headerlink" href="#altcoins" title="Link to this heading">¶</a></h2>
 <p>バリエーションは沢山ある、暗号化や署名のアルゴリズム、通貨としての利用
 や交換形態、通貨じゃないやつ、Public or Private, 運営や開発の主体、分
 岐したチェーンの破棄方法、実装やパラメータなど様々な分類軸がある</p>
@@ -329,7 +329,7 @@ $ echo $?
 </ul>
 </section>
 <section id="proof-of-work">
-<h2 id="proof-of-work">Proof of Work<a class="headerlink" href="#proof-of-work" title="Permalink to this heading">¶</a></h2>
+<h2 id="proof-of-work">Proof of Work<a class="headerlink" href="#proof-of-work" title="Link to this heading">¶</a></h2>
 <p>BitCoinと同様、Nonceの計算を競う早い者勝ちのプロトコル。より早くNonce
 を見つけるためには、より多くのコンピュータがあった方がよい。</p>
 <ul class="simple">
@@ -338,7 +338,7 @@ $ echo $?
 </ul>
 </section>
 <section id="proof-of-stake">
-<h2 id="proof-of-stake">Proof of Stake<a class="headerlink" href="#proof-of-stake" title="Permalink to this heading">¶</a></h2>
+<h2 id="proof-of-stake">Proof of Stake<a class="headerlink" href="#proof-of-stake" title="Link to this heading">¶</a></h2>
 <p>投票によりより多くのコインを集めたBlockが正しいものになる。</p>
 <ul class="simple">
 <li><p>Pros: PoWよりはエコ, attacker は過半数に近いコインを集める必要がある, lower latency</p></li>
@@ -372,7 +372,7 @@ $ echo $?
 </ul>
 </section>
 <section id="id1">
-<h2 id="id1">他<a class="headerlink" href="#id1" title="Permalink to this heading">¶</a></h2>
+<h2 id="id1">他<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Proof of Activity Proposal](<a class="reference external" href="https://bitcointalk.org/index.php?topic=102355.0">https://bitcointalk.org/index.php?topic=102355.0</a>)</p></li>
 <li><p>[Proof of burn](<a class="reference external" href="https://en.bitcoin.it/wiki/Proof_of_burn">https://en.bitcoin.it/wiki/Proof_of_burn</a>) - Coinを “burn” する=利用不可能なWalletに送金するとProofになる</p></li>
@@ -382,7 +382,7 @@ $ echo $?
 </ul>
 </section>
 <section id="ghost-protocol">
-<h2 id="ghost-protocol">GHOST Protocol<a class="headerlink" href="#ghost-protocol" title="Permalink to this heading">¶</a></h2>
+<h2 id="ghost-protocol">GHOST Protocol<a class="headerlink" href="#ghost-protocol" title="Link to this heading">¶</a></h2>
 <p>[Accelerating Bitcoin’s Transaction Processing - Fast Money Grows on Trees, Not Chains](<a class="reference external" href="https://eprint.iacr.org/2013/881.pdf">https://eprint.iacr.org/2013/881.pdf</a>)</p>
 <p>1. Bitcoinのやつだとブランチしやすい→アタックを受けた時などにスループットが頭打ちになる（らしい
 1. Branch selection 戦略を変える
@@ -401,9 +401,9 @@ $ echo $?
 <p>ところが… =&gt; Casper</p>
 </section>
 <section id="major-altcoins">
-<h2 id="major-altcoins">Major AltCoins<a class="headerlink" href="#major-altcoins" title="Permalink to this heading">¶</a></h2>
+<h2 id="major-altcoins">Major AltCoins<a class="headerlink" href="#major-altcoins" title="Link to this heading">¶</a></h2>
 <section id="ripple-proof-of-work-trust">
-<h3 id="ripple-proof-of-work-trust">Ripple: proof of work, TRUST?<a class="headerlink" href="#ripple-proof-of-work-trust" title="Permalink to this heading">¶</a></h3>
+<h3 id="ripple-proof-of-work-trust">Ripple: proof of work, TRUST?<a class="headerlink" href="#ripple-proof-of-work-trust" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Heuristics, to assume some limitations on network latency</p></li>
 <li><p>The Ripple protocol can achieve consensus in the face of (n-1)/5 failures +several other desirable features</p></li>
@@ -450,7 +450,7 @@ Minerが現れるのでブロックが進みやすい（レイテンシを短く
 </section>
 </section>
 <section id="stellar-stellar-consensus-protocol-trust">
-<h2 id="stellar-stellar-consensus-protocol-trust">Stellar: Stellar consensus protocol (TRUST)<a class="headerlink" href="#stellar-stellar-consensus-protocol-trust" title="Permalink to this heading">¶</a></h2>
+<h2 id="stellar-stellar-consensus-protocol-trust">Stellar: Stellar consensus protocol (TRUST)<a class="headerlink" href="#stellar-stellar-consensus-protocol-trust" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Federated Byzantine Agreementというプロトコルを開発し、 PoW, PoS の問題を全て解決したと主張</p></li>
 <li><p>Byzantine General Problem を限定的な状況について効率的に解いたとのこと</p></li>
@@ -463,7 +463,7 @@ Minerが現れるのでブロックが進みやすい（レイテンシを短く
 </ul>
 </section>
 <section id="bitshares-dpos-delegated-pos">
-<h2 id="bitshares-dpos-delegated-pos">BitShares: DPOS (Delegated PoS)<a class="headerlink" href="#bitshares-dpos-delegated-pos" title="Permalink to this heading">¶</a></h2>
+<h2 id="bitshares-dpos-delegated-pos">BitShares: DPOS (Delegated PoS)<a class="headerlink" href="#bitshares-dpos-delegated-pos" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Delegated Proof-of-Stake](<a class="reference external" href="https://bitshares.org/technology/delegated-proof-of-stake-consensus/">https://bitshares.org/technology/delegated-proof-of-stake-consensus/</a>):</p>
 <ul>
@@ -482,7 +482,7 @@ decentralization.</p></li>
 <p>詳しいものを発見できてない</p>
 </section>
 <section id="qointum-qdpos">
-<h2 id="qointum-qdpos">Qointum; QDPoS<a class="headerlink" href="#qointum-qdpos" title="Permalink to this heading">¶</a></h2>
+<h2 id="qointum-qdpos">Qointum; QDPoS<a class="headerlink" href="#qointum-qdpos" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Queued Delegated Proof-of-Stake](<a class="reference external" href="https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake">https://wiki.qointum.com/design/dev/#queued-delegated-proof-of-stake</a>)</p></li>
 </ul>
@@ -497,7 +497,7 @@ decentralization.</p></li>
 </ul>
 </section>
 <section id="references">
-<h2 id="references">References<a class="headerlink" href="#references" title="Permalink to this heading">¶</a></h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Proof of Stake versus Proof of Work white paper](<a class="reference external" href="http://bitfury.com/content/5-white-papers-research/pos-vs-pow-1.0.2.pdf">http://bitfury.com/content/5-white-papers-research/pos-vs-pow-1.0.2.pdf</a>)</p></li>
 <li><p>[Infographic: The Blockchain Ecosystem in 2016](<a class="reference external" href="https://ibsintelligence.com/ibs-journal/ibs-news/infographic-the-blockchain-ecosystem-in-2016/">https://ibsintelligence.com/ibs-journal/ibs-news/infographic-the-blockchain-ecosystem-in-2016/</a>)</p></li>
@@ -535,7 +535,7 @@ gpg: Good signature from "Kota UENISHI (nope) &lt;kuenishi@gmail.com&gt;"
 <p><code class="docutils literal notranslate"><span class="pre">hello.py</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.asc</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.2</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.2.asc</span></code> =&gt; … =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.$n</span></code> =&gt; <code class="docutils literal notranslate"><span class="pre">hello.py.$n.asc</span></code> =&gt; …</p>
 </section>
 <section id="misc">
-<h2 id="misc">Misc<a class="headerlink" href="#misc" title="Permalink to this heading">¶</a></h2>
+<h2 id="misc">Misc<a class="headerlink" href="#misc" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[Landscape](<a class="reference external" href="http://startupmanagement.org/wp-content/uploads/2015/12/Blockchain-in-Financial-Services-Landscape.jpg">http://startupmanagement.org/wp-content/uploads/2015/12/Blockchain-in-Financial-Services-Landscape.jpg</a>)</p></li>
 <li><p>[Distributed Ledger Technology: beyond block chain](<a class="reference external" href="https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16-1-distributed-ledger-technology.pdf">https://www.gov.uk/government/uploads/system/uploads/attachment_data/file/492972/gs-16-1-distributed-ledger-technology.pdf</a>)</p></li>
@@ -552,7 +552,7 @@ Bitsharesにおける取引承認のシステムは、DPOS(Delegated Proof of St
 </ul>
 </section>
 <section id="others">
-<h2 id="others">Others<a class="headerlink" href="#others" title="Permalink to this heading">¶</a></h2>
+<h2 id="others">Others<a class="headerlink" href="#others" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>[20 MINS INTRO TO CONSENSUS](<a class="reference external" href="https://devcon.ethereum.org/slides/consensus_williams.pdf">https://devcon.ethereum.org/slides/consensus_williams.pdf</a>)</p></li>
 <li><p>A Prunable Blockchain Consensus Protocol Based on Non-Interactive
@@ -619,7 +619,7 @@ Agreement using Cryptography, 2000 Cachin, Kursawe, Shoup</p></li>
               
           </div>
             Created using
-            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.0.0.
+            <a href="http://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
              and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
               Sphinx</a>

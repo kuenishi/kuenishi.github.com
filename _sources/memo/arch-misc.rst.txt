@@ -3,6 +3,16 @@ Arch Linux (misc)
 #####################################
 
 
+ピープ音を消す
+-----------------
+
+::
+
+   # echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf
+
+
+他にもいくつか方法が `公式ドキュメント <https://wiki.archlinux.jp/index.php/PC_%E3%82%B9%E3%83%94%E3%83%BC%E3%82%AB%E3%83%BC#PC_.E3.82.B9.E3.83.94.E3.83.BC.E3.82.AB.E3.83.BC.E3.81.AE.E7.84.A1.E5.8A.B9.E5.8C.96>`_ に掲載されている。
+
 Docker
 ------
 
